@@ -13,7 +13,15 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: Git ignore rules.
+# Description: Build (all HILs, development environment target) and test (automated)
+#       configuration.
 
-# standalone build build directory
-build/
+mark_as_advanced( CMAKE_INSTALL_PREFIX )
+
+set( CMAKE_BUILD_TYPE              "RelWithDebInfo" CACHE INTERNAL "" )
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON               CACHE INTERNAL "" )
+
+set( MICROLIBRARY_HIL                     "ALL"                     CACHE INTERNAL "" )
+set( MICROLIBRARY_TARGET                  "DEVELOPMENT_ENVIRONMENT" CACHE INTERNAL "" )
+set( MICROLIBRARY_BUILD_AUTOMATED_TESTS   ON                        CACHE INTERNAL "" )
+set( MICROLIBRARY_BUILD_INTERACTIVE_TESTS OFF                       CACHE INTERNAL "" )

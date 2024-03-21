@@ -35,6 +35,20 @@ jobs:
               shell: bash
               run: ./ci/analyze.sh --analyzer shellcheck
 
+    build-all-development_environment-test-automated:
+        name: Build (all HILs, development environment target) and test (automated)
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+            - name: Build
+              shell: bash
+              run: ./ci/build.sh --configuration build-all-development_environment-test-automated
+            - name: Test
+              shell: bash
+              run: ./ci/test-automated.sh --configuration build-all-development_environment-test-automated
+
     format:
         name: Format
         runs-on: ubuntu-20.04
