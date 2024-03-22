@@ -13,7 +13,8 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: Git ignore rules.
+# Description: Interactive tests CMake rules.
 
-# standalone build build directory
-build/
+if( NOT MICROLIBRARY_BUILD_INTERACTIVE_TESTS )
+    return()
+endif( NOT MICROLIBRARY_BUILD_INTERACTIVE_TESTS )

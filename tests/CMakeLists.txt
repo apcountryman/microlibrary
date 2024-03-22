@@ -13,7 +13,10 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: Git ignore rules.
+# Description: Tests CMake rules.
 
-# standalone build build directory
-build/
+# automated tests
+add_subdirectory( automated )
+
+# interactive tests
+add_subdirectory( interactive )

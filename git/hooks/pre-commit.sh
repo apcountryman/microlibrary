@@ -50,16 +50,20 @@ function display_help_text()
         "SYNOPSIS\n" \
         "    $mnemonic --help\n" \
         "    $mnemonic --version\n" \
-        "    $mnemonic\n" \
+        "    $mnemonic [--jobs <jobs>]\n" \
         "OPTIONS\n" \
         "    --help\n" \
         "        Display this help text.\n" \
+        "    --jobs <jobs>\n" \
+        "        Specify the number of build jobs to use when building. If the number of\n" \
+        "        jobs is not specified, 'nproc - 1' jobs will be used.\n" \
         "    --version\n" \
         "        Display the version of this script.\n" \
         "EXAMPLES\n" \
         "    $mnemonic --help\n" \
         "    $mnemonic --version\n" \
         "    $mnemonic\n" \
+        "    $mnemonic --jobs 1\n" \
         ""
 }
 
@@ -72,7 +76,7 @@ function message()
 {
     local -r content="$1"
     local -r content_length=${#content}
-    local -r content_length_max=47
+    local -r content_length_max=85
     local -r ellipsis_count_min=3
     local -r ellipsis_count=$(( content_length_max - content_length + ellipsis_count_min ))
 
@@ -138,6 +142,69 @@ function ensure_no_script_errors_are_present()
     message_status_no_errors_found
 }
 
+function ensure_no_build_errors_are_present()
+{
+    local configurations; mapfile -t configurations < <( git -C "$repository" ls-files 'configuration/' | cut -f 2 -d / | sort -u | grep '^build-' ); readonly configurations
+
+    local configuration
+    local build_directory
+    local build_configuration
+    for configuration in "${configurations[@]}"; do
+        message "checking for ($configuration) build errors"
+
+        build_directory="$repository/build/$configuration"
+        build_configuration="$repository/configuration/$configuration/CMakeLists.txt"
+
+        if [[ ! -d "$build_directory" ]]; then
+            if ! cmake -C "$build_configuration" -S "$repository" -B "$build_directory" > "/dev/null" 2>&1; then
+                message_status_errors_found
+                error "aborting commit due to ($configuration) build CMake initialization error(s), listed below"
+                rm -rf "$build_directory"
+                cmake -C "$build_configuration" -S "$repository" -B "$build_directory"
+                abort
+            fi
+        fi
+
+        if ! cmake -C "$build_configuration" "$build_directory" > "/dev/null" 2>&1; then
+            message_status_errors_found
+            error "aborting commit due to ($configuration) build CMake configuration error(s), listed below"
+            cmake -C "$build_configuration" "$build_directory"
+            abort
+        fi
+
+        if ! cmake --build "$build_directory" -j "$build_jobs" > "/dev/null" 2>&1; then
+            message_status_errors_found
+            error "aborting commit due to ($configuration) build CMake build error(s), listed below"
+            cmake --build "$build_directory" -j "$build_jobs"
+            abort
+        fi
+
+        message_status_no_errors_found
+    done
+}
+
+function ensure_no_automated_test_errors_are_present()
+{
+    local configurations; mapfile -t configurations < <( git -C "$repository" ls-files 'configuration/' | cut -f 2 -d / | sort -u | grep '^build-' | grep 'test-automated' ); readonly configurations
+
+    local configuration
+    local build_directory
+    for configuration in "${configurations[@]}"; do
+        message "checking for ($configuration) automated test errors"
+
+        build_directory="$repository/build/$configuration"
+
+        if ! cmake --build "$build_directory" --target test > "/dev/null" 2>&1; then
+            message_status_errors_found
+            error "aborting commit due to automated test error(s), listed below"
+            cmake --build "$build_directory" --target test -- CTEST_OUTPUT_ON_FAILURE=1
+            abort
+        fi
+
+        message_status_no_errors_found
+    done
+}
+
 function main()
 {
     local -r script=$( readlink -f "$0" )
@@ -155,6 +222,17 @@ function main()
             --help)
                 display_help_text
                 exit
+                ;;
+            --jobs)
+                if [[ -n "$build_jobs" ]]; then
+                    abort "build job count already specified"
+                fi
+
+                if [[ "$#" -le 0 ]]; then
+                    abort "build job count not specified"
+                fi
+
+                local -r build_jobs="$1"; shift
                 ;;
             --version)
                 display_version
@@ -177,9 +255,15 @@ function main()
         local -r against=$( git hash-object -t tree "/dev/null" )
     fi
 
+    if [[ -z "$build_jobs" ]]; then
+        local -r build_jobs=$(( $( nproc ) - 1 ))
+    fi
+
     ensure_filenames_are_portable
     ensure_no_whitespace_errors_are_present
     ensure_no_script_errors_are_present
+    ensure_no_build_errors_are_present
+    ensure_no_automated_test_errors_are_present
 }
 
 main "$@"

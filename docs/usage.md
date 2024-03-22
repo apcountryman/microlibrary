@@ -3,9 +3,28 @@
 ## Table of Contents
 
 1. [Dependency](#dependency)
+    1. [Configuration Options](#configuration-options)
 1. [Development](#development)
 
 ## Dependency
+
+### General Configuration Options
+
+microlibrary supports the following general configuration options:
+- `MICROLIBRARY_HIL` (defaults to an empty string): HIL.
+  Must be one of the following strings:
+    - `ALL`: All officially supported HILs.
+      `MICROLIBRARY_TARGET` must be `DEVELOPMENT_ENVIRONMENT`.
+    - `CUSTOM`:
+      A HIL that is not officially supported.
+- `MICROLIBRARY_TARGET` (defaults to an empty string): Target environment.
+  Must be one of the following strings:
+    - `DEVELOPMENT_ENVIRONMENT`: Development environment.
+    - `HARDWARE`: Hardware.
+- `MICROLIBRARY_BUILD_AUTOMATED_TESTS` (defaults to `OFF`): Build automated tests.
+  `MICROLIBRARY_TARGET` must be `DEVELOPMENT_ENVIRONMENT`.
+- `MICROLIBRARY_BUILD_INTERACTIVE_TESTS` (defaults to `OFF`): Build interactive tests.
+  `MICROLIBRARY_TARGET` must be `HARDWARE`.
 
 ## Development
 
@@ -15,3 +34,13 @@ See the `install.sh` script's help text for usage details.
 ```shell
 ./git/hooks/install.sh --help
 ```
+
+The repository's `pre-commit.sh` hook script is the simplest way to configure, build, and
+test microlibrary during development.
+See the `pre-commit.sh` script's help text for usage details.
+```shell
+./git/hooks/pre-commit.sh --help
+```
+
+Additional checks, such as static analysis, are performed by the repository's GitHub
+Actions CI workflow.
