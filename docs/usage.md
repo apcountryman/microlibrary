@@ -8,6 +8,17 @@
 
 ## Dependency
 
+To use microlibrary as a dependency, simply add the subdirectory containing the repository
+to a CMake build, and link with the `microlibrary` static library.
+```cmake
+add_subdirectory( microlibrary )
+```
+```cmake
+target_link_libraries( foo
+    microlibrary
+    )
+```
+
 ### General Configuration Options
 
 microlibrary supports the following general configuration options:

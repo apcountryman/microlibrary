@@ -18,3 +18,6 @@
 if( NOT MICROLIBRARY_BUILD_INTERACTIVE_TESTS )
     return()
 endif( NOT MICROLIBRARY_BUILD_INTERACTIVE_TESTS )
+
+# microlibrary static library interactive tests
+add_subdirectory( microlibrary )

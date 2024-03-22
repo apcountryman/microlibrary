@@ -13,11 +13,14 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: Automated tests CMake rules.
+# Description: microlibrary static library CMake rules.
 
-if( NOT MICROLIBRARY_BUILD_AUTOMATED_TESTS )
-    return()
-endif( NOT MICROLIBRARY_BUILD_AUTOMATED_TESTS )
+add_library( microlibrary STATIC )
 
-# microlibrary static library automated tests
-add_subdirectory( microlibrary )
+target_compile_definitions( microlibrary
+    PUBLIC MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT=$<IF:$<STREQUAL:"${MICROLIBRARY_TARGET}","DEVELOPMENT_ENVIRONMENT">,1,0>
+    PUBLIC MICROLIBRARY_TARGET_IS_HARDWARE=$<IF:$<STREQUAL:"${MICROLIBRARY_TARGET}","HARDWARE">,1,0>
+    )
+
+add_subdirectory( ANY )
+add_subdirectory( CUSTOM )
