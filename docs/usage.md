@@ -11,7 +11,7 @@
 ### General Configuration Options
 
 microlibrary supports the following general configuration options:
-- `MICROLIBRARY_HIL` (default to an empty string): HIL.
+- `MICROLIBRARY_HIL` (defaults to an empty string): HIL.
   Must be one of the following strings:
     - `ALL`: All officially supported HILs.
       `MICROLIBRARY_TARGET` must be `DEVELOPMENT_ENVIRONMENT`.
