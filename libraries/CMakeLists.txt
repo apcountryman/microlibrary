@@ -14,3 +14,5 @@
 # permissions and limitations under the License.
 
 # Description: Libraries CMake rules.
+
+add_subdirectory( microlibrary )
