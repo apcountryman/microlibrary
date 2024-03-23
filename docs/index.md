@@ -6,5 +6,6 @@ A C++ microcontroller driver/utility library.
 
 1. [Definitions](definitions.md)
 1. [Usage](usage.md)
+1. [Dependencies](dependencies.md)
 1. [Automated Tests](tests-automated.md)
 1. [Interactive Tests](tests-interactive.md)
