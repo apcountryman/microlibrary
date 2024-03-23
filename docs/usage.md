@@ -25,13 +25,14 @@ microlibrary supports the following general configuration options:
 - `MICROLIBRARY_HIL` (defaults to an empty string): HIL.
   Must be one of the following strings:
     - `ALL`: All officially supported HILs.
-      `MICROLIBRARY_TARGET` must be `DEVELOPMENT_ENVIRONMENT`.
+      `MICROLIBRARY_TARGET` must be `DEVELOPMENT_ENVIRONMENT` or `NONE`.
     - `CUSTOM`:
       A HIL that is not officially supported.
 - `MICROLIBRARY_TARGET` (defaults to an empty string): Target environment.
   Must be one of the following strings:
     - `DEVELOPMENT_ENVIRONMENT`: Development environment.
     - `HARDWARE`: Hardware.
+    - `NONE`: None (used to exclude target specific code from static analysis).
 - `MICROLIBRARY_BUILD_AUTOMATED_TESTS` (defaults to `OFF`): Build automated tests.
   `MICROLIBRARY_TARGET` must be `DEVELOPMENT_ENVIRONMENT`.
 - `MICROLIBRARY_BUILD_INTERACTIVE_TESTS` (defaults to `OFF`): Build interactive tests.
