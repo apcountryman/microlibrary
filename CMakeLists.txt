@@ -113,27 +113,27 @@ endif( MICROLIBRARY_BUILD_INTERACTIVE_TESTS AND NOT MICROLIBRARY_TARGET STREQUAL
 if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
     set( CMAKE_CXX_STANDARD 17 )
 
-    add_compile_options(
-        -Werror -Wall -Wextra
-        -Wcast-align=strict
-        -Wcast-qual
-        -Wduplicated-cond
-        -Wextra-semi
-        -Wfloat-equal
-        -Wimplicit-fallthrough=5
-        -Wlogical-op
-        -Wmissing-field-initializers
-        -Wmissing-include-dirs
-        -Wold-style-cast
-        -Wplacement-new=2
-        -Wpointer-arith
-        -Wshadow
-        -Wunsafe-loop-optimizations
-        -fno-exceptions
-        -fno-threadsafe-statics
-        )
-
     if( MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
+        add_compile_options(
+            -Werror -Wall -Wextra
+            -Wcast-align=strict
+            -Wcast-qual
+            -Wduplicated-cond
+            -Wextra-semi
+            -Wfloat-equal
+            -Wimplicit-fallthrough=5
+            -Wlogical-op
+            -Wmissing-field-initializers
+            -Wmissing-include-dirs
+            -Wold-style-cast
+            -Wplacement-new=2
+            -Wpointer-arith
+            -Wshadow
+            -Wunsafe-loop-optimizations
+            -fno-exceptions
+            -fno-threadsafe-statics
+            )
+
         if( MICROLIBRARY_BUILD_AUTOMATED_TESTS )
             add_compile_options(
                 -fsanitize=address
@@ -148,7 +148,44 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
     endif( MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
 
     if( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+        add_compile_options(
+            -Werror -Wall -Wextra
+            -Wcast-align=strict
+            -Wcast-qual
+            -Wduplicated-cond
+            -Wextra-semi
+            -Wfloat-equal
+            -Wimplicit-fallthrough=5
+            -Wlogical-op
+            -Wmissing-field-initializers
+            -Wmissing-include-dirs
+            -Wold-style-cast
+            -Wplacement-new=2
+            -Wpointer-arith
+            -Wshadow
+            -Wunsafe-loop-optimizations
+            -fno-exceptions
+            -fno-threadsafe-statics
+            )
     endif( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+
+    if( MICROLIBRARY_TARGET STREQUAL "NONE" )
+        add_compile_options(
+            -Werror -Wall -Wextra
+            -Wcast-align
+            -Wcast-qual
+            -Wextra-semi
+            -Wfloat-equal
+            -Wimplicit-fallthrough
+            -Wmissing-field-initializers
+            -Wmissing-include-dirs
+            -Wold-style-cast
+            -Wpointer-arith
+            -Wshadow
+            -fno-exceptions
+            -fno-threadsafe-statics
+            )
+    endif( MICROLIBRARY_TARGET STREQUAL "NONE" )
 endif( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
 
 # automated testing configuration

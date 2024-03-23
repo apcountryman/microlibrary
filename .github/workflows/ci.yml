@@ -26,6 +26,15 @@ on:
             - main
 
 jobs:
+    analyze-static-clang-tidy:
+        name: Analyze (static) - clang-tidy
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v4
+            - name: Analyze
+              shell: bash
+              run: ./ci/analyze.sh --analyzer clang-tidy
+
     analyze-static-shellcheck:
         name: Analyze (static) - shellcheck
         runs-on: ubuntu-20.04

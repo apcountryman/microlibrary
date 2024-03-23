@@ -101,6 +101,20 @@ function value_is_in_array()
     return 1
 }
 
+function run_clang-tidy()
+{
+    local -r build_directory="$repository/build/analyze-clang-tidy"
+    local -r build_configuration="$repository/configuration/analyze-clang-tidy/CMakeLists.txt"
+
+    if ! cmake -C "$build_configuration" -S "$repository" -B "$build_directory"; then
+        abort
+    fi
+
+    if ! run-clang-tidy '-header-filter=*' -p "$build_directory"; then
+        abort
+    fi
+}
+
 function run_shellcheck()
 {
     local scripts; mapfile -t scripts < <( git -C "$repository" ls-files '*.sh' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly scripts
@@ -126,6 +140,7 @@ function main()
     local -r version=$( git -C "$repository" describe --match=none --always --dirty --broken )
 
     local -r analyzers=(
+        clang-tidy
         shellcheck
     )
 
