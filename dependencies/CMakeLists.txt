@@ -14,3 +14,5 @@
 # permissions and limitations under the License.
 
 # Description: Library dependencies CMake rules.
+
+add_subdirectory( googletest )

@@ -13,14 +13,30 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary static library any HIL, development environment target CMake
-#       rules.
+# Description: GoogleTest dependency CMake rules.
 
 if( NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
     return()
 endif( NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
 
-target_link_libraries( microlibrary
-    PUBLIC gmock
-    PUBLIC gtest
+option(
+    MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST
+    "microlibrary: Use parent project GoogleTest."
+    ON
     )
+if( MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
+    return()
+endif( MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
+
+set( BUILD_GMOCK   ON  CACHE INTERNAL "" )
+set( INSTALL_GTEST OFF CACHE INTERNAL "" )
+
+set( gtest_force_shared_crt      OFF CACHE INTERNAL "" )
+set( gtest_build_tests           OFF CACHE INTERNAL "" )
+set( gtest_build_samples         OFF CACHE INTERNAL "" )
+set( gtest_disable_pthreads      OFF CACHE INTERNAL "" )
+set( gtest_hide_internal_symbols OFF CACHE INTERNAL "" )
+
+set( gmock_build_tests OFF CACHE INTERNAL "" )
+
+add_subdirectory( googletest )
