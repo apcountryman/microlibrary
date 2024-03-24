@@ -115,6 +115,25 @@ function run_clang-tidy()
     fi
 }
 
+function run_lizard()
+{
+    local source_files; mapfile -t source_files < <( git -C "$repository" ls-files '*.h' '*.h.in' '*.cc' '*.cc.in' ':!:tests/' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly source_files
+
+    local -r lizard_options=(
+        "--languages" "cpp"
+
+        "--modified"
+
+        "--arguments" "5"
+        "--length"    "25"
+        "--CCN"       "10"
+    )
+
+    if ! "$repository/tools/lizard/lizard.py" "${lizard_options[@]}" "${source_files[@]}"; then
+        abort
+    fi
+}
+
 function run_shellcheck()
 {
     local scripts; mapfile -t scripts < <( git -C "$repository" ls-files '*.sh' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly scripts
@@ -141,6 +160,7 @@ function main()
 
     local -r analyzers=(
         clang-tidy
+        lizard
         shellcheck
     )
 
