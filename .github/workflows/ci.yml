@@ -35,6 +35,17 @@ jobs:
               shell: bash
               run: ./ci/analyze.sh --analyzer clang-tidy
 
+    analyze-lizard:
+        name: Analyze (lizard)
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+            - name: Analyze
+              shell: bash
+              run: ./ci/analyze.sh --analyzer lizard
+
     analyze-shellcheck:
         name: Analyze (shellcheck)
         runs-on: ubuntu-20.04

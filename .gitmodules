@@ -19,3 +19,8 @@
 [submodule "dependencies/googletest/googletest"]
 	path = dependencies/googletest/googletest
 	url = ../googletest
+
+# tools
+[submodule "tools/lizard"]
+	path = tools/lizard
+	url = ../lizard
