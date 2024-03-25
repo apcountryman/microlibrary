@@ -92,6 +92,7 @@ function value_is_in_array()
     local -r target_value="$1"; shift
     local -r array=( "$@" )
 
+    local value
     for value in "${array[@]}"; do
         if [[ "$target_value" == "$value" ]]; then
             return 0
