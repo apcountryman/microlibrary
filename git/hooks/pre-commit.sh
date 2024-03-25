@@ -147,13 +147,11 @@ function ensure_no_build_errors_are_present()
     local configurations; mapfile -t configurations < <( git -C "$repository" ls-files 'configuration/' | cut -f 2 -d / | sort -u | grep '^build-' ); readonly configurations
 
     local configuration
-    local build_directory
-    local build_configuration
     for configuration in "${configurations[@]}"; do
         message "checking for ($configuration) build errors"
 
-        build_directory="$repository/build/$configuration"
-        build_configuration="$repository/configuration/$configuration/CMakeLists.txt"
+        local build_directory="$repository/build/$configuration"
+        local build_configuration="$repository/configuration/$configuration/CMakeLists.txt"
 
         if [[ ! -d "$build_directory" ]]; then
             if ! cmake -C "$build_configuration" -S "$repository" -B "$build_directory" > "/dev/null" 2>&1; then
@@ -188,11 +186,10 @@ function ensure_no_automated_test_errors_are_present()
     local configurations; mapfile -t configurations < <( git -C "$repository" ls-files 'configuration/' | cut -f 2 -d / | sort -u | grep '^build-' | grep 'test-automated' ); readonly configurations
 
     local configuration
-    local build_directory
     for configuration in "${configurations[@]}"; do
         message "checking for ($configuration) automated test errors"
 
-        build_directory="$repository/build/$configuration"
+        local build_directory="$repository/build/$configuration"
 
         if ! cmake --build "$build_directory" --target test > "/dev/null" 2>&1; then
             message_status_errors_found

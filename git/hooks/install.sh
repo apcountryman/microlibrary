@@ -72,9 +72,9 @@ function install_git_hooks()
 {
     local hook_scripts; mapfile -t hook_scripts < <( git -C "$repository" ls-files 'git/hooks/' ':!:git/hooks/install.sh' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly hook_scripts
 
-    local hook
+    local hook_script
     for hook_script in "${hook_scripts[@]}"; do
-        hook=$( basename "$hook_script" | cut -f 1 -d '.' )
+        local hook; hook=$( basename "$hook_script" | cut -f 1 -d '.' )
 
         rm -f "$repository/.git/hooks/$hook"
 
