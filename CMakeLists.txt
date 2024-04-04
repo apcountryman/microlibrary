@@ -16,10 +16,9 @@
 # Description: Core CMake rules.
 
 cmake_minimum_required( VERSION 3.16.3 )
-project(
-    microlibrary
+project( microlibrary
     LANGUAGES CXX
-)
+    )
 
 # general configuration
 
