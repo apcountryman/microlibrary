@@ -193,7 +193,7 @@ function ensure_no_automated_test_errors_are_present()
 
         if ! cmake --build "$build_directory" --target test > "/dev/null" 2>&1; then
             message_status_errors_found
-            error "aborting commit due to automated test error(s), listed below"
+            error "aborting commit due to ($configuration) automated test error(s), listed below"
             cmake --build "$build_directory" --target test -- CTEST_OUTPUT_ON_FAILURE=1
             abort
         fi
