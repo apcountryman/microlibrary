@@ -17,7 +17,7 @@
 
 /**
  * \file
- * \brief microlibrary::Arm::Cortex interface.
+ * \brief microlibrary::Arm::Cortex::M0PLUS interface.
  */
 
 #ifndef MICROLIBRARY_ARM_CORTEX_M0PLUS_H
