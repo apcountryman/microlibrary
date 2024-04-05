@@ -13,19 +13,9 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: Git submodules.
+# Description: microlibrary static library Arm Cortex-M0+ HIL, hardware target CMake
+#       rules.
 
-# dependencies
-[submodule "dependencies/googletest/googletest"]
-	path = dependencies/googletest/googletest
-	url = ../googletest
-
-# toolchains
-[submodule "toolchains/toolchain-arm-none-eabi-gcc"]
-	path = toolchains/toolchain-arm-none-eabi-gcc
-	url = ../toolchain-arm-none-eabi-gcc
-
-# tools
-[submodule "tools/lizard"]
-	path = tools/lizard
-	url = ../lizard
+if( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+    return()
+endif( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )

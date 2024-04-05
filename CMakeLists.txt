@@ -50,6 +50,7 @@ option(
 
 set(
     MICROLIBRARY_HIL_LIST
+    "ARM_CORTEX_M0PLUS"
     "ALL"
     "CUSTOM"
     )
@@ -58,8 +59,9 @@ if( NOT MICROLIBRARY_HIL IN_LIST MICROLIBRARY_HIL_LIST )
         FATAL_ERROR
         "'${MICROLIBRARY_HIL}' is not a valid value for MICROLIBRARY_HIL.\n"
         "Please set it to a value from the first column of the following list:\n"
-        "    ALL        All officially supported HILs.\n"
-        "    CUSTOM     A HIL that is not officially supported.\n"
+        "    ARM_CORTEX_M0PLUS      Generic Arm Cortex-M0+ HIL.\n"
+        "    ALL                    All officially supported HILs.\n"
+        "    CUSTOM                 A HIL that is not officially supported.\n"
         )
 endif( NOT MICROLIBRARY_HIL IN_LIST MICROLIBRARY_HIL_LIST )
 
@@ -166,6 +168,13 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
             -fno-exceptions
             -fno-threadsafe-statics
             )
+
+        if( MICROLIBRARY_HIL STREQUAL "ARM_CORTEX_M0PLUS" )
+            add_compile_options(
+                -mcpu=cortex-m0plus
+                -mthumb
+                )
+        endif( MICROLIBRARY_HIL STREQUAL "ARM_CORTEX_M0PLUS" )
     endif( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
 
     if( MICROLIBRARY_TARGET STREQUAL "NONE" )

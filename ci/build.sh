@@ -106,9 +106,16 @@ function ensure_no_build_errors_are_present()
 {
     local -r build_directory="$repository/build/$configuration"
     local -r build_configuration="$repository/configuration/$configuration/CMakeLists.txt"
+    local -r build_toolchain="$repository/configuration/$configuration/toolchain.cmake"
 
-    if ! cmake -C "$build_configuration" -S "$repository" -B "$build_directory"; then
-        abort
+    if [[ -e "$build_toolchain" ]]; then
+        if ! cmake -DCMAKE_TOOLCHAIN_FILE="$build_toolchain" -C "$build_configuration" -S "$repository" -B "$build_directory"; then
+            abort
+        fi
+    else
+        if ! cmake -C "$build_configuration" -S "$repository" -B "$build_directory"; then
+            abort
+        fi
     fi
 
     if ! cmake --build "$build_directory" -j "$( nproc )"; then

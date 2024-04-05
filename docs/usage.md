@@ -24,6 +24,7 @@ target_link_libraries( foo
 microlibrary supports the following general configuration options:
 - `MICROLIBRARY_HIL` (defaults to an empty string): HIL.
   Must be one of the following strings:
+    - `ARM_CORTEX_M0PLUS`: Generic Arm Cortex-M0+ HIL.
     - `ALL`: All officially supported HILs.
       `MICROLIBRARY_TARGET` must be `DEVELOPMENT_ENVIRONMENT` or `NONE`.
     - `CUSTOM`:
