@@ -14,3 +14,11 @@
 # permissions and limitations under the License.
 
 # Description: microlibrary static library Arm Cortex-M0+ HIL, any target CMake rules.
+
+target_include_directories( microlibrary
+    PUBLIC include
+    )
+
+target_sources( microlibrary
+    PRIVATE source/microlibrary/arm/cortex/m0plus.cc
+    )
