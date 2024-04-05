@@ -13,19 +13,12 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: Git submodules.
+# Description: Build (Arm Cortex-M0+ HIL, hardware target) configuration.
 
-# dependencies
-[submodule "dependencies/googletest/googletest"]
-	path = dependencies/googletest/googletest
-	url = ../googletest
+set( CMAKE_BUILD_TYPE              "RelWithDebInfo" CACHE INTERNAL "" )
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON               CACHE INTERNAL "" )
 
-# toolchains
-[submodule "toolchains/toolchain-arm-none-eabi-gcc"]
-	path = toolchains/toolchain-arm-none-eabi-gcc
-	url = ../toolchain-arm-none-eabi-gcc
-
-# tools
-[submodule "tools/lizard"]
-	path = tools/lizard
-	url = ../lizard
+set( MICROLIBRARY_HIL                     "ARM_CORTEX_M0PLUS" CACHE INTERNAL "" )
+set( MICROLIBRARY_TARGET                  "HARDWARE"          CACHE INTERNAL "" )
+set( MICROLIBRARY_BUILD_AUTOMATED_TESTS   OFF                 CACHE INTERNAL "" )
+set( MICROLIBRARY_BUILD_INTERACTIVE_TESTS OFF                 CACHE INTERNAL "" )

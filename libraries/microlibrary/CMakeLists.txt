@@ -23,4 +23,5 @@ target_compile_definitions( microlibrary
     )
 
 add_subdirectory( ANY )
+add_subdirectory( ARM_CORTEX_M0PLUS )
 add_subdirectory( CUSTOM )

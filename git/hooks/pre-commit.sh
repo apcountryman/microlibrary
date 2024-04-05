@@ -152,14 +152,25 @@ function ensure_no_build_errors_are_present()
 
         local build_directory="$repository/build/$configuration"
         local build_configuration="$repository/configuration/$configuration/CMakeLists.txt"
+        local build_toolchain="$repository/configuration/$configuration/toolchain.cmake"
 
         if [[ ! -d "$build_directory" ]]; then
-            if ! cmake -C "$build_configuration" -S "$repository" -B "$build_directory" > "/dev/null" 2>&1; then
-                message_status_errors_found
-                error "aborting commit due to ($configuration) build CMake initialization error(s), listed below"
-                rm -rf "$build_directory"
-                cmake -C "$build_configuration" -S "$repository" -B "$build_directory"
-                abort
+            if [[ -e "$build_toolchain" ]]; then
+                if ! cmake -DCMAKE_TOOLCHAIN_FILE="$build_toolchain" -C "$build_configuration" -S "$repository" -B "$build_directory" > "/dev/null" 2>&1; then
+                    message_status_errors_found
+                    error "aborting commit due to ($configuration) build CMake initialization error(s), listed below"
+                    rm -rf "$build_directory"
+                    cmake -DCMAKE_TOOLCHAIN_FILE="$build_toolchain" -C "$build_configuration" -S "$repository" -B "$build_directory"
+                    abort
+                fi
+            else
+                if ! cmake -C "$build_configuration" -S "$repository" -B "$build_directory" > "/dev/null" 2>&1; then
+                    message_status_errors_found
+                    error "aborting commit due to ($configuration) build CMake initialization error(s), listed below"
+                    rm -rf "$build_directory"
+                    cmake -C "$build_configuration" -S "$repository" -B "$build_directory"
+                    abort
+                fi
             fi
         fi
 
