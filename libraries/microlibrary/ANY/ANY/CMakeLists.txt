@@ -21,4 +21,5 @@ target_include_directories( microlibrary
 
 target_sources( microlibrary
     PRIVATE source/microlibrary.cc
+    PRIVATE source/microlibrary/arm.cc
     )
