@@ -23,4 +23,5 @@ target_sources( microlibrary
     PRIVATE source/microlibrary.cc
     PRIVATE source/microlibrary/arm.cc
     PRIVATE source/microlibrary/arm/cortex.cc
+    PRIVATE source/microlibrary/microchip.cc
     )
