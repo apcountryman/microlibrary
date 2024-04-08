@@ -13,16 +13,25 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary static library CMake rules.
+# Description: avr-libcpp dependency CMake rules.
 
-add_library( microlibrary STATIC )
+if( NOT MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR" )
+    return()
+endif( NOT MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR" )
 
-target_compile_definitions( microlibrary
-    PUBLIC MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT=$<IF:$<STREQUAL:"${MICROLIBRARY_TARGET}","DEVELOPMENT_ENVIRONMENT">,1,0>
-    PUBLIC MICROLIBRARY_TARGET_IS_HARDWARE=$<IF:$<STREQUAL:"${MICROLIBRARY_TARGET}","HARDWARE">,1,0>
+if( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+    return()
+endif( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+
+option(
+    MICROLIBRARY_USE_PARENT_PROJECT_AVRLIBCPP
+    "microlibrary: Use parent project avr-libcpp."
+    ON
     )
+if( MICROLIBRARY_USE_PARENT_PROJECT_AVRLIBCPP )
+    return()
+endif( MICROLIBRARY_USE_PARENT_PROJECT_AVRLIBCPP )
 
-add_subdirectory( ANY )
-add_subdirectory( ARM_CORTEX_M0PLUS )
-add_subdirectory( MICROCHIP_MEGAAVR )
-add_subdirectory( CUSTOM )
+set( AVRLIBCPP_SUPPRESS_SFR_MACROS ON CACHE INTERNAL "" )
+
+add_subdirectory( avr-libcpp )

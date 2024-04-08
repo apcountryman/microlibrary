@@ -13,16 +13,9 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary static library CMake rules.
+# Description: microlibrary static library Microchip megaAVR HIL, hardware target CMake
+#       rules.
 
-add_library( microlibrary STATIC )
-
-target_compile_definitions( microlibrary
-    PUBLIC MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT=$<IF:$<STREQUAL:"${MICROLIBRARY_TARGET}","DEVELOPMENT_ENVIRONMENT">,1,0>
-    PUBLIC MICROLIBRARY_TARGET_IS_HARDWARE=$<IF:$<STREQUAL:"${MICROLIBRARY_TARGET}","HARDWARE">,1,0>
-    )
-
-add_subdirectory( ANY )
-add_subdirectory( ARM_CORTEX_M0PLUS )
-add_subdirectory( MICROCHIP_MEGAAVR )
-add_subdirectory( CUSTOM )
+if( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+    return()
+endif( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )

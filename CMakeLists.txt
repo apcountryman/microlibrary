@@ -51,6 +51,7 @@ option(
 set(
     MICROLIBRARY_HIL_LIST
     "ARM_CORTEX_M0PLUS"
+    "MICROCHIP_MEGAAVR"
     "ALL"
     "CUSTOM"
     )
@@ -60,6 +61,7 @@ if( NOT MICROLIBRARY_HIL IN_LIST MICROLIBRARY_HIL_LIST )
         "'${MICROLIBRARY_HIL}' is not a valid value for MICROLIBRARY_HIL.\n"
         "Please set it to a value from the first column of the following list:\n"
         "    ARM_CORTEX_M0PLUS      Generic Arm Cortex-M0+ HIL.\n"
+        "    MICROCHIP_MEGAAVR      Microchip megaAVR HIL.\n"
         "    ALL                    All officially supported HILs.\n"
         "    CUSTOM                 A HIL that is not officially supported.\n"
         )
@@ -175,6 +177,37 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
                 -mthumb
                 )
         endif( MICROLIBRARY_HIL STREQUAL "ARM_CORTEX_M0PLUS" )
+
+        if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR" )
+            set(
+                MICROLIBRARY_MCU
+                "" CACHE STRING
+                "microlibrary: MCU type."
+                )
+
+            set(
+                MICROLIBRARY_F_CPU
+                "" CACHE STRING
+                "microlibrary: CPU frequency, in Hz."
+                )
+
+            add_compile_options(
+                -mmcu=${MICROLIBRARY_MCU}
+                -B "${PROJECT_SOURCE_DIR}/dfps/dfp-microchip-atmega/dfp/gcc/dev/${MICROLIBRARY_MCU}"
+                )
+
+            add_compile_definitions(
+                F_CPU=${MICROLIBRARY_F_CPU}
+                )
+
+            add_link_options(
+                -mmcu=${MICROLIBRARY_MCU}
+                )
+
+            include_directories( SYSTEM
+                "${PROJECT_SOURCE_DIR}/dfps/dfp-microchip-atmega/dfp/include"
+                )
+        endif( MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR" )
     endif( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
 
     if( MICROLIBRARY_TARGET STREQUAL "NONE" )

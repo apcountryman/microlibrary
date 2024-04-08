@@ -16,6 +16,9 @@
 # Description: Git submodules.
 
 # dependencies
+[submodule "dependencies/avr-libcpp/avr-libcpp"]
+	path = dependencies/avr-libcpp/avr-libcpp
+	url = ../avr-libcpp
 [submodule "dependencies/googletest/googletest"]
 	path = dependencies/googletest/googletest
 	url = ../googletest
@@ -24,6 +27,14 @@
 [submodule "toolchains/toolchain-arm-none-eabi-gcc"]
 	path = toolchains/toolchain-arm-none-eabi-gcc
 	url = ../toolchain-arm-none-eabi-gcc
+[submodule "toolchains/toolchain-avr-gcc"]
+	path = toolchains/toolchain-avr-gcc
+	url = ../toolchain-avr-gcc
+
+# DFPs
+[submodule "dfps/dfp-microchip-atmega"]
+	path = dfps/dfp-microchip-atmega
+	url = ../dfp-microchip-atmega
 
 # tools
 [submodule "tools/lizard"]
