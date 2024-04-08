@@ -193,7 +193,7 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
 
             add_compile_options(
                 -mmcu=${MICROLIBRARY_MCU}
-                -B "${PROJECT_SOURCE_DIR}/dfps/dfp-microchip-megaavr/dfp/gcc/dev/${MICROLIBRARY_MCU}"
+                -B "${PROJECT_SOURCE_DIR}/dfps/dfp-microchip-atmega/dfp/gcc/dev/${MICROLIBRARY_MCU}"
                 )
 
             add_compile_definitions(
@@ -205,7 +205,7 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
                 )
 
             include_directories( SYSTEM
-                "${PROJECT_SOURCE_DIR}/dfps/dfp-microchip-megaavr/dfp/include"
+                "${PROJECT_SOURCE_DIR}/dfps/dfp-microchip-atmega/dfp/include"
                 )
         endif( MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR" )
     endif( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )

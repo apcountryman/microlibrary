@@ -32,8 +32,8 @@
 	url = ../toolchain-avr-gcc
 
 # DFPs
-[submodule "dfps/dfp-microchip-megaavr"]
-	path = dfps/dfp-microchip-megaavr
+[submodule "dfps/dfp-microchip-atmega"]
+	path = dfps/dfp-microchip-atmega
 	url = ../dfp-microchip-atmega
 
 # tools
