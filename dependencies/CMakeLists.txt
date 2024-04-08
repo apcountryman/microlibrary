@@ -15,4 +15,5 @@
 
 # Description: Library dependencies CMake rules.
 
+add_subdirectory( avr-libcpp )
 add_subdirectory( googletest )
