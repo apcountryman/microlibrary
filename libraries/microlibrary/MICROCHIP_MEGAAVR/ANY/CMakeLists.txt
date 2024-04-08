@@ -14,3 +14,11 @@
 # permissions and limitations under the License.
 
 # Description: microlibrary static library Microchip megaAVR HIL, any target CMake rules.
+
+target_include_directories( microlibrary
+    PUBLIC include
+    )
+
+target_sources( microlibrary
+    PRIVATE source/microlibrary/microchip/megaavr.cc
+    )
