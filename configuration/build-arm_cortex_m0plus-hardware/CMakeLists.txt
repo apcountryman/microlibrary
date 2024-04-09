@@ -13,7 +13,7 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: Build (Arm Cortex-M0+ HIL, hardware target) configuration.
+# Description: Build (Generic Arm Cortex-M0+ HIL, hardware target) configuration.
 
 set( CMAKE_BUILD_TYPE              "RelWithDebInfo" CACHE INTERNAL "" )
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON               CACHE INTERNAL "" )

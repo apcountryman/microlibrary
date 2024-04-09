@@ -70,7 +70,7 @@ jobs:
               run: ./ci/test-automated.sh --configuration build-all-development_environment-test-automated
 
     build-arm_cortex_m0plus-hardware:
-        name: Build (Arm Cortex-M0+ HIL, hardware target)
+        name: Build (Generic Arm Cortex-M0+ HIL, hardware target)
         runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@v4
