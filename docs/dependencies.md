@@ -11,6 +11,9 @@ avr-libcpp is a microlibrary dependency if `MICROLIBRARY_HIL` is `MICROCHIP_MEGA
 A parent project supplied copy of avr-libcpp can be used instead of microlibrary's
 avr-libcpp submodule by setting the `MICROLIBRARY_USE_PARENT_PROJECT_AVRLIBCPP` option to
 `ON`.
+If a parent project supplied copy of avr-libcpp is used, avr-libcpp must be configured as
+follows:
+- `AVRLIBCPP_SUPPRESS_SFR_MACROS` must be `ON`
 
 ## GoogleTest
 

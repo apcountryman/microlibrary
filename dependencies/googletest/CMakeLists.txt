@@ -24,19 +24,20 @@ option(
     "microlibrary: Use parent project GoogleTest."
     ON
     )
-if( MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
-    return()
-endif( MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
 
-set( BUILD_GMOCK   ON  CACHE INTERNAL "" )
-set( INSTALL_GTEST OFF CACHE INTERNAL "" )
+if( NOT MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
+    set( BUILD_GMOCK   ON  CACHE INTERNAL "" )
+    set( INSTALL_GTEST OFF CACHE INTERNAL "" )
 
-set( gtest_force_shared_crt      OFF CACHE INTERNAL "" )
-set( gtest_build_tests           OFF CACHE INTERNAL "" )
-set( gtest_build_samples         OFF CACHE INTERNAL "" )
-set( gtest_disable_pthreads      OFF CACHE INTERNAL "" )
-set( gtest_hide_internal_symbols OFF CACHE INTERNAL "" )
+    set( gtest_force_shared_crt      OFF CACHE INTERNAL "" )
+    set( gtest_build_tests           OFF CACHE INTERNAL "" )
+    set( gtest_build_samples         OFF CACHE INTERNAL "" )
+    set( gtest_disable_pthreads      OFF CACHE INTERNAL "" )
+    set( gtest_hide_internal_symbols OFF CACHE INTERNAL "" )
 
-set( gmock_build_tests OFF CACHE INTERNAL "" )
+    set( gmock_build_tests OFF CACHE INTERNAL "" )
+endif( NOT MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
 
-add_subdirectory( googletest )
+if( NOT MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
+    add_subdirectory( googletest )
+endif( NOT MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
