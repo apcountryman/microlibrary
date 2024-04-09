@@ -15,3 +15,11 @@
 
 # Description: microlibrary static library Microchip megaAVR 0-series HIL, any target
 #       CMake rules.
+
+target_include_directories( microlibrary
+    PUBLIC include
+    )
+
+target_sources( microlibrary
+    PRIVATE source/microlibrary/microchip/megaavr0.cc
+    )
