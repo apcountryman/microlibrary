@@ -26,6 +26,7 @@ microlibrary supports the following general configuration options:
   Must be one of the following strings:
     - `ARM_CORTEX_M0PLUS`: Generic Arm Cortex-M0+ HIL.
     - `MICROCHIP_MEGAAVR`: Microchip megaAVR HIL.
+    - `MICROCHIP_MEGAAVR0`: Microchip megaAVR 0-series HIL.
     - `ALL`: All officially supported HILs.
       `MICROLIBRARY_TARGET` must be `DEVELOPMENT_ENVIRONMENT` or `NONE`.
     - `CUSTOM`:
