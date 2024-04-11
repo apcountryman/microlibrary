@@ -3,7 +3,7 @@
 ## Table of Contents
 
 1. [Dependency](#dependency)
-    1. [Configuration Options](#configuration-options)
+    1. [General Configuration Options](#general-configuration-options)
 1. [Development](#development)
 
 ## Dependency
