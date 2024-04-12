@@ -53,6 +53,7 @@ set(
     "ARM_CORTEX_M0PLUS"
     "MICROCHIP_MEGAAVR"
     "MICROCHIP_MEGAAVR0"
+    "MICROCHIP_SAM_D21DA1"
     "ALL"
     "CUSTOM"
     )
@@ -64,6 +65,7 @@ if( NOT MICROLIBRARY_HIL IN_LIST MICROLIBRARY_HIL_LIST )
         "    ARM_CORTEX_M0PLUS      Generic Arm Cortex-M0+ HIL.\n"
         "    MICROCHIP_MEGAAVR      Microchip megaAVR HIL.\n"
         "    MICROCHIP_MEGAAVR      Microchip megaAVR 0-series HIL.\n"
+        "    MICROCHIP_SAM_D21DA1   Microchip SAM D21/DA1 HIL.\n"
         "    ALL                    All officially supported HILs.\n"
         "    CUSTOM                 A HIL that is not officially supported.\n"
         )
@@ -113,6 +115,69 @@ if( MICROLIBRARY_BUILD_INTERACTIVE_TESTS AND NOT MICROLIBRARY_TARGET STREQUAL "H
         "interactive tests can only be built if MICROLIBRARY_TARGET is 'HARDWARE'"
         )
 endif( MICROLIBRARY_BUILD_INTERACTIVE_TESTS AND NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+
+# Microchip SAM D21/DA1 HIL configuration
+if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
+    if( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+        set(
+            MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU
+            "" CACHE STRING
+            "microlibrary: Microchip SAM D21/DA1 MCU type."
+            )
+    endif( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+endif( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
+
+# Microchip SAM D21/DA1 HIL configuration validation
+if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
+    if( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+        set(
+            MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU_LIST
+            "ATSAMD21E15A"
+            "ATSAMD21E15B"
+            "ATSAMD21E15C"
+            "ATSAMD21E15L"
+            "ATSAMD21E16A"
+            "ATSAMD21E16B"
+            "ATSAMD21E16C"
+            "ATSAMD21E16L"
+            "ATSAMD21E17A"
+            "ATSAMD21E17D"
+            "ATSAMD21E17L"
+            "ATSAMD21E18A"
+            "ATSAMD21G15A"
+            "ATSAMD21G15B"
+            "ATSAMD21G16A"
+            "ATSAMD21G16B"
+            "ATSAMD21G16L"
+            "ATSAMD21G17A"
+            "ATSAMD21G17D"
+            "ATSAMD21G17L"
+            "ATSAMD21G18A"
+            "ATSAMD21J15A"
+            "ATSAMD21J15B"
+            "ATSAMD21J16A"
+            "ATSAMD21J16B"
+            "ATSAMD21J17A"
+            "ATSAMD21J17D"
+            "ATSAMD21J18A"
+            "ATSAMDA1E14B"
+            "ATSAMDA1E15B"
+            "ATSAMDA1E16B"
+            "ATSAMDA1G14B"
+            "ATSAMDA1G15B"
+            "ATSAMDA1G16B"
+            "ATSAMDA1J14B"
+            "ATSAMDA1J15B"
+            "ATSAMDA1J16B"
+            )
+        if( NOT MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU IN_LIST MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU_LIST )
+            message(
+                FATAL_ERROR
+                "'${MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU}' is not a valid Microchip SAM D21/DA1 MCU type"
+                )
+        endif( NOT MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU IN_LIST MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU_LIST )
+    endif( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+endif( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
 
 # compilation and linking configuration
 if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
@@ -241,6 +306,13 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
                 "${PROJECT_SOURCE_DIR}/dfps/dfp-microchip-atmega/dfp/include"
                 )
         endif( MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR0" )
+
+        if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
+            add_compile_options(
+                -mcpu=cortex-m0plus
+                -mthumb
+                )
+        endif( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
     endif( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
 
     if( MICROLIBRARY_TARGET STREQUAL "NONE" )

@@ -83,6 +83,20 @@ jobs:
               shell: bash
               run: ./ci/build.sh --configuration build-arm_cortex_m0plus-hardware
 
+    build-microchip_sam_d21da1-hardware-atsamd21g18a:
+        name: Build (Microchip SAM D21/DA1 HIL, hardware target, ATSAMD21G18A MCU)
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+            - name: Install Dependencies
+              shell: bash
+              run: sudo apt update && sudo apt install gcc-arm-none-eabi
+            - name: Build
+              shell: bash
+              run: ./ci/build.sh --configuration build-microchip_sam_d21da1-hardware-atsamd21g18a
+
     format:
         name: Format
         runs-on: ubuntu-20.04
