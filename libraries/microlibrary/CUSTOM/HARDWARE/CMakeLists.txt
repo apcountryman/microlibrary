@@ -18,3 +18,14 @@
 if( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
     return()
 endif( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+
+if( TARGET microlibrary-custom )
+    target_link_libraries( microlibrary
+        PUBLIC microlibrary-custom
+        )
+else( TARGET microlibrary-custom )
+    message(
+        STATUS
+        "microlibrary-custom target not found, using default configuration"
+        )
+endif( TARGET microlibrary-custom )
