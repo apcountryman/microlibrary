@@ -15,3 +15,11 @@
 
 # Description: microlibrary static library Microchip SAM D21/DA1 HIL, any target CMake
 #       rules.
+
+target_include_directories( microlibrary
+    PUBLIC include
+    )
+
+target_sources( microlibrary
+    PRIVATE source/microlibrary/microchip/sam/d21da1.cc
+    )
