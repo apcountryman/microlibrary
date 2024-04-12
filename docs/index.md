@@ -9,3 +9,4 @@ A C++ microcontroller driver/utility library.
 1. [Dependencies](dependencies.md)
 1. [Automated Tests](tests-automated.md)
 1. [Interactive Tests](tests-interactive.md)
+1. [HILs](hils.md)
