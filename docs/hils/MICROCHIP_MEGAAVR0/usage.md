@@ -6,4 +6,4 @@
 
 ## Configuration Options
 
-The Microchip megaAVR 0-series HIL has no configuration options.
+The Microchip megaAVR 0-series HIL supports the following configuration options:

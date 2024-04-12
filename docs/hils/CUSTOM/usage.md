@@ -6,4 +6,4 @@
 
 ## Configuration Options
 
-Custom HILs have no configuration options.
+Custom HILs support the following configuration options:
