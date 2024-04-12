@@ -6,4 +6,4 @@
 
 ## Configuration Options
 
-The Arm Cortex-M0+ HIL has no configuration options.
+The Arm Cortex-M0+ HIL supports the following configuration options:
