@@ -29,8 +29,7 @@ microlibrary supports the following general configuration options:
     - `MICROCHIP_MEGAAVR0`: Microchip megaAVR 0-series HIL.
     - `ALL`: All officially supported HILs.
       `MICROLIBRARY_TARGET` must be `DEVELOPMENT_ENVIRONMENT` or `NONE`.
-    - `CUSTOM`:
-      A HIL that is not officially supported.
+    - `CUSTOM`: A HIL that is not officially supported.
 - `MICROLIBRARY_TARGET` (defaults to an empty string): Target environment.
   Must be one of the following strings:
     - `DEVELOPMENT_ENVIRONMENT`: Development environment.
