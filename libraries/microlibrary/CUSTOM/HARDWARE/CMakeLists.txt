@@ -24,8 +24,7 @@ if( TARGET microlibrary-custom )
         PUBLIC microlibrary-custom
         )
 else( TARGET microlibrary-custom )
-    message(
-        STATUS
+    message( STATUS
         "microlibrary-custom target not found, using default configuration"
         )
 endif( TARGET microlibrary-custom )

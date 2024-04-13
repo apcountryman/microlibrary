@@ -15,8 +15,7 @@
 
 # Description: microlibrary static library Arm Cortex-M0+ HIL CMake rules.
 
-set(
-    MICROLIBRARY_ARM_CORTEX_M0PLUS_HIL_LIST
+set( MICROLIBRARY_ARM_CORTEX_M0PLUS_HIL_LIST
     "ARM_CORTEX_M0PLUS"
     "MICROCHIP_SAM_D21DA1"
     )

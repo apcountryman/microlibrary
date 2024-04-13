@@ -22,34 +22,29 @@ project( microlibrary
 
 # general configuration
 
-set(
-    MICROLIBRARY_HIL
+set( MICROLIBRARY_HIL
     "" CACHE STRING
     "microlibrary: HIL."
     )
 
-set(
-    MICROLIBRARY_TARGET
+set( MICROLIBRARY_TARGET
     "" CACHE STRING
     "microlibrary: Target environment."
     )
 
-option(
-    MICROLIBRARY_BUILD_AUTOMATED_TESTS
+option( MICROLIBRARY_BUILD_AUTOMATED_TESTS
     "microlibrary: Build automated tests."
     OFF
     )
 
-option(
-    MICROLIBRARY_BUILD_INTERACTIVE_TESTS
+option( MICROLIBRARY_BUILD_INTERACTIVE_TESTS
     "microlibrary: Build interactive tests."
     OFF
     )
 
 # general configuration validation
 
-set(
-    MICROLIBRARY_HIL_LIST
+set( MICROLIBRARY_HIL_LIST
     "ARM_CORTEX_M0PLUS"
     "MICROCHIP_MEGAAVR"
     "MICROCHIP_MEGAAVR0"
@@ -58,8 +53,7 @@ set(
     "CUSTOM"
     )
 if( NOT MICROLIBRARY_HIL IN_LIST MICROLIBRARY_HIL_LIST )
-    message(
-        FATAL_ERROR
+    message( FATAL_ERROR
         "'${MICROLIBRARY_HIL}' is not a valid value for MICROLIBRARY_HIL.\n"
         "Please set it to a value from the first column of the following list:\n"
         "    ARM_CORTEX_M0PLUS      Generic Arm Cortex-M0+ HIL.\n"
@@ -71,15 +65,13 @@ if( NOT MICROLIBRARY_HIL IN_LIST MICROLIBRARY_HIL_LIST )
         )
 endif( NOT MICROLIBRARY_HIL IN_LIST MICROLIBRARY_HIL_LIST )
 
-set(
-    MICROLIBRARY_TARGET_LIST
+set( MICROLIBRARY_TARGET_LIST
     "DEVELOPMENT_ENVIRONMENT"
     "HARDWARE"
     "NONE"
     )
 if( NOT MICROLIBRARY_TARGET IN_LIST MICROLIBRARY_TARGET_LIST )
-    message(
-        FATAL_ERROR
+    message( FATAL_ERROR
         "'${MICROLIBRARY_TARGET}' is not a valid value for MICROLIBRARY_TARGET.\n"
         "Please set it to a value from the first column of the following list:\n"
         "    DEVELOPMENT_ENVIRONMENT    Development environment.\n"
@@ -89,29 +81,25 @@ if( NOT MICROLIBRARY_TARGET IN_LIST MICROLIBRARY_TARGET_LIST )
 endif( NOT MICROLIBRARY_TARGET IN_LIST MICROLIBRARY_TARGET_LIST )
 
 if( MICROLIBRARY_HIL STREQUAL "ALL" AND NOT ( MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" OR MICROLIBRARY_TARGET STREQUAL "NONE" ) )
-    message(
-        FATAL_ERROR
+    message( FATAL_ERROR
         "MICROLIBRARY_TARGET must be 'DEVELOPMENT_ENVIRONMENT' or 'NONE' if MICROLIBRARY_HIL is 'ALL'"
         )
 endif( MICROLIBRARY_HIL STREQUAL "ALL" AND NOT ( MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" OR MICROLIBRARY_TARGET STREQUAL "NONE" ) )
 
 if( MICROLIBRARY_HIL STREQUAL "CUSTOM" AND CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR )
-    message(
-        FATAL_ERROR
+    message( FATAL_ERROR
         "Standalone builds are not supported if MICROLIBRARY_HIL is 'CUSTOM'"
         )
 endif( MICROLIBRARY_HIL STREQUAL "CUSTOM" AND CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR )
 
 if( MICROLIBRARY_BUILD_AUTOMATED_TESTS AND NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
-    message(
-        FATAL_ERROR
+    message( FATAL_ERROR
         "automated tests can only be built if MICROLIBRARY_TARGET is 'DEVELOPMENT_ENVIRONMENT'"
         )
 endif( MICROLIBRARY_BUILD_AUTOMATED_TESTS AND NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
 
 if( MICROLIBRARY_BUILD_INTERACTIVE_TESTS AND NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
-    message(
-        FATAL_ERROR
+    message( FATAL_ERROR
         "interactive tests can only be built if MICROLIBRARY_TARGET is 'HARDWARE'"
         )
 endif( MICROLIBRARY_BUILD_INTERACTIVE_TESTS AND NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
@@ -119,8 +107,7 @@ endif( MICROLIBRARY_BUILD_INTERACTIVE_TESTS AND NOT MICROLIBRARY_TARGET STREQUAL
 # Microchip SAM D21/DA1 HIL configuration
 if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
     if( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
-        set(
-            MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU
+        set( MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU
             "" CACHE STRING
             "microlibrary: Microchip SAM D21/DA1 MCU type."
             )
@@ -130,8 +117,7 @@ endif( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
 # Microchip SAM D21/DA1 HIL configuration validation
 if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
     if( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
-        set(
-            MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU_LIST
+        set( MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU_LIST
             "ATSAMD21E15A"
             "ATSAMD21E15B"
             "ATSAMD21E15C"
@@ -171,8 +157,7 @@ if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
             "ATSAMDA1J16B"
             )
         if( NOT MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU IN_LIST MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU_LIST )
-            message(
-                FATAL_ERROR
+            message( FATAL_ERROR
                 "'${MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU}' is not a valid Microchip SAM D21/DA1 MCU type"
                 )
         endif( NOT MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU IN_LIST MICROLIBRARY_MICROCHIP_SAM_D21DA1_MCU_LIST )
@@ -246,14 +231,12 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
         endif( MICROLIBRARY_HIL STREQUAL "ARM_CORTEX_M0PLUS" )
 
         if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR" )
-            set(
-                MICROLIBRARY_MCU
+            set( MICROLIBRARY_MCU
                 "" CACHE STRING
                 "microlibrary: MCU type."
                 )
 
-            set(
-                MICROLIBRARY_F_CPU
+            set( MICROLIBRARY_F_CPU
                 "" CACHE STRING
                 "microlibrary: CPU frequency, in Hz."
                 )
@@ -277,14 +260,12 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
         endif( MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR" )
 
         if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR0" )
-            set(
-                MICROLIBRARY_MCU
+            set( MICROLIBRARY_MCU
                 "" CACHE STRING
                 "microlibrary: MCU type."
                 )
 
-            set(
-                MICROLIBRARY_F_CPU
+            set( MICROLIBRARY_F_CPU
                 "" CACHE STRING
                 "microlibrary: CPU frequency, in Hz."
                 )
