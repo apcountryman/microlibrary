@@ -260,27 +260,27 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
         endif( MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR" )
 
         if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR0" )
-            set( MICROLIBRARY_MCU
+            set( MICROLIBRARY_MICROCHIP_MEGAAVR0_MCU
                 "" CACHE STRING
-                "microlibrary: MCU type."
+                "microlibrary: Microchip megaAVR 0-series MCU type."
                 )
 
-            set( MICROLIBRARY_F_CPU
+            set( MICROLIBRARY_MICROCHIP_MEGAAVR0_F_CPU
                 "" CACHE STRING
-                "microlibrary: CPU frequency, in Hz."
+                "microlibrary: Microchip megaAVR 0-series CPU frequency, in Hz."
                 )
 
             add_compile_options(
-                -mmcu=${MICROLIBRARY_MCU}
-                -B "${PROJECT_SOURCE_DIR}/dfps/dfp-microchip-atmega/dfp/gcc/dev/${MICROLIBRARY_MCU}"
+                -mmcu=${MICROLIBRARY_MICROCHIP_MEGAAVR0_MCU}
+                -B "${PROJECT_SOURCE_DIR}/dfps/dfp-microchip-atmega/dfp/gcc/dev/${MICROLIBRARY_MICROCHIP_MEGAAVR0_MCU}"
                 )
 
             add_compile_definitions(
-                F_CPU=${MICROLIBRARY_F_CPU}
+                F_CPU=${MICROLIBRARY_MICROCHIP_MEGAAVR0_F_CPU}
                 )
 
             add_link_options(
-                -mmcu=${MICROLIBRARY_MCU}
+                -mmcu=${MICROLIBRARY_MICROCHIP_MEGAAVR0_MCU}
                 )
 
             include_directories( SYSTEM
