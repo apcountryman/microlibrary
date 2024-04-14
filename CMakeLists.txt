@@ -243,7 +243,7 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
 
             add_compile_options(
                 -mmcu=${MICROLIBRARY_MICROCHIP_MEGAAVR_MCU}
-                -B "${PROJECT_SOURCE_DIR}/dfps/dfp-microchip-atmega/dfp/gcc/dev/${MICROLIBRARY_MCU}"
+                -B "${PROJECT_SOURCE_DIR}/dfps/dfp-microchip-atmega/dfp/gcc/dev/${MICROLIBRARY_MICROCHIP_MEGAAVR_MCU}"
                 )
 
             add_compile_definitions(
