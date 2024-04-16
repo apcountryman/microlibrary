@@ -9,3 +9,10 @@ automated test executable's
 source file.
 
 ## Table of Contents
+
+[`to_underlying()`](#to_underlying)
+
+## `to_underlying()`
+
+To convert an enum value to its underlying type, use the `::microlibrary::to_underlying()`
+utility.
