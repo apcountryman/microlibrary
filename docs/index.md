@@ -10,3 +10,4 @@ A C++ microcontroller driver/utility library.
 1. [Automated Tests](tests-automated.md)
 1. [Interactive Tests](tests-interactive.md)
 1. [HILs](hils.md)
+1. [Enum Utilities](enum_utilities.md)
