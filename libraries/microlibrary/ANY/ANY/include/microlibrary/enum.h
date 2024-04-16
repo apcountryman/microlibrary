@@ -23,7 +23,25 @@
 #ifndef MICROLIBRARY_ENUM_H
 #define MICROLIBRARY_ENUM_H
 
+#include <type_traits>
+
 namespace microlibrary {
+
+/**
+ * \brief Convert an enum value to its underlying type.
+ *
+ * \tparam Enum The type of enum to convert.
+ *
+ * \param[in] value The enum value to convert.
+ *
+ * \return The enum value converted to its underlying type.
+ */
+template<typename Enum>
+constexpr auto to_underlying( Enum value ) noexcept
+{
+    return static_cast<std::underlying_type_t<Enum>>( value );
+}
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_ENUM_H
