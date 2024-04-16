@@ -13,17 +13,22 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary static library any HIL, any target CMake rules.
+# Description: microlibrary enum utilities automated tests CMake rules.
 
-target_include_directories( microlibrary
-    PUBLIC include
+add_executable( test-automated-microlibrary-enum )
+
+target_sources( test-automated-microlibrary-enum
+    PRIVATE main.cc
     )
 
-target_sources( microlibrary
-    PRIVATE source/microlibrary.cc
-    PRIVATE source/microlibrary/arm.cc
-    PRIVATE source/microlibrary/arm/cortex.cc
-    PRIVATE source/microlibrary/enum.cc
-    PRIVATE source/microlibrary/microchip.cc
-    PRIVATE source/microlibrary/microchip/sam.cc
+target_link_libraries( test-automated-microlibrary-enum
+    PRIVATE gmock
+    PRIVATE gmock_main
+    PRIVATE gtest
+    PRIVATE microlibrary
+    )
+
+add_test(
+    NAME    test-automated-microlibrary-enum
+    COMMAND test-automated-microlibrary-enum
     )

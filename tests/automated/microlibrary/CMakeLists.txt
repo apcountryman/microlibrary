@@ -14,3 +14,6 @@
 # permissions and limitations under the License.
 
 # Description: microlibrary static library automated tests CMake rules.
+
+# microlibrary enum utilities automated tests
+add_subdirectory( enum )
