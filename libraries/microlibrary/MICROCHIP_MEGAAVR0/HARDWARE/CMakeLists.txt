@@ -19,3 +19,7 @@
 if( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
     return()
 endif( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
+
+target_link_libraries( microlibrary
+    PUBLIC avr-libcpp
+    )
