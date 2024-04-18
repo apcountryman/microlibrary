@@ -23,14 +23,10 @@ if( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
     return()
 endif( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
 
-option( MICROLIBRARY_USE_PARENT_PROJECT_AVRLIBCPP
-    "microlibrary: Use parent project avr-libcpp."
-    ON
-    )
-
-if( NOT MICROLIBRARY_USE_PARENT_PROJECT_AVRLIBCPP )
+FetchContent_GetProperties( avrlibcpp )
+if( NOT avrlibcpp_POPULATED )
     set( AVRLIBCPP_SUPPRESS_SFR_MACROS ON CACHE INTERNAL "" )
-endif( NOT MICROLIBRARY_USE_PARENT_PROJECT_AVRLIBCPP )
+endif( NOT avrlibcpp_POPULATED )
 
 if( NOT AVRLIBCPP_SUPPRESS_SFR_MACROS )
     message( FATAL_ERROR
@@ -38,6 +34,7 @@ if( NOT AVRLIBCPP_SUPPRESS_SFR_MACROS )
         )
 endif( NOT AVRLIBCPP_SUPPRESS_SFR_MACROS )
 
-if( NOT MICROLIBRARY_USE_PARENT_PROJECT_AVRLIBCPP )
-    add_subdirectory( avr-libcpp )
-endif( NOT MICROLIBRARY_USE_PARENT_PROJECT_AVRLIBCPP )
+FetchContent_Declare( avrlibcpp
+    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/avr-libcpp"
+    )
+FetchContent_MakeAvailable( avrlibcpp )

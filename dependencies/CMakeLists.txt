@@ -15,5 +15,7 @@
 
 # Description: Library dependencies CMake rules.
 
+include( FetchContent )
+
 add_subdirectory( avr-libcpp )
 add_subdirectory( googletest )

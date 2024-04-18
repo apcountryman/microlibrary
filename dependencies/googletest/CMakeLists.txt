@@ -19,12 +19,8 @@ if( NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
     return()
 endif( NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
 
-option( MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST
-    "microlibrary: Use parent project GoogleTest."
-    ON
-    )
-
-if( NOT MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
+FetchContent_GetProperties( googletest )
+if( NOT googletest_POPULATED )
     set( BUILD_GMOCK   ON  CACHE INTERNAL "" )
     set( INSTALL_GTEST OFF CACHE INTERNAL "" )
 
@@ -35,8 +31,9 @@ if( NOT MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
     set( gtest_hide_internal_symbols OFF CACHE INTERNAL "" )
 
     set( gmock_build_tests OFF CACHE INTERNAL "" )
-endif( NOT MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
+endif( NOT googletest_POPULATED )
 
-if( NOT MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
-    add_subdirectory( googletest )
-endif( NOT MICROLIBRARY_USE_PARENT_PROJECT_GOOGLETEST )
+FetchContent_Declare( googletest
+    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/googletest"
+    )
+FetchContent_MakeAvailable( googletest )
