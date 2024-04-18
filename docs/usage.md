@@ -8,10 +8,18 @@
 
 ## Dependency
 
-To use microlibrary as a dependency, simply add the subdirectory containing the repository
+To use microlibrary as a dependency, use CMake's FetchContent module to add microlibrary
 to a CMake build, and link with the `microlibrary` static library.
 ```cmake
-add_subdirectory( microlibrary )
+include( FetchContent )
+```
+```cmake
+FetchContent_Declare( microlibrary
+    ...
+    )
+```
+```cmake
+FetchContent_MakeAvailable( microlibrary )
 ```
 ```cmake
 target_link_libraries( foo
