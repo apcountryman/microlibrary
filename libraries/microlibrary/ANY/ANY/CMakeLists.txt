@@ -26,4 +26,5 @@ target_sources( microlibrary
     PRIVATE source/microlibrary/enum.cc
     PRIVATE source/microlibrary/microchip.cc
     PRIVATE source/microlibrary/microchip/sam.cc
+    PRIVATE source/microlibrary/rom.cc
     )
