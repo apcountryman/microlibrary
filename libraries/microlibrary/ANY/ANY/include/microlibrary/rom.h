@@ -31,6 +31,43 @@
  * \brief ROM facilities.
  */
 namespace microlibrary::ROM {
+
+#if !MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+/**
+ * \brief A handle to a null-terminated string that may be stored in ROM.
+ *
+ * To create a string literal that can be stored in ROM, use MICROLIBRARY_ROM_STRING().
+ *
+ * A custom HIL can replace this type with a HIL specific version by doing the following:
+ * - Provide a microlibrary-custom library that provides microlibrary/hil/rom.h
+ * - Define MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED to be a value that will be evaluated as
+ *   true by the preprocessor (e.g. 1) in microlibrary/hil/rom.h
+ * - Define the HIL specific version of microlibrary::ROM::String in
+ *   microlibrary/hil/rom.h
+ */
+using String = char const *;
+#endif // !MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+
+#if !MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+/**
+ * \brief Create a string literal that can be stored in ROM.
+ *
+ * \relatedalso microlibrary::ROM::String
+ *
+ * \param[in] string The string literal that can be stored in ROM.
+ *
+ * \return A handle to the string literal that may be stored in ROM.
+ *
+ * A custom HIL can replace this macro with a HIL specific version by doing the following:
+ * - Provide a microlibrary-custom library that provides microlibrary/hil/rom.h
+ * - Define MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED to be a value that will be evaluated as
+ *   true by the preprocessor (e.g. 1) in microlibrary/hil/rom.h
+ * - Define the HIL specific version of MICROLIBRARY_ROM_STRING() in
+ *   microlibrary/hil/rom.h
+ */
+#define MICROLIBRARY_ROM_STRING( string ) ( string )
+#endif // !MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+
 } // namespace microlibrary::ROM
 
 #endif // MICROLIBRARY_ROM_H
