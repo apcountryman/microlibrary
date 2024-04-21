@@ -13,7 +13,8 @@ header/source file pair.
 The `::microlibrary::ROM::String` type is used for handles to null-terminated strings that
 may be stored in ROM.
 This type defaults to `char const *`.
-A custom HIL can replace this type with a HIL specific version by doing the following:
+A custom HIL can replace this type with a HIL specific version if `MICROLIBRARY_TARGET` is
+`HARDWARE` by doing the following:
 - Provide a `microlibrary-custom` library that provides `microlibrary/hil/rom.h`
 - Define `MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED` to be a value that will be evaluated as
   true by the preprocessor (e.g. `1`) in `microlibrary/hil/rom.h`
@@ -41,8 +42,8 @@ auto foo() noexcept -> ::microlibrary::ROM::String
 }
 ```
 
-A custom HIL can replace `MICROLIBRARY_ROM_STRING()` with a HIL specific version by doing
-the following:
+A custom HIL can replace `MICROLIBRARY_ROM_STRING()` with a HIL specific version  if
+`MICROLIBRARY_TARGET` is `HARDWARE` by doing the following:
 - Provide a `microlibrary-custom` library that provides `microlibrary/hil/rom.h`
 - Define `MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED` to be a value that will be evaluated as
   true by the preprocessor (e.g. `1`) `in microlibrary/hil/rom.h`
