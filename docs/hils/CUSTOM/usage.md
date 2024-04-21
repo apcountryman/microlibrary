@@ -14,3 +14,4 @@ Custom HILs support the following configuration options:
 If `MICROLIBRARY_TARGET` is `HARDWARE`, the following features can be configured for use
 with a custom HIL by creating a `microlibrary-custom` library and following the
 instructions in the documentation for the feature:
+- [Null-terminated ROM strings](../../rom.md#null-terminated-strings)
