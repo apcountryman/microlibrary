@@ -50,7 +50,7 @@ class String {
      *
      * \param[in] string The underlying ROM character pointer.
      */
-    constexpr explicit String( char const * string ) noexcept : m_string{ string }
+    constexpr String( char const * string ) noexcept : m_string{ string }
     {
     }
 
@@ -148,7 +148,7 @@ class String {
 
         ++m_string;
 
-        return String{ string };
+        return string;
     }
 
     /**
@@ -162,7 +162,7 @@ class String {
 
         --m_string;
 
-        return String{ string };
+        return string;
     }
 
     /**
@@ -174,7 +174,7 @@ class String {
      */
     constexpr auto operator+( std::ptrdiff_t n ) const noexcept -> String
     {
-        return String{ m_string + n };
+        return m_string + n;
     }
 
     /**
@@ -186,7 +186,7 @@ class String {
      */
     constexpr auto operator-( std::ptrdiff_t n ) const noexcept -> String
     {
-        return String{ m_string - n };
+        return m_string - n;
     }
 
     /**
@@ -341,7 +341,7 @@ constexpr auto operator>=( String lhs, String rhs ) noexcept -> bool
  */
 constexpr auto operator+( std::ptrdiff_t n, String string ) noexcept -> String
 {
-    return String{ string.m_string + n };
+    return string.m_string + n;
 }
 
 /**
@@ -355,7 +355,7 @@ constexpr auto operator+( std::ptrdiff_t n, String string ) noexcept -> String
  */
 constexpr auto operator-( std::ptrdiff_t n, String string ) noexcept -> String
 {
-    return String{ string.m_string - n };
+    return string.m_string - n;
 }
 
 /**
