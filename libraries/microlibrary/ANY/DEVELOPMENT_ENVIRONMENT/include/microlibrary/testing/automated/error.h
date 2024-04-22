@@ -20,10 +20,10 @@
  * \brief microlibrary error identification automated testing facilities interface.
  */
 
-#ifndef MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_H
-#define MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_H
+#ifndef MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_ERROR_H
+#define MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_ERROR_H
 
 namespace microlibrary::Testing::Automated {
 } // namespace microlibrary::Testing::Automated
 
-#endif // MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_H
+#endif // MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_ERROR_H
