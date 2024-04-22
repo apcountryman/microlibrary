@@ -12,3 +12,4 @@ A C++ microcontroller driver/utility library.
 1. [HILs](hils.md)
 1. [Enum Utilities](enum_utilities.md)
 1. [ROM Facilities](rom.md)
+1. [Error Handling Facilities](error_handling.md)
