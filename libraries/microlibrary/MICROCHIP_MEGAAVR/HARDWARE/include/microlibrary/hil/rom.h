@@ -92,16 +92,6 @@ class String {
     constexpr auto operator=( String const & expression ) noexcept -> String & = default;
 
     /**
-     * \brief Get the underlying ROM character pointer.
-     *
-     * \return The underlying ROM character pointer.
-     */
-    constexpr auto string() const noexcept -> char const *
-    {
-        return m_string;
-    }
-
-    /**
      * \brief Access the pointed to character.
      *
      * \return The pointed to character.
@@ -232,6 +222,16 @@ class String {
      * \brief The underlying ROM character pointer.
      */
     char const * m_string{ nullptr };
+
+    friend constexpr auto operator==( String lhs, String rhs ) noexcept -> bool;
+
+    friend constexpr auto operator<( String lhs, String rhs ) noexcept -> bool;
+
+    friend constexpr auto operator+( std::ptrdiff_t n, String string ) noexcept -> String;
+
+    friend constexpr auto operator-( std::ptrdiff_t n, String string ) noexcept -> String;
+
+    friend constexpr auto operator-( String lhs, String rhs ) noexcept -> std::ptrdiff_t;
 };
 
 /**
@@ -247,7 +247,7 @@ class String {
  */
 constexpr auto operator==( String lhs, String rhs ) noexcept -> bool
 {
-    return lhs.string() == rhs.string();
+    return lhs.m_string == rhs.m_string;
 }
 
 /**
@@ -279,7 +279,7 @@ constexpr auto operator!=( String lhs, String rhs ) noexcept -> bool
  */
 constexpr auto operator<( String lhs, String rhs ) noexcept -> bool
 {
-    return lhs.string() < rhs.string();
+    return lhs.m_string < rhs.m_string;
 }
 
 /**
@@ -341,7 +341,7 @@ constexpr auto operator>=( String lhs, String rhs ) noexcept -> bool
  */
 constexpr auto operator+( std::ptrdiff_t n, String string ) noexcept -> String
 {
-    return String{ string.string() + n };
+    return String{ string.m_string + n };
 }
 
 /**
@@ -355,7 +355,7 @@ constexpr auto operator+( std::ptrdiff_t n, String string ) noexcept -> String
  */
 constexpr auto operator-( std::ptrdiff_t n, String string ) noexcept -> String
 {
-    return String{ string.string() - n };
+    return String{ string.m_string - n };
 }
 
 /**
@@ -370,7 +370,7 @@ constexpr auto operator-( std::ptrdiff_t n, String string ) noexcept -> String
  */
 constexpr auto operator-( String lhs, String rhs ) noexcept -> std::ptrdiff_t
 {
-    return lhs.string() - rhs.string();
+    return lhs.m_string - rhs.m_string;
 }
 
 /**
