@@ -20,6 +20,14 @@ if( NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
     return()
 endif( NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
 
+target_include_directories( microlibrary
+    PUBLIC include
+    )
+
+target_sources( microlibrary
+    PRIVATE source/microlibrary/testing/automated.cc
+    )
+
 target_link_libraries( microlibrary
     PUBLIC gmock
     PUBLIC gtest
