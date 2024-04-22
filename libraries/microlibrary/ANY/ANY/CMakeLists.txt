@@ -24,6 +24,7 @@ target_sources( microlibrary
     PRIVATE source/microlibrary/arm.cc
     PRIVATE source/microlibrary/arm/cortex.cc
     PRIVATE source/microlibrary/enum.cc
+    PRIVATE source/microlibrary/error.cc
     PRIVATE source/microlibrary/microchip.cc
     PRIVATE source/microlibrary/microchip/sam.cc
     PRIVATE source/microlibrary/rom.cc
