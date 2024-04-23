@@ -26,6 +26,8 @@
 #include <cstdint>
 #include <type_traits>
 
+#include "microlibrary/rom.h"
+
 namespace microlibrary {
 
 /**
@@ -51,6 +53,55 @@ struct is_error_code_enum : std::false_type {
  */
 template<typename Enum>
 inline constexpr auto is_error_code_enum_v = is_error_code_enum<Enum>::value;
+
+/**
+ * \brief Error category.
+ */
+class Error_Category {
+  public:
+    Error_Category( Error_Category && ) = delete;
+
+    Error_Category( Error_Category const & ) = delete;
+
+    auto operator=( Error_Category && ) = delete;
+
+    auto operator=( Error_Category const & ) = delete;
+
+    /**
+     * \brief Get the name of the error category.
+     *
+     * \return The name of the error category.
+     */
+#if MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+    auto name() const noexcept -> ROM::String;
+#else  // MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+    virtual auto name() const noexcept -> ROM::String                           = 0;
+#endif // MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+
+    /**
+     * \brief Get an error ID's description.
+     *
+     * \param[in] id The error ID whose description is to be got.
+     *
+     * \return The error ID's description.
+     */
+#if MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+    auto error_description( Error_ID id ) const noexcept -> ROM::String;
+#else  // MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+    virtual auto error_description( Error_ID id ) const noexcept -> ROM::String = 0;
+#endif // MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+
+  protected:
+    /**
+     * \brief Constructor.
+     */
+    constexpr Error_Category() noexcept = default;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Error_Category() noexcept = default;
+};
 
 } // namespace microlibrary
 
