@@ -19,8 +19,8 @@
 set( CMAKE_BUILD_TYPE              "RelWithDebInfo" CACHE INTERNAL "" )
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON               CACHE INTERNAL "" )
 
-set( MICROLIBRARY_HIL                     "MICROCHIP_SAM_D21DA1"                   CACHE INTERNAL "" )
-set( MICROLIBRARY_TARGET                  "HARDWARE"                               CACHE INTERNAL "" )
+set( MICROLIBRARY_HIL                                       "MICROCHIP_SAM_D21DA1" CACHE INTERNAL "" )
+set( MICROLIBRARY_TARGET                                    "HARDWARE"             CACHE INTERNAL "" )
 set( MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION OFF                    CACHE INTERNAL "" )
 set( MICROLIBRARY_BUILD_AUTOMATED_TESTS                     OFF                    CACHE INTERNAL "" )
 set( MICROLIBRARY_BUILD_INTERACTIVE_TESTS                   OFF                    CACHE INTERNAL "" )

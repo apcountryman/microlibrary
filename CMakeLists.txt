@@ -33,7 +33,7 @@ set( MICROLIBRARY_TARGET
     )
 
 option( MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
-    "microlibrary: Suppress human readable error information"
+    "microlibrary: Suppress human readable error information."
     OFF
     )
 
