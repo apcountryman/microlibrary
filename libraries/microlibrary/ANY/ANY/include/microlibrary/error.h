@@ -24,6 +24,7 @@
 #define MICROLIBRARY_ERROR_H
 
 #include <cstdint>
+#include <type_traits>
 
 namespace microlibrary {
 
@@ -33,6 +34,23 @@ namespace microlibrary {
  * \attention This type is the expected underlying type for all error code enums.
  */
 using Error_ID = std::uint_fast8_t;
+
+/**
+ * \brief Check if an enum is an error code enum.
+ *
+ * \tparam Enum The enum to check.
+ */
+template<typename Enum>
+struct is_error_code_enum : std::false_type {
+};
+
+/**
+ * \brief Check if an enum is an error code enum.
+ *
+ * \tparam Enum The enum to check.
+ */
+template<typename Enum>
+inline constexpr auto is_error_code_enum_v = is_error_code_enum<Enum>::value;
 
 } // namespace microlibrary
 
