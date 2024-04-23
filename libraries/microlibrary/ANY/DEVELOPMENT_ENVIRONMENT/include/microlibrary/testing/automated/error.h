@@ -23,7 +23,40 @@
 #ifndef MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_ERROR_H
 #define MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_ERROR_H
 
+#include "gmock/gmock.h"
+#include "microlibrary/error.h"
+
 namespace microlibrary::Testing::Automated {
+
+/**
+ * \brief Mock error category.
+ */
+class Mock_Error_Category : public Error_Category {
+  public:
+    static auto instance() -> Mock_Error_Category const &
+    {
+        static auto const category = Mock_Error_Category{};
+
+        return category;
+    }
+
+    Mock_Error_Category() = default;
+
+    Mock_Error_Category( Mock_Error_Category && ) = delete;
+
+    Mock_Error_Category( Mock_Error_Category const & ) = delete;
+
+    ~Mock_Error_Category() noexcept = default;
+
+    auto operator=( Mock_Error_Category && ) = delete;
+
+    auto operator=( Mock_Error_Category const & ) = delete;
+
+    MOCK_METHOD( char const *, name, (), ( const, noexcept, override ) );
+
+    MOCK_METHOD( char const *, error_description, ( Error_ID ), ( const, noexcept, override ) );
+};
+
 } // namespace microlibrary::Testing::Automated
 
 #endif // MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_ERROR_H

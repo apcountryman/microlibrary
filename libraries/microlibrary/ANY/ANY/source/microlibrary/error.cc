@@ -21,3 +21,25 @@
  */
 
 #include "microlibrary/error.h"
+
+#include "microlibrary/rom.h"
+
+namespace microlibrary {
+
+#if MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+auto Error_Category::name() const noexcept -> ROM::String
+{
+    return MICROLIBRARY_ROM_STRING( "" );
+}
+#endif // MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+
+#if MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+auto Error_Category::error_description( Error_ID id ) const noexcept -> ROM::String
+{
+    static_cast<void>( id );
+
+    return MICROLIBRARY_ROM_STRING( "" );
+}
+#endif // MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+
+} // namespace microlibrary
