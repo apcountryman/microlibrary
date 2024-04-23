@@ -23,7 +23,17 @@
 #ifndef MICROLIBRARY_ERROR_H
 #define MICROLIBRARY_ERROR_H
 
+#include <cstdint>
+
 namespace microlibrary {
+
+/**
+ * \brief Error ID.
+ *
+ * \attention This type is the expected underlying type for all error code enums.
+ */
+using Error_ID = std::uint_fast8_t;
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_ERROR_H
