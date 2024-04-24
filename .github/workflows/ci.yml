@@ -68,6 +68,12 @@ jobs:
             - name: Test
               shell: bash
               run: ./ci/test-automated.sh --configuration build-all-development_environment-test-automated
+            - name: Archive tests coverage report
+              uses: actions/upload-artifact@v4
+              with:
+                  name: microlibrary-automated-tests-coverage-report
+                  path: build/build-all-development_environment-test-automated/microlibrary-automated-tests-coverage-report
+                  retention-days: 7
 
     build-arm_cortex_m0plus-hardware:
         name: Build (Generic Arm Cortex-M0+ HIL, hardware target)
