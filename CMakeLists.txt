@@ -175,6 +175,11 @@ if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
     endif( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
 endif( MICROLIBRARY_HIL STREQUAL "MICROCHIP_SAM_D21DA1" )
 
+# CMake modules configuration
+list( APPEND CMAKE_MODULE_PATH
+    "${PROJECT_SOURCE_DIR}/cmake/modules/cmake-utilities"
+    )
+
 # compilation and linking configuration
 if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
     set( CMAKE_CXX_STANDARD 17 )
@@ -204,11 +209,15 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
             add_compile_options(
                 -fsanitize=address
                 -fno-sanitize-recover=all
+                -fprofile-arcs
+                -ftest-coverage
                 )
 
             add_link_options(
                 -fsanitize=address
                 -fno-sanitize-recover=all
+                -fprofile-arcs
+                -ftest-coverage
                 )
         endif( MICROLIBRARY_BUILD_AUTOMATED_TESTS )
     endif( MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
@@ -330,6 +339,21 @@ endif( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
 if( MICROLIBRARY_BUILD_AUTOMATED_TESTS )
     set( MICROLIBRARY_AUTOMATED_TESTS_OPTIONS
         --gtest_color=yes
+        )
+
+    include( lcov-utilities )
+    add_lcov_coverage_target( microlibrary-automated-tests-coverage
+        ctest
+        EXECUTABLE_ARGUMENTS --tests-regex test-automated-microlibrary*
+        INCLUDE_BRANCH_COVERAGE
+        EXCLUDE_EXTERNAL_SOURCE_FILES
+        REMOVE
+            */dependencies/*
+            */include/microlibrary/testing.h
+            */include/microlibrary/testing/*
+            */source/microlibrary/testing.h
+            */source/microlibrary/testing/*
+            */tests/*
         )
 
     enable_testing()

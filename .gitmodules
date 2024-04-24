@@ -23,6 +23,11 @@
 	path = dependencies/googletest/googletest
 	url = ../googletest
 
+# CMake modules
+[submodule "cmake/modules/cmake-utilities"]
+	path = cmake/modules/cmake-utilities
+	url = ../cmake-utilities
+
 # CMake toolchains
 [submodule "toolchains/toolchain-arm-none-eabi-gcc"]
 	path = toolchains/toolchain-arm-none-eabi-gcc

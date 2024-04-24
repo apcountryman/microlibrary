@@ -106,7 +106,7 @@ function ensure_no_automated_test_errors_are_present()
 {
     local -r build_directory="$repository/build/$configuration"
 
-    if ! cmake --build "$build_directory" --target test -- CTEST_OUTPUT_ON_FAILURE=1; then
+    if ! cmake --build "$build_directory" --target microlibrary-automated-tests-coverage -- CTEST_OUTPUT_ON_FAILURE=1; then
         abort
     fi
 }
