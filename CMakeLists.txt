@@ -328,6 +328,10 @@ endif( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
 
 # automated testing configuration
 if( MICROLIBRARY_BUILD_AUTOMATED_TESTS )
+    set( MICROLIBRARY_AUTOMATED_TESTS_OPTIONS
+        --gtest_color=yes
+        )
+
     enable_testing()
 endif( MICROLIBRARY_BUILD_AUTOMATED_TESTS )
 

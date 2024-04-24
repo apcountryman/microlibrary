@@ -30,5 +30,5 @@ target_link_libraries( test-automated-microlibrary-error_code
 
 add_test(
     NAME    test-automated-microlibrary-error_code
-    COMMAND test-automated-microlibrary-error_code
+    COMMAND test-automated-microlibrary-error_code ${MICROLIBRARY_AUTOMATED_TESTS_OPTIONS}
     )
