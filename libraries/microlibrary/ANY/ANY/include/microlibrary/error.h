@@ -285,7 +285,7 @@ class Error_Code final {
     /**
      * \brief The error's ID.
      */
-    Error_ID m_id{};
+    Error_ID m_id{ 0 };
 };
 
 /**

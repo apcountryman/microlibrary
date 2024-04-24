@@ -54,18 +54,16 @@ TEST( constructorDefault, worksProperly )
  */
 TEST( constructorCategoryID, worksProperly )
 {
-    auto const category = Mock_Error_Category{};
-    auto const id       = Error_ID{ 195 };
+    auto const category    = Mock_Error_Category{};
+    auto const id          = Error_ID{ 195 };
+    auto const description = "aGE931YlH5YAdR";
+
+    EXPECT_CALL( category, error_description( id ) ).WillOnce( Return( description ) );
 
     auto const error = Error_Code{ category, id };
 
     EXPECT_EQ( &error.category(), &category );
     EXPECT_EQ( error.id(), id );
-
-    auto const description = "aGE931YlH5YAdR";
-
-    EXPECT_CALL( category, error_description( id ) ).WillOnce( Return( description ) );
-
     EXPECT_STREQ( error.description(), description );
 }
 
@@ -74,17 +72,15 @@ TEST( constructorCategoryID, worksProperly )
  */
 TEST( constructorErrorCodeEnum, worksProperly )
 {
-    auto const id = Error_ID{ 49 };
+    auto const id          = Error_ID{ 49 };
+    auto const description = "qMiNrCStx5Ch";
+
+    EXPECT_CALL( Mock_Error_Category::instance(), error_description( id ) ).WillOnce( Return( description ) );
 
     auto const error = Error_Code{ static_cast<Mock_Error>( id ) };
 
     EXPECT_EQ( &error.category(), &Mock_Error_Category::instance() );
     EXPECT_EQ( error.id(), id );
-
-    auto const description = "qMiNrCStx5Ch";
-
-    EXPECT_CALL( Mock_Error_Category::instance(), error_description( id ) ).WillOnce( Return( description ) );
-
     EXPECT_STREQ( error.description(), description );
 }
 
