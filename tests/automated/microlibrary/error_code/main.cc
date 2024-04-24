@@ -44,7 +44,7 @@ TEST( constructorDefault, worksProperly )
 
     EXPECT_NE( &error.category(), nullptr );
     EXPECT_STREQ( error.category().name(), "::microlibrary::Default_Error" );
-    EXPECT_EQ( error.id(), 1 );
+    EXPECT_EQ( error.id(), 0 );
     EXPECT_STREQ( error.description(), "UNKNOWN" );
 }
 
