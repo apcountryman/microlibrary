@@ -42,4 +42,22 @@ auto Error_Category::error_description( Error_ID id ) const noexcept -> ROM::Str
 }
 #endif // MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
 
+Error_Code::Default_Error_Category const Error_Code::Default_Error_Category::INSTANCE{};
+
+#if !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+auto Error_Code::Default_Error_Category::name() const noexcept -> ROM::String
+{
+    return MICROLIBRARY_ROM_STRING( "::microlibrary::Default_Error" );
+}
+#endif // !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+
+#if !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+auto Error_Code::Default_Error_Category::error_description( Error_ID id ) const noexcept -> ROM::String
+{
+    static_cast<void>( id );
+
+    return MICROLIBRARY_ROM_STRING( "UNKNOWN" );
+}
+#endif // !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+
 } // namespace microlibrary

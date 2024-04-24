@@ -21,3 +21,37 @@
  */
 
 #include "microlibrary/testing/automated/error.h"
+
+#include <cstdint>
+#include <ios>
+#include <ostream>
+#include <typeinfo>
+
+namespace microlibrary {
+
+auto operator<<( std::ostream & stream, Error_Code const & error ) -> std::ostream &
+{
+    if ( &error.category() == &Testing::Automated::Mock_Error_Category::instance() ) {
+        return stream << "::microlibrary::Testing::Automated::Mock_Error::" << std::dec
+                      << static_cast<std::uint_fast16_t>( error.id() );
+    } // if
+
+    if ( typeid( error.category() ) == typeid( Testing::Automated::Mock_Error_Category ) ) {
+        return stream << "::microlibrary::Testing::Automated::Mock_Error( " << &error.category()
+                      << " )::" << std::dec << static_cast<std::uint_fast16_t>( error.id() );
+    } // if
+
+    return stream << error.category().name() << "::" << error.description();
+}
+
+} // namespace microlibrary
+
+namespace microlibrary::Testing::Automated {
+
+auto operator<<( std::ostream & stream, Mock_Error error ) -> std::ostream &
+{
+    return stream << "::microlibrary::Testing::Automated::Mock_Error::" << std::dec
+                  << static_cast<std::uint_fast16_t>( error );
+}
+
+} // namespace microlibrary::Testing::Automated
