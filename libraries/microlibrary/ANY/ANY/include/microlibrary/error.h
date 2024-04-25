@@ -107,7 +107,7 @@ class Error_Category {
 /**
  * \brief Error code.
  */
-class Error_Code final {
+class Error_Code {
   public:
     /**
      * \brief Constructor.
