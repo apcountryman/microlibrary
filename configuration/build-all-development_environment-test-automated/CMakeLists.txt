@@ -18,8 +18,8 @@
 
 mark_as_advanced( CMAKE_INSTALL_PREFIX )
 
-set( CMAKE_BUILD_TYPE              "RelWithDebInfo" CACHE INTERNAL "" )
-set( CMAKE_EXPORT_COMPILE_COMMANDS ON               CACHE INTERNAL "" )
+set( CMAKE_BUILD_TYPE              "Debug" CACHE INTERNAL "" )
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON      CACHE INTERNAL "" )
 
 set( MICROLIBRARY_HIL                                       "ALL"                     CACHE INTERNAL "" )
 set( MICROLIBRARY_TARGET                                    "DEVELOPMENT_ENVIRONMENT" CACHE INTERNAL "" )
