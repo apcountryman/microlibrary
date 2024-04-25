@@ -42,6 +42,16 @@ namespace microlibrary {
  */
 auto operator<<( std::ostream & stream, Error_Code const & error ) -> std::ostream &;
 
+/**
+ * \brief Insertion operator.
+ *
+ * \param[in] stream The stream to write the microlibrary::Generic_Error to.
+ * \param[in] generic_error The microlibrary::Generic_Error to write to the stream.
+ *
+ * \return stream
+ */
+auto operator<<( std::ostream & stream, Generic_Error generic_error ) -> std::ostream &;
+
 } // namespace microlibrary
 
 namespace microlibrary::Testing::Automated {

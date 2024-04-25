@@ -26,6 +26,7 @@
 #include <cstdint>
 #include <type_traits>
 
+#include "microlibrary/enum.h"
 #include "microlibrary/rom.h"
 
 namespace microlibrary {
@@ -319,6 +320,101 @@ constexpr auto operator!=( Error_Code const & lhs, Error_Code const & rhs ) noex
 {
     return not( lhs == rhs );
 }
+
+/**
+ * \brief Generic errors.
+ *
+ * \relatedalso microlibrary::Generic_Error_Category
+ */
+enum class Generic_Error : Error_ID {
+    INVALID_ARGUMENT, ///< Invalid argument.
+    LOGIC_ERROR,      ///< Logic error.
+    OUT_OF_RANGE,     ///< Out of range.
+    RUNTIME_ERROR,    ///< Runtime error.
+};
+
+/**
+ * \brief Generic error category.
+ */
+class Generic_Error_Category final : public Error_Category {
+  public:
+    /**
+     * \brief Get a reference to the generic error category instance.
+     *
+     * \return A reference to the generic error category instance.
+     */
+    static constexpr auto instance() noexcept -> Generic_Error_Category const &
+    {
+        return INSTANCE;
+    }
+
+    Generic_Error_Category( Generic_Error_Category && ) = delete;
+
+    Generic_Error_Category( Generic_Error_Category const & ) = delete;
+
+    auto operator=( Generic_Error_Category && ) = delete;
+
+    auto operator=( Generic_Error_Category const & ) = delete;
+
+#if !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+    /**
+     * \brief Get the name of the error category.
+     *
+     * \return The name of the error category.
+     */
+    auto name() const noexcept -> ROM::String override final;
+#endif // !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+
+#if !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+    /**
+     * \brief Get an error ID's description.
+     *
+     * \param[in] id The error ID whose description is to be got.
+     *
+     * \return The error ID's description.
+     */
+    auto error_description( Error_ID id ) const noexcept -> ROM::String override final;
+#endif // !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+
+  private:
+    /**
+     * \brief The generic error category instance.
+     */
+    static Generic_Error_Category const INSTANCE;
+
+    /**
+     * \brief Constructor.
+     */
+    constexpr Generic_Error_Category() noexcept = default;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Generic_Error_Category() noexcept = default;
+};
+
+/**
+ * \brief Construct an error code from a generic error.
+ *
+ * \relatedalso microlibrary::Generic_Error_Category
+ *
+ * \param[in] error The generic error to construct the error code from.
+ *
+ * \return The constructed error code.
+ */
+inline auto make_error_code( Generic_Error error ) noexcept -> Error_Code
+{
+    return { Generic_Error_Category::instance(), to_underlying( error ) };
+}
+
+/**
+ * \brief microlibrary::Generic_Error error code enum registration.
+ *
+ * \relatedalso microlibrary::Generic_Error_Category
+ */
+template<>
+struct is_error_code_enum<Generic_Error> : std::true_type {
+};
 
 } // namespace microlibrary
 

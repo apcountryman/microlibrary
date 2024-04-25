@@ -201,8 +201,6 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
             -Wpointer-arith
             -Wshadow
             -Wunsafe-loop-optimizations
-            -fno-exceptions
-            -fno-threadsafe-statics
             )
 
         if( MICROLIBRARY_BUILD_AUTOMATED_TESTS )
