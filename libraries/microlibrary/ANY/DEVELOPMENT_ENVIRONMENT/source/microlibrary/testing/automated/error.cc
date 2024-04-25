@@ -51,9 +51,9 @@ auto operator<<( std::ostream & stream, Generic_Error generic_error ) -> std::os
             // clang-format off
 
         case Generic_Error::INVALID_ARGUMENT: return stream << "::microlibrary::Generic_Error::INVALID_ARGUMENT";
-        case Generic_Error::LOGIC_ERROR:      return stream << "::microlibrary::Generic_Error::LOGIC_ERROR";
-        case Generic_Error::OUT_OF_RANGE:     return stream << "::microlibrary::Generic_Error::OUT_OF_RANGE";
-        case Generic_Error::RUNTIME_ERROR:    return stream << "::microlibrary::Generic_Error::RUNTIME_ERROR";
+        case Generic_Error::LOGIC_ERROR: return stream << "::microlibrary::Generic_Error::LOGIC_ERROR";
+        case Generic_Error::OUT_OF_RANGE: return stream << "::microlibrary::Generic_Error::OUT_OF_RANGE";
+        case Generic_Error::RUNTIME_ERROR: return stream << "::microlibrary::Generic_Error::RUNTIME_ERROR";
 
             // clang-format on
     } // switch

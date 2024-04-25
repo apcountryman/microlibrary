@@ -101,9 +101,9 @@ errorDescription_Test_Case const errorDescription_TEST_CASES[]{
     // clang-format off
 
     { to_underlying( Generic_Error::INVALID_ARGUMENT ), "INVALID_ARGUMENT" },
-    { to_underlying( Generic_Error::LOGIC_ERROR ),      "LOGIC_ERROR"      },
-    { to_underlying( Generic_Error::OUT_OF_RANGE ),     "OUT_OF_RANGE"     },
-    { to_underlying( Generic_Error::RUNTIME_ERROR ),    "RUNTIME_ERROR"    },
+    { to_underlying( Generic_Error::LOGIC_ERROR ), "LOGIC_ERROR" },
+    { to_underlying( Generic_Error::OUT_OF_RANGE ), "OUT_OF_RANGE" },
+    { to_underlying( Generic_Error::RUNTIME_ERROR ), "RUNTIME_ERROR" },
 
     { to_underlying( Generic_Error::RUNTIME_ERROR ) + 1, "UNKNOWN" },
 
