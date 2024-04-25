@@ -25,6 +25,7 @@
 #include <cstdint>
 #include <ios>
 #include <ostream>
+#include <stdexcept>
 #include <typeinfo>
 
 namespace microlibrary {
@@ -42,6 +43,24 @@ auto operator<<( std::ostream & stream, Error_Code const & error ) -> std::ostre
     } // if
 
     return stream << error.category().name() << "::" << error.description();
+}
+
+auto operator<<( std::ostream & stream, Generic_Error generic_error ) -> std::ostream &
+{
+    switch ( generic_error ) {
+            // clang-format off
+
+        case Generic_Error::INVALID_ARGUMENT: return stream << "::microlibrary::Generic_Error::INVALID_ARGUMENT";
+        case Generic_Error::LOGIC_ERROR:      return stream << "::microlibrary::Generic_Error::LOGIC_ERROR";
+        case Generic_Error::OUT_OF_RANGE:     return stream << "::microlibrary::Generic_Error::OUT_OF_RANGE";
+        case Generic_Error::RUNTIME_ERROR:    return stream << "::microlibrary::Generic_Error::RUNTIME_ERROR";
+
+            // clang-format on
+    } // switch
+
+    throw std::invalid_argument{
+        "generic_error is not a valid ::microlibrary::Generic_Error"
+    };
 }
 
 } // namespace microlibrary

@@ -60,4 +60,31 @@ auto Error_Code::Default_Error_Category::error_description( Error_ID id ) const 
 }
 #endif // !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
 
+Generic_Error_Category const Generic_Error_Category::INSTANCE{};
+
+#if !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+auto Generic_Error_Category::name() const noexcept -> ROM::String
+{
+    return MICROLIBRARY_ROM_STRING( "::microlibrary::Generic_Error" );
+}
+#endif // !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+
+#if !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+auto Generic_Error_Category::error_description( Error_ID id ) const noexcept -> ROM::String
+{
+    switch ( static_cast<Generic_Error>( id ) ) {
+            // clang-format off
+
+        case Generic_Error::INVALID_ARGUMENT: return MICROLIBRARY_ROM_STRING( "INVALID_ARGUMENT" );
+        case Generic_Error::LOGIC_ERROR: return MICROLIBRARY_ROM_STRING( "LOGIC_ERROR" );
+        case Generic_Error::OUT_OF_RANGE: return MICROLIBRARY_ROM_STRING( "OUT_OF_RANGE" );
+        case Generic_Error::RUNTIME_ERROR: return MICROLIBRARY_ROM_STRING( "RUNTIME_ERROR" );
+
+            // clang-format on
+    } // switch
+
+    return MICROLIBRARY_ROM_STRING( "UNKNOWN" );
+}
+#endif // !MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
+
 } // namespace microlibrary

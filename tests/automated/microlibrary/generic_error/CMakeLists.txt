@@ -13,13 +13,22 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary static library automated tests CMake rules.
+# Description: microlibrary::Generic_Error automated tests CMake rules.
 
-# microlibrary::Error_Code automated tests
-add_subdirectory( error_code )
+add_executable( test-automated-microlibrary-generic_error )
 
-# microlibrary::Generic_Error automated tests
-add_subdirectory( generic_error )
+target_sources( test-automated-microlibrary-generic_error
+    PRIVATE main.cc
+    )
 
-# microlibrary::Generic_Error_Category automated tests
-add_subdirectory( generic_error_category )
+target_link_libraries( test-automated-microlibrary-generic_error
+    PRIVATE gmock
+    PRIVATE gmock_main
+    PRIVATE gtest
+    PRIVATE microlibrary
+    )
+
+add_test(
+    NAME    test-automated-microlibrary-generic_error
+    COMMAND test-automated-microlibrary-generic_error ${MICROLIBRARY_AUTOMATED_TESTS_OPTIONS}
+    )
