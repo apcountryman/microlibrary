@@ -5,6 +5,7 @@
 1. [Error Identification](#error-identification)
     1. [Library Defined Errors](#library-defined-errors)
     1. [Defining Additional Errors](#defining-additional-errors)
+1. [Assertions](#assertions)
 
 ## Error Identification
 
@@ -106,3 +107,5 @@ To create an additional error set, do the following:
    takes the enum class and returns a `::microlibrary::Error_Code`.
 4. Register the enum class as an error code enum by specializing
    `::microlibrary::is_error_code_enum` for the enum class.
+
+## Assertions
