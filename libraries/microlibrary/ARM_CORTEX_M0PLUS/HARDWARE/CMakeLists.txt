@@ -27,7 +27,7 @@ if( MICROLIBRARY_HIL STREQUAL "ARM_CORTEX_M0PLUS" )
             )
     else( TARGET microlibrary-arm-cortex-m0plus )
         message( STATUS
-            "microlibrary-arm-cortex-m0plus target not found, using default configuration"
+            "microlibrary-arm-cortex-m0plus target not found, using default configuration."
             )
     endif( TARGET microlibrary-arm-cortex-m0plus )
 endif( MICROLIBRARY_HIL STREQUAL "ARM_CORTEX_M0PLUS" )
