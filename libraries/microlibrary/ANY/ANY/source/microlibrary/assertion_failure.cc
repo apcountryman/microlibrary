@@ -79,7 +79,7 @@ extern "C" [[noreturn]] void microlibrary_handle_assertion_failure( ::microlibra
 namespace microlibrary {
 
 #if !MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION
-[[noreturn]] void handle_assertion_failure( ROM::String string, int line, Error_Code const & error ) noexcept
+[[noreturn]] void handle_assertion_failure( ROM::String file, int line, Error_Code const & error ) noexcept
     __attribute__( ( weak, alias( "microlibrary_handle_assertion_failure" ) ) );
 #else  // !MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION
 [[noreturn]] void handle_assertion_failure( Error_Code const & error ) noexcept
