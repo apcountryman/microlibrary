@@ -37,8 +37,8 @@ namespace microlibrary {
  */
 #define MICROLIBRARY_ENSURE( guarantee, error )                 \
     ( ( guarantee ) ? static_cast<void>( 0 )                    \
-                      : ::microlibrary::handle_assertion_failure( \
-                          MICROLIBRARY_ROM_STRING( __FILE__ ), __LINE__, error ) )
+                    : ::microlibrary::handle_assertion_failure( \
+                        MICROLIBRARY_ROM_STRING( __FILE__ ), __LINE__, error ) )
 #else // !MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION
 /**
  * \brief Check a postcondition's guarantee.
