@@ -7,6 +7,7 @@
     1. [Defining Additional Errors](#defining-additional-errors)
 1. [Assertions](#assertions)
     1. [Precondition Assertions](#precondition-assertions)
+    1. [Postcondition Assertions](#postcondition-assertions)
     1. [Assertion Failure Handling](#assertion-failure-handling)
 
 ## Error Identification
@@ -136,6 +137,19 @@ use the `::microlibrary::Run_Precondition_Expectation_Checks` type.
 Users can then use the `::microlibrary::RUN_PRECONDITION_EXPECTATION_CHECKS` constant to
 select the function overload that runs the function's precondition expectation checks
 while bypassing the called function's precondition expectation checks.
+
+### Postcondition Assertions
+
+Postcondition assertion facilities are defined in the `microlibrary` static library's
+[`microlibrary/postcondition.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/include/microlibrary/postcondition.h)/[`microlibrary/postcondition.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/source/microlibrary/postcondition.cc)
+header/source file pair.
+
+To check if a function postcondition guarantee, use the `MICROLIBRARY_ENSURE()` macro.
+If the `guarantee` macro argument evaluates to `false`,
+`::microlibrary::handle_assertion_failure()` will be called.
+If code is structured in a way that an execution path being taken indicates a
+postcondition guarantee has not been met, use the `MICROLIBRARY_GUARANTEE_NOT_MET()` macro
+to unconditionally call `::microlibrary::handle_assertion_failure()`.
 
 ### Assertion Failure Handling
 
