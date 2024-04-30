@@ -30,7 +30,7 @@ endif( NOT avrlibcpp_POPULATED )
 
 if( NOT AVRLIBCPP_SUPPRESS_SFR_MACROS )
     message( FATAL_ERROR
-        "AVRLIBCPP_SUPPRESS_SFR_MACROS must be 'ON'"
+        "AVRLIBCPP_SUPPRESS_SFR_MACROS must be 'ON'."
         )
 endif( NOT AVRLIBCPP_SUPPRESS_SFR_MACROS )
 
