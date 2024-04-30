@@ -144,7 +144,7 @@ Postcondition assertion facilities are defined in the `microlibrary` static libr
 [`microlibrary/postcondition.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/include/microlibrary/postcondition.h)/[`microlibrary/postcondition.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/source/microlibrary/postcondition.cc)
 header/source file pair.
 
-To check if a function postcondition guarantee, use the `MICROLIBRARY_ENSURE()` macro.
+To check a function postcondition guarantee, use the `MICROLIBRARY_ENSURE()` macro.
 If the `guarantee` macro argument evaluates to `false`,
 `::microlibrary::handle_assertion_failure()` will be called.
 If code is structured in a way that an execution path being taken indicates a
