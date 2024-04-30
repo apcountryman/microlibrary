@@ -6,6 +6,7 @@
     1. [Library Defined Errors](#library-defined-errors)
     1. [Defining Additional Errors](#defining-additional-errors)
 1. [Assertions](#assertions)
+    1. [Precondition Assertions](#precondition-assertions)
     1. [Assertion Failure Handling](#assertion-failure-handling)
 
 ## Error Identification
@@ -110,6 +111,31 @@ To create an additional error set, do the following:
    `::microlibrary::is_error_code_enum` for the enum class.
 
 ## Assertions
+
+### Precondition Assertions
+
+Precondition assertion facilities are defined in the `microlibrary` static library's
+[`microlibrary/precondition.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/include/microlibrary/precondition.h)/[`microlibrary/precondition.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/source/microlibrary/precondition.cc)
+header/source file pair.
+
+To check a precondition expectation, use the `MICROLIBRARY_EXPECT()` macro.
+If the `expectation` macro argument evaluates to `false`,
+`::microlibrary::handle_assertion_failure()` will be called.
+If code is structured in a way that an execution path being taken indicates a precondition
+expectation has not been met, use the `MICROLIBRARY_EXPECTATION_NOT_MET()` macro to
+unconditionally call `::microlibrary::handle_assertion_failure()`.
+
+To create a function overload that lets the user bypass precondition expectation checks,
+use the `::microlibrary::Bypass_Precondition_Expectation_Checks` type.
+Users can then use the `::microlibrary::BYPASS_PRECONDITION_EXPECTATION_CHECKS` constant
+to select the function overload that bypasses the precondition expectation checks.
+
+To create a function overload that lets the user run the function's precondition
+expectation checks while bypassing a called function's precondition expectation checks,
+use the `::microlibrary::Run_Precondition_Expectation_Checks` type.
+Users can then use the `::microlibrary::RUN_PRECONDITION_EXPECTATION_CHECKS` constant to
+select the function overload that runs the function's precondition expectation checks
+while bypassing the called function's precondition expectation checks.
 
 ### Assertion Failure Handling
 
