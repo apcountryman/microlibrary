@@ -100,11 +100,13 @@ void log_assertion_failure_default( void * data, ::microlibrary::Error_Code cons
 /**
  * \brief The active assertion failure logger.
  */
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 auto ASSERTION_FAILURE_LOGGER = log_assertion_failure_default;
 
 /**
  * \brief The data associated with the active assertion failure logger.
  */
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 auto ASSERTION_FAILURE_LOGGER_DATA = static_cast<void *>( nullptr );
 
 #if !MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION
