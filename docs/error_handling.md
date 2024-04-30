@@ -6,6 +6,7 @@
     1. [Library Defined Errors](#library-defined-errors)
     1. [Defining Additional Errors](#defining-additional-errors)
 1. [Assertions](#assertions)
+    1. [Assertion Failure Handling](#assertion-failure-handling)
 
 ## Error Identification
 
@@ -109,3 +110,26 @@ To create an additional error set, do the following:
    `::microlibrary::is_error_code_enum` for the enum class.
 
 ## Assertions
+
+### Assertion Failure Handling
+
+Assertion failure handling facilities are defined in the `microlibrary` static library's
+[`microlibrary/assertion_failure.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/include/microlibrary/assertion_failure.h)/[`microlibrary/assertion_failure.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/source/microlibrary/assertion_failure.cc)
+header/source file pair.
+
+The `::microlibrary::trap_assertion_failure()` function is called if an assertion failure
+occurs.
+This function calls an assertion failure logger to log the assertion failure and then
+calls `::microlibrary::handle_assertion_failure()` to handle the assertion failure.
+
+The `::microlibrary::Assertion_Failure_Logger` type alias defines the expected signature
+of an assertion failure logger.
+The behavior of the default assertion failure logger depends on `MICROLIBRARY_TARGET`.
+If `MICROLIBRARY_TARGET` is `DEVELOPMENT_ENVIRONMENT`, the default assertion failure
+logger writes all available information about an assertion failure to `std::cerr`.
+If `MICROLIBRARY_TARGET` is `HARDWARE`, the default assertion failure logger does nothing.
+The default assertion failure logger can be replaced using the
+`::microlibrary::replace_assertion_failure_logger()` function.
+
+`::microlibrary::handle_assertion_failure()` is defined as a weak alias for its default
+implementation (which simply calls `std::abort()` so that its behavior can be overridden.

@@ -44,6 +44,8 @@ microlibrary supports the following general configuration options:
     - `DEVELOPMENT_ENVIRONMENT`: Development environment.
     - `HARDWARE`: Hardware.
     - `NONE`: None (used to exclude target specific code from static analysis).
+- `MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION` (defaults to `OFF`):
+  Suppress assertion failure location information.
 - `MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION` (defaults to `OFF`): Suppress
   human readable error information.
 - `MICROLIBRARY_BUILD_AUTOMATED_TESTS` (defaults to `OFF`): Build automated tests.

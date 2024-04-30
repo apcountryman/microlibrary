@@ -22,6 +22,7 @@ target_include_directories( microlibrary
 target_compile_definitions( microlibrary
     PUBLIC MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT=$<STREQUAL:"${MICROLIBRARY_TARGET}","DEVELOPMENT_ENVIRONMENT">
     PUBLIC MICROLIBRARY_TARGET_IS_HARDWARE=$<STREQUAL:"${MICROLIBRARY_TARGET}","HARDWARE">
+    PUBLIC MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION=$<BOOL:${MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION}>
     PUBLIC MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION=$<BOOL:${MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION}>
     )
 
@@ -29,6 +30,7 @@ target_sources( microlibrary
     PRIVATE source/microlibrary.cc
     PRIVATE source/microlibrary/arm.cc
     PRIVATE source/microlibrary/arm/cortex.cc
+    PRIVATE source/microlibrary/assertion_failure.cc
     PRIVATE source/microlibrary/enum.cc
     PRIVATE source/microlibrary/error.cc
     PRIVATE source/microlibrary/microchip.cc
