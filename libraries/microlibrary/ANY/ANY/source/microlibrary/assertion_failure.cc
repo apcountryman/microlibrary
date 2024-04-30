@@ -60,6 +60,13 @@ void log_assertion_failure_default( void * data, ::microlibrary::ROM::String fil
     static_cast<void>( line );
     static_cast<void>( error );
 #endif // MICROLIBRARY_TARGET_IS_HARDWARE
+
+#if MICROLIBRARY_TARGET_IS_NONE
+    static_cast<void>( data );
+    static_cast<void>( file );
+    static_cast<void>( line );
+    static_cast<void>( error );
+#endif // MICROLIBRARY_TARGET_IS_NONE
 }
 #else // !MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION
 /**
@@ -82,6 +89,11 @@ void log_assertion_failure_default( void * data, ::microlibrary::Error_Code cons
     static_cast<void>( data );
     static_cast<void>( error );
 #endif // MICROLIBRARY_TARGET_IS_HARDWARE
+
+#if MICROLIBRARY_TARGET_IS_NONE
+    static_cast<void>( data );
+    static_cast<void>( error );
+#endif // MICROLIBRARY_TARGET_IS_NONE
 }
 #endif // !MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION
 
