@@ -6,6 +6,7 @@
     1. [Library Defined Errors](#library-defined-errors)
     1. [Defining Additional Errors](#defining-additional-errors)
 1. [Assertions](#assertions)
+    1. [Assertion Failure Handling](#assertion-failure-handling)
 
 ## Error Identification
 
@@ -109,3 +110,20 @@ To create an additional error set, do the following:
    `::microlibrary::is_error_code_enum` for the enum class.
 
 ## Assertions
+
+### Assertion Failure Handling
+
+Assertion failure handling facilities are defined in the `microlibrary` static library's
+[`microlibrary/assertion_failure.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/include/microlibrary/assertion_failure.h)/[`microlibrary/assertion_failure.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/source/microlibrary/assertion_failure.cc)
+header/source file pair.
+
+The `::microlibrary::handle_assertion_failure()` function is called if an assertion
+failure occurs.
+This function is defined as a weak alias for its default implementation so that its
+behavior can be overridden.
+The behavior of the default implementation depends on `MICROLIBRARY_TARGET`.
+If `MICROLIBRARY_TARGET` is `DEVELOPMENT_ENVIRONMENT`, the default implementation writes
+all available information about an assertion failure to `std::cerr` and calls
+`std::abort()`.
+If `MICROLIBRARY_TARGET` is not `DEVELOPMENT_ENVIRONMENT`, the default implementation
+simply calls `std::abort()`.

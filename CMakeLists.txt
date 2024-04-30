@@ -32,6 +32,11 @@ set( MICROLIBRARY_TARGET
     "microlibrary: Target environment."
     )
 
+option( MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION
+    "microlibrary: Suppress assertion failure location information."
+    OFF
+    )
+
 option( MICROLIBRARY_SUPPRESS_HUMAN_READABLE_ERROR_INFORMATION
     "microlibrary: Suppress human readable error information."
     OFF
@@ -201,6 +206,7 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
             -Wpointer-arith
             -Wshadow
             -Wunsafe-loop-optimizations
+            -ffile-prefix-map=${PROJECT_SOURCE_DIR}/=
             )
 
         if( MICROLIBRARY_BUILD_AUTOMATED_TESTS )
@@ -239,6 +245,7 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
             -Wunsafe-loop-optimizations
             -fno-exceptions
             -fno-threadsafe-statics
+            -ffile-prefix-map=${PROJECT_SOURCE_DIR}/=
             )
 
         if( MICROLIBRARY_HIL STREQUAL "ARM_CORTEX_M0PLUS" )
@@ -329,6 +336,7 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
             -Wshadow
             -fno-exceptions
             -fno-threadsafe-statics
+            -ffile-prefix-map=${PROJECT_SOURCE_DIR}/=
             )
     endif( MICROLIBRARY_TARGET STREQUAL "NONE" )
 endif( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
