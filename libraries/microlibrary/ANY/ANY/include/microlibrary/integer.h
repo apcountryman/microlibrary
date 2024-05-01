@@ -23,7 +23,30 @@
 #ifndef MICROLIBRARY_INTEGER_H
 #define MICROLIBRARY_INTEGER_H
 
+#include <cstring>
+#include <type_traits>
+
 namespace microlibrary {
+
+/**
+ * \brief Convert a potentially signed integer to its bitwise unsigned integer equivalent.
+ *
+ * \tparam Integer The type of potentially signed integer to convert.
+ *
+ * \param[in] integer The potentially signed integer to convert.
+ *
+ * \return The potentially signed integer converted to its bitwise unsigned integer
+ *         equivalent.
+ */
+template<typename Integer>
+constexpr auto to_unsigned( Integer integer ) noexcept
+{
+    std::make_unsigned_t<Integer> unsigned_integer;
+    static_assert( sizeof( unsigned_integer ) == sizeof( integer ) );
+    std::memcpy( &unsigned_integer, &integer, sizeof( unsigned_integer ) );
+    return unsigned_integer;
+}
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_INTEGER_H
