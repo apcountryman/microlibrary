@@ -5,3 +5,10 @@ Integer utilities are defined in the `microlibrary` static library's
 header/source file pair.
 
 ## Table of Contents
+
+[`to_unsigned()`](#to_unsigned)
+
+## `to_unsigned()`
+
+To convert a potentially signed integer to its bitwise unsigned integer equivalent, use
+the `::microlibrary::to_unsigned()` utility.
