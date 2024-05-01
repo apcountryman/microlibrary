@@ -13,8 +13,24 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: Libraries CMake rules.
+# Description: microlibrary-version static library CMake rules.
 
-add_subdirectory( microlibrary )
+add_library( microlibrary-version STATIC )
 
-add_subdirectory( microlibrary-version )
+target_include_directories( microlibrary-version
+    PUBLIC include
+    )
+
+configure_file(
+    source/microlibrary/version.cc.in
+    source/microlibrary/version.cc
+    @ONLY
+    )
+
+target_sources( microlibrary-version
+    PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/source/microlibrary/version.cc"
+    )
+
+target_link_libraries( microlibrary-version
+    PUBLIC microlibrary
+    )
