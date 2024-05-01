@@ -377,7 +377,7 @@ class [[nodiscard]] Result<Value_Type, true>
     /**
      * \brief Access the result of a successful operation.
      *
-     * \warning calling this function on the result of a failed operation results in
+     * \warning Calling this function on the result of a failed operation results in
      *          undefined behavior.
      *
      * \return The generated information.
@@ -390,7 +390,7 @@ class [[nodiscard]] Result<Value_Type, true>
     /**
      * \brief Access the result of a successful operation.
      *
-     * \warning calling this function on the result of a failed operation results in
+     * \warning Calling this function on the result of a failed operation results in
      *          undefined behavior.
      *
      * \return The generated information.
@@ -403,7 +403,7 @@ class [[nodiscard]] Result<Value_Type, true>
     /**
      * \brief Access the result of a successful operation.
      *
-     * \warning calling this function on the result of a failed operation results in
+     * \warning Calling this function on the result of a failed operation results in
      *          undefined behavior.
      *
      * \return The generated information.
@@ -416,7 +416,7 @@ class [[nodiscard]] Result<Value_Type, true>
     /**
      * \brief Access the result of a successful operation.
      *
-     * \warning calling this function on the result of a failed operation results in
+     * \warning Calling this function on the result of a failed operation results in
      *          undefined behavior.
      *
      * \return The generated information.
@@ -651,7 +651,7 @@ class [[nodiscard]] Result<Value_Type, false>
     /**
      * \brief Access the result of a successful operation.
      *
-     * \warning calling this function on the result of a failed operation results in
+     * \warning Calling this function on the result of a failed operation results in
      *          undefined behavior.
      *
      * \return The generated information.
@@ -664,7 +664,7 @@ class [[nodiscard]] Result<Value_Type, false>
     /**
      * \brief Access the result of a successful operation.
      *
-     * \warning calling this function on the result of a failed operation results in
+     * \warning Calling this function on the result of a failed operation results in
      *          undefined behavior.
      *
      * \return The generated information.
@@ -677,7 +677,7 @@ class [[nodiscard]] Result<Value_Type, false>
     /**
      * \brief Access the result of a successful operation.
      *
-     * \warning calling this function on the result of a failed operation results in
+     * \warning Calling this function on the result of a failed operation results in
      *          undefined behavior.
      *
      * \return The generated information.
@@ -690,7 +690,7 @@ class [[nodiscard]] Result<Value_Type, false>
     /**
      * \brief Access the result of a successful operation.
      *
-     * \warning calling this function on the result of a failed operation results in
+     * \warning Calling this function on the result of a failed operation results in
      *          undefined behavior.
      *
      * \return The generated information.
