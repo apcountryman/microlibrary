@@ -14,3 +14,4 @@ A C++ microcontroller driver/utility library.
 1. [ROM Facilities](rom.md)
 1. [Project Version](project_version.md)
 1. [Error Handling Facilities](error_handling.md)
+1. [Integer Utilities](integer_utilities.md)
