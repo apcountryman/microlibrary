@@ -20,9 +20,8 @@
  * \brief microlibrary::version() implementation.
  */
 
-#include "microlibrary/version.h"
-
 #include "microlibrary/rom.h"
+#include "microlibrary/version.h"
 
 namespace microlibrary {
 
