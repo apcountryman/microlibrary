@@ -341,6 +341,12 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
     endif( MICROLIBRARY_TARGET STREQUAL "NONE" )
 endif( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
 
+# project version capture
+include( git-utilities )
+execute_git_command( MICROLIBRARY_VERSION
+    COMMAND describe --match=none --always --dirty --broken
+    )
+
 # automated testing configuration
 if( MICROLIBRARY_BUILD_AUTOMATED_TESTS )
     set( MICROLIBRARY_AUTOMATED_TESTS_OPTIONS
