@@ -38,6 +38,7 @@ target_sources( microlibrary
     PRIVATE source/microlibrary/microchip/sam.cc
     PRIVATE source/microlibrary/postcondition.cc
     PRIVATE source/microlibrary/precondition.cc
+    PRIVATE source/microlibrary/result.cc
     PRIVATE source/microlibrary/rom.cc
     PRIVATE source/microlibrary/testing.cc
     )
