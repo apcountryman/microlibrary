@@ -23,6 +23,7 @@
 #ifndef MICROLIBRARY_INTEGER_H
 #define MICROLIBRARY_INTEGER_H
 
+#include <cstdint>
 #include <cstring>
 #include <type_traits>
 
@@ -45,6 +46,27 @@ constexpr auto to_unsigned( Integer integer ) noexcept
     static_assert( sizeof( unsigned_integer ) == sizeof( integer ) );
     std::memcpy( &unsigned_integer, &integer, sizeof( unsigned_integer ) );
     return unsigned_integer;
+}
+
+/**
+ * \brief Lookup an unsigned integer value's highest bit set.
+ *
+ * \tparam Integer The type of unsigned integer the lookup will be performed on.
+ *
+ * \param[in] value The unsigned integer value to perform the lookup on.
+ *
+ * \attention This function assumes value is non-zero.
+ *
+ * \return The unsigned integer value's highest bit set.
+ */
+template<typename Integer>
+constexpr auto highest_bit_set( Integer value ) noexcept -> std::uint_fast8_t
+{
+    static_assert( std::is_unsigned_v<Integer> );
+
+    auto bit = std::uint_fast8_t{ 0 };
+    for ( ; value >>= 1; ++bit ) {} // for
+    return bit;
 }
 
 } // namespace microlibrary

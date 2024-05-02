@@ -11,8 +11,14 @@ source file.
 ## Table of Contents
 
 [`to_unsigned()`](#to_unsigned)
+[`highest_bit_set()`](#highest_bit_set)
 
 ## `to_unsigned()`
 
 To convert a potentially signed integer to its bitwise unsigned integer equivalent, use
 the `::microlibrary::to_unsigned()` utility.
+
+## `highest_bit_set()`
+
+To lookup an unsigned integer value's highest bit set, use the
+`::microlibrary::highest_bit_set()` utility.
