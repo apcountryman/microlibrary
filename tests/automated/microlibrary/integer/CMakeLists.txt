@@ -13,15 +13,15 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary bit manipulation utilities automated tests CMake rules.
+# Description: microlibrary integer utilities automated tests CMake rules.
 
-add_executable( test-automated-microlibrary-bit_manipulation )
+add_executable( test-automated-microlibrary-integer )
 
-target_sources( test-automated-microlibrary-bit_manipulation
+target_sources( test-automated-microlibrary-integer
     PRIVATE main.cc
     )
 
-target_link_libraries( test-automated-microlibrary-bit_manipulation
+target_link_libraries( test-automated-microlibrary-integer
     PRIVATE gmock
     PRIVATE gmock_main
     PRIVATE gtest
@@ -29,6 +29,6 @@ target_link_libraries( test-automated-microlibrary-bit_manipulation
     )
 
 add_test(
-    NAME    test-automated-microlibrary-bit_manipulation
-    COMMAND test-automated-microlibrary-bit_manipulation ${MICROLIBRARY_AUTOMATED_TESTS_OPTIONS}
+    NAME    test-automated-microlibrary-integer
+    COMMAND test-automated-microlibrary-integer ${MICROLIBRARY_AUTOMATED_TESTS_OPTIONS}
     )

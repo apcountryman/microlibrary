@@ -15,4 +15,3 @@ A C++ microcontroller driver/utility library.
 1. [Project Version](project_version.md)
 1. [Error Handling Facilities](error_handling.md)
 1. [Integer Utilities](integer_utilities.md)
-1. [Bit Manipulation Utilities](bit_manipulation_utilities.md)
