@@ -17,7 +17,7 @@
 
 /**
  * \file
- * \brief microlibrary:::Error_Code automated tests.
+ * \brief microlibrary::Error_Code automated tests.
  */
 
 #include "gmock/gmock.h"
