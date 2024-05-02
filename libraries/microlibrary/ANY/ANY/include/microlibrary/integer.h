@@ -57,7 +57,7 @@ constexpr auto to_unsigned( Integer integer ) noexcept
  *
  * \attention This function assumes value is non-zero.
  *
- * \return The integer value's highest bit set.
+ * \return The unsigned integer value's highest bit set.
  */
 template<typename Integer>
 constexpr auto highest_bit_set( Integer value ) noexcept -> std::uint_fast8_t

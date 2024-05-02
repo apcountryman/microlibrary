@@ -50,7 +50,7 @@ struct highestBitSet_Test_Case {
     Integer value;
 
     /**
-     * \brief The integer's highest bit set.
+     * \brief The unsigned integer value's highest bit set.
      */
     std::uint_fast8_t highest_bit_set;
 };
