@@ -10,8 +10,8 @@ source file.
 
 ## Table of Contents
 
-[`to_unsigned()`](#to_unsigned)
-[`highest_bit_set()`](#highest_bit_set)
+1. [`to_unsigned()`](#to_unsigned)
+1. [`highest_bit_set()`](#highest_bit_set)
 
 ## `to_unsigned()`
 
