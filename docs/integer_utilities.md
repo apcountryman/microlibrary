@@ -3,6 +3,10 @@
 Integer utilities are defined in the `microlibrary` static library's
 [`microlibrary/integer.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/include/microlibrary/integer.h)/[`microlibrary/integer.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/source/microlibrary/integer.cc)
 header/source file pair.
+Integer utilities automated tests are defined in the `test-automated-microlibrary-integer`
+automated test executable's
+[`main.cc`](https://github.com/apcountryman/microlibrary/blob/main/tests/automated/microlibrary/integer/main.cc)
+source file.
 
 ## Table of Contents
 

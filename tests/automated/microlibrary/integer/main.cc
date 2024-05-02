@@ -17,13 +17,9 @@
 
 /**
  * \file
- * \brief microlibrary bit manipulation utilities interface.
+ * \brief microlibrary integer utilities automated tests.
  */
 
-#ifndef MICROLIBRARY_BIT_MANIPULATION_H
-#define MICROLIBRARY_BIT_MANIPULATION_H
-
-namespace microlibrary {
-} // namespace microlibrary
-
-#endif // MICROLIBRARY_BIT_MANIPULATION_H
+#include "gmock/gmock.h"
+#include "gtest/gtest.h"
+#include "microlibrary/integer.h"

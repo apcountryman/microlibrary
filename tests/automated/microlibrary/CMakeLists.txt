@@ -15,9 +15,6 @@
 
 # Description: microlibrary static library automated tests CMake rules.
 
-# microlibrary bit manipulation utilities automated tests
-add_subdirectory( bit_manipulation )
-
 # microlibrary::Error_Code automated tests
 add_subdirectory( error_code )
 
@@ -26,3 +23,6 @@ add_subdirectory( generic_error )
 
 # microlibrary::Generic_Error_Category automated tests
 add_subdirectory( generic_error_category )
+
+# microlibrary integer utilities automated tests
+add_subdirectory( integer )
