@@ -32,6 +32,7 @@ target_sources( microlibrary
     PRIVATE source/microlibrary/arm.cc
     PRIVATE source/microlibrary/arm/cortex.cc
     PRIVATE source/microlibrary/assertion_failure.cc
+    PRIVATE source/microlibrary/bit_manipulation.cc
     PRIVATE source/microlibrary/enum.cc
     PRIVATE source/microlibrary/error.cc
     PRIVATE source/microlibrary/integer.cc
