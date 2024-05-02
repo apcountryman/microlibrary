@@ -20,5 +20,5 @@ the `::microlibrary::to_unsigned()` utility.
 
 ## `highest_bit_set()`
 
-To lookup an unsigned integer's highest bit set, use the
+To lookup an unsigned integer value's highest bit set, use the
 `::microlibrary::highest_bit_set()` utility.

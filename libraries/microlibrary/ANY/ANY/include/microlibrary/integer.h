@@ -49,23 +49,23 @@ constexpr auto to_unsigned( Integer integer ) noexcept
 }
 
 /**
- * \brief Lookup an unsigned integer's highest bit set.
+ * \brief Lookup an unsigned integer value's highest bit set.
  *
  * \tparam Integer The type of unsigned integer the lookup will be performed on.
  *
- * \param[in] integer The unsigned integer to perform the lookup on.
+ * \param[in] value The unsigned integer value to perform the lookup on.
  *
- * \attention This function assumes integer is non-zero.
+ * \attention This function assumes value is non-zero.
  *
- * \return The integer's highest bit set.
+ * \return The integer value's highest bit set.
  */
 template<typename Integer>
-constexpr auto highest_bit_set( Integer integer ) noexcept -> std::uint_fast8_t
+constexpr auto highest_bit_set( Integer value ) noexcept -> std::uint_fast8_t
 {
     static_assert( std::is_unsigned_v<Integer> );
 
     auto bit = std::uint_fast8_t{ 0 };
-    for ( ; integer >>= 1; ++bit ) {} // for
+    for ( ; value >>= 1; ++bit ) {} // for
     return bit;
 }
 

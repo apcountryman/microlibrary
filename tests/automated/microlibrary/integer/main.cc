@@ -45,9 +45,9 @@ using ::testing::ValuesIn;
 template<typename Integer>
 struct highestBitSet_Test_Case {
     /**
-     * \brief The unsigned integer to perform the lookup on.
+     * \brief The unsigned integer value to perform the lookup on.
      */
-    Integer integer;
+    Integer value;
 
     /**
      * \brief The integer's highest bit set.
@@ -62,7 +62,7 @@ auto operator<<( std::ostream & stream, highestBitSet_Test_Case<Integer> const &
     // clang-format off
 
     return stream << "{ "
-                  << ".integer = 0b" << std::bitset<std::numeric_limits<Integer>::digits>{ test_case.integer }
+                  << ".value = 0b" << std::bitset<std::numeric_limits<Integer>::digits>{ test_case.value }
                   << ", "
                   << ".highest_bit_set = " << std::dec << static_cast<std::uint_fast16_t>( test_case.highest_bit_set )
                   << " }";
@@ -83,7 +83,7 @@ TEST_P( highestBitSet8, worksProperly )
 {
     auto const test_case = GetParam();
 
-    EXPECT_EQ( highest_bit_set( test_case.integer ), test_case.highest_bit_set );
+    EXPECT_EQ( highest_bit_set( test_case.value ), test_case.highest_bit_set );
 }
 
 /**
@@ -135,7 +135,7 @@ TEST_P( highestBitSet16, worksProperly )
 {
     auto const test_case = GetParam();
 
-    EXPECT_EQ( highest_bit_set( test_case.integer ), test_case.highest_bit_set );
+    EXPECT_EQ( highest_bit_set( test_case.value ), test_case.highest_bit_set );
 }
 
 /**
@@ -211,7 +211,7 @@ TEST_P( highestBitSet32, worksProperly )
 {
     auto const test_case = GetParam();
 
-    EXPECT_EQ( highest_bit_set( test_case.integer ), test_case.highest_bit_set );
+    EXPECT_EQ( highest_bit_set( test_case.value ), test_case.highest_bit_set );
 }
 
 /**
