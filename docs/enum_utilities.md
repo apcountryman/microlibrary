@@ -6,7 +6,7 @@ header/source file pair.
 
 ## Table of Contents
 
-[`to_underlying()`](#to_underlying)
+1. [`to_underlying()`](#to_underlying)
 
 ## `to_underlying()`
 
