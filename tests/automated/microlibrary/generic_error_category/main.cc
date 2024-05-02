@@ -17,7 +17,7 @@
 
 /**
  * \file
- * \brief microlibrary:::Generic_Error_Category automated tests.
+ * \brief microlibrary::Generic_Error_Category automated tests.
  */
 
 #include <cstdint>
