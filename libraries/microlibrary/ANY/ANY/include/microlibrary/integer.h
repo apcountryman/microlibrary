@@ -25,6 +25,7 @@
 
 #include <cstdint>
 #include <cstring>
+#include <limits>
 #include <type_traits>
 
 namespace microlibrary {
@@ -67,6 +68,26 @@ constexpr auto highest_bit_set( Integer value ) noexcept -> std::uint_fast8_t
     auto bit = std::uint_fast8_t{ 0 };
     for ( ; value >>= 1; ++bit ) {} // for
     return bit;
+}
+
+/**
+ * \brief Create a bit mask.
+ *
+ * \tparam Mask The type of unsigned integer to use for the mask.
+ *
+ * \param[in] size The size of the mask (the number of masked bits).
+ * \param[in] bit The bit position of the least significant masked bit.
+ *
+ * \return The created bit mask.
+ */
+template<typename Mask>
+constexpr auto mask( std::uint_fast8_t size, std::uint_fast8_t bit ) noexcept -> Mask
+{
+    static_assert( std::is_unsigned_v<Mask> );
+
+    return ( static_cast<std::uintmax_t>( std::numeric_limits<Mask>::max() )
+             >> ( std::numeric_limits<Mask>::digits - size ) )
+           << bit;
 }
 
 } // namespace microlibrary
