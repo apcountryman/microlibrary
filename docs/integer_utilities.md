@@ -12,6 +12,7 @@ source file.
 
 1. [`to_unsigned()`](#to_unsigned)
 1. [`highest_bit_set()`](#highest_bit_set)
+1. [`mask()`](#mask)
 
 ## `to_unsigned()`
 
@@ -22,3 +23,7 @@ the `::microlibrary::to_unsigned()` utility.
 
 To lookup an unsigned integer value's highest bit set, use the
 `::microlibrary::highest_bit_set()` utility.
+
+## `mask()`
+
+To create a bit mask, use the `::microlibrary::mask()` utility.
