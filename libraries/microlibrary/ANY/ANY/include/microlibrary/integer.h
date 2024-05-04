@@ -116,6 +116,24 @@ constexpr auto reflect( Integer value ) noexcept -> Integer
     return result << remaining_shifts;
 }
 
+/**
+ * \brief Check if an unsigned integer is a power of two.
+ *
+ * \tparam Integer The type of unsigned integer the check will be performed on.
+ *
+ * \param[in] value The unsigned integer value to perform the check on.
+ *
+ * \return true if value is a power of two.
+ * \return false if value is not a power of two.
+ */
+template<typename Integer>
+constexpr auto is_power_of_two( Integer value ) noexcept -> bool
+{
+    static_assert( std::is_unsigned_v<Integer> );
+
+    return value != 0 and ( value & ( value - 1 ) ) == 0;
+}
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_INTEGER_H
