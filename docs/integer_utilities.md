@@ -14,6 +14,7 @@ source file.
 1. [`highest_bit_set()`](#highest_bit_set)
 1. [`mask()`](#mask)
 1. [`reflect()`](#reflect)
+1. [`is_power_of_two()`](#is_power_of_two)
 
 ## `to_unsigned()`
 
@@ -32,3 +33,8 @@ To create a bit mask, use the `::microlibrary::mask()` utility.
 ## `reflect()`
 
 To reflect an unsigned integer's bits, use the `::microlibrary::reflect()` utility.
+
+## `is_power_of_two()`
+
+To check if an unsigned integer is a power of two, use the
+`::microlibrary::is_power_of_two()` utility.

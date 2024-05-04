@@ -22,6 +22,7 @@
 
 #include <bitset>
 #include <cstdint>
+#include <ios>
 #include <limits>
 #include <ostream>
 
@@ -32,6 +33,7 @@
 namespace {
 
 using ::microlibrary::highest_bit_set;
+using ::microlibrary::is_power_of_two;
 using ::microlibrary::mask;
 using ::microlibrary::reflect;
 using ::testing::TestWithParam;
@@ -1552,3 +1554,347 @@ reflect_Test_Case<std::uint32_t> const reflect32_TEST_CASES[]{
 };
 
 INSTANTIATE_TEST_SUITE_P(, reflect32, ValuesIn( reflect32_TEST_CASES ) );
+
+/**
+ * \brief microlibrary::is_power_of_two() test case.
+ *
+ * \tparam Integer The type of unsigned integer the check will be performed on.
+ */
+template<typename Integer>
+struct isPowerOfTwo_Test_Case {
+    /**
+     * \brief The unsigned integer value to perform the check on.
+     */
+    Integer value;
+
+    /**
+     * \brief value is a power of two.
+     */
+    bool is_power_of_two;
+};
+
+template<typename Integer>
+auto operator<<( std::ostream & stream, isPowerOfTwo_Test_Case<Integer> const & test_case )
+    -> std::ostream &
+{
+    // clang-format off
+
+    return stream << "{ "
+                  << ".value = 0b" << std::bitset<std::numeric_limits<Integer>::digits>{ test_case.value }
+                  << ", "
+                  << ".is_power_of_two = " << std::boolalpha << test_case.is_power_of_two
+                  << " }";
+
+    // clang-format on
+}
+
+/**
+ * \brief microlibrary::is_power_of_two() std::uint8_t test fixture.
+ */
+class isPowerOfTwo8 : public TestWithParam<isPowerOfTwo_Test_Case<std::uint8_t>> {
+};
+
+/**
+ * \brief Verify microlibrary::is_power_of_two() works properly.
+ */
+TEST_P( isPowerOfTwo8, worksProperly )
+{
+    auto const test_case = GetParam();
+
+    EXPECT_EQ( is_power_of_two( test_case.value ), test_case.is_power_of_two );
+}
+
+/**
+ * \brief microlibrary::is_power_of_two() std::uint8_t test cases.
+ */
+isPowerOfTwo_Test_Case<std::uint8_t> const isPowerOfTwo8_TEST_CASES[]{
+    // clang-format off
+
+    { 0b00000001, true },
+    { 0b00000010, true },
+    { 0b00000100, true },
+    { 0b00001000, true },
+    { 0b00010000, true },
+    { 0b00100000, true },
+    { 0b01000000, true },
+    { 0b10000000, true },
+
+    { 0b00000000, false },
+    { 0b11111111, false },
+
+    { 0b10000001, false },
+    { 0b01000001, false },
+    { 0b00100001, false },
+    { 0b00010001, false },
+    { 0b00001001, false },
+    { 0b00000101, false },
+
+    { 0b00000011, false },
+
+    { 0b00000111, false },
+    { 0b00001111, false },
+    { 0b00011111, false },
+    { 0b00111111, false },
+    { 0b01111111, false },
+
+    { 0b00000110, false },
+    { 0b00001100, false },
+    { 0b00011001, false },
+    { 0b00110111, false },
+    { 0b01010011, false },
+    { 0b11001100, false },
+
+    // clang-format on
+};
+
+INSTANTIATE_TEST_SUITE_P(, isPowerOfTwo8, ValuesIn( isPowerOfTwo8_TEST_CASES ) );
+
+/**
+ * \brief microlibrary::is_power_of_two() std::uint16_t test fixture.
+ */
+class isPowerOfTwo16 : public TestWithParam<isPowerOfTwo_Test_Case<std::uint16_t>> {
+};
+
+/**
+ * \brief Verify microlibrary::is_power_of_two() works properly.
+ */
+TEST_P( isPowerOfTwo16, worksProperly )
+{
+    auto const test_case = GetParam();
+
+    EXPECT_EQ( is_power_of_two( test_case.value ), test_case.is_power_of_two );
+}
+
+/**
+ * \brief microlibrary::is_power_of_two() std::uint16_t test cases.
+ */
+isPowerOfTwo_Test_Case<std::uint16_t> const isPowerOfTwo16_TEST_CASES[]{
+    // clang-format off
+
+    { 0b0000000000000001, true },
+    { 0b0000000000000010, true },
+    { 0b0000000000000100, true },
+    { 0b0000000000001000, true },
+    { 0b0000000000010000, true },
+    { 0b0000000000100000, true },
+    { 0b0000000001000000, true },
+    { 0b0000000010000000, true },
+    { 0b0000000100000000, true },
+    { 0b0000001000000000, true },
+    { 0b0000010000000000, true },
+    { 0b0000100000000000, true },
+    { 0b0001000000000000, true },
+    { 0b0010000000000000, true },
+    { 0b0100000000000000, true },
+    { 0b1000000000000000, true },
+
+    { 0b0000000000000000, false },
+    { 0b1111111111111111, false },
+
+    { 0b1000000000000001, false },
+    { 0b0100000000000001, false },
+    { 0b0010000000000001, false },
+    { 0b0001000000000001, false },
+    { 0b0000100000000001, false },
+    { 0b0000010000000001, false },
+    { 0b0000001000000001, false },
+    { 0b0000000100000001, false },
+    { 0b0000000010000001, false },
+    { 0b0000000001000001, false },
+    { 0b0000000000100001, false },
+    { 0b0000000000010001, false },
+    { 0b0000000000001001, false },
+    { 0b0000000000000101, false },
+
+    { 0b0000000000000011, false },
+
+    { 0b0000000000000111, false },
+    { 0b0000000000001111, false },
+    { 0b0000000000011111, false },
+    { 0b0000000000111111, false },
+    { 0b0000000001111111, false },
+    { 0b0000000011111111, false },
+    { 0b0000000111111111, false },
+    { 0b0000001111111111, false },
+    { 0b0000011111111111, false },
+    { 0b0000111111111111, false },
+    { 0b0001111111111111, false },
+    { 0b0011111111111111, false },
+    { 0b0111111111111111, false },
+
+    { 0b0000000000000110, false },
+    { 0b0000000000001100, false },
+    { 0b0000000000011001, false },
+    { 0b0000000000110111, false },
+    { 0b0000000001010011, false },
+    { 0b0000000011001100, false },
+    { 0b0000000100000100, false },
+    { 0b0000001100100001, false },
+    { 0b0000011011100000, false },
+    { 0b0000101011000011, false },
+    { 0b0001101110011111, false },
+    { 0b0010100111010001, false },
+    { 0b0110100001010000, false },
+    { 0b1010111110111110, false },
+
+    // clang-format on
+};
+
+INSTANTIATE_TEST_SUITE_P(, isPowerOfTwo16, ValuesIn( isPowerOfTwo16_TEST_CASES ) );
+
+/**
+ * \brief microlibrary::is_power_of_two() std::uint32_t test fixture.
+ */
+class isPowerOfTwo32 : public TestWithParam<isPowerOfTwo_Test_Case<std::uint32_t>> {
+};
+
+/**
+ * \brief Verify microlibrary::is_power_of_two() works properly.
+ */
+TEST_P( isPowerOfTwo32, worksProperly )
+{
+    auto const test_case = GetParam();
+
+    EXPECT_EQ( is_power_of_two( test_case.value ), test_case.is_power_of_two );
+}
+
+/**
+ * \brief microlibrary::is_power_of_two() std::uint32_t test cases.
+ */
+isPowerOfTwo_Test_Case<std::uint32_t> const isPowerOfTwo32_TEST_CASES[]{
+    // clang-format off
+
+    { 0b00000000000000000000000000000001, true },
+    { 0b00000000000000000000000000000010, true },
+    { 0b00000000000000000000000000000100, true },
+    { 0b00000000000000000000000000001000, true },
+    { 0b00000000000000000000000000010000, true },
+    { 0b00000000000000000000000000100000, true },
+    { 0b00000000000000000000000001000000, true },
+    { 0b00000000000000000000000010000000, true },
+    { 0b00000000000000000000000100000000, true },
+    { 0b00000000000000000000001000000000, true },
+    { 0b00000000000000000000010000000000, true },
+    { 0b00000000000000000000100000000000, true },
+    { 0b00000000000000000001000000000000, true },
+    { 0b00000000000000000010000000000000, true },
+    { 0b00000000000000000100000000000000, true },
+    { 0b00000000000000001000000000000000, true },
+    { 0b00000000000000010000000000000000, true },
+    { 0b00000000000000100000000000000000, true },
+    { 0b00000000000001000000000000000000, true },
+    { 0b00000000000010000000000000000000, true },
+    { 0b00000000000100000000000000000000, true },
+    { 0b00000000001000000000000000000000, true },
+    { 0b00000000010000000000000000000000, true },
+    { 0b00000000100000000000000000000000, true },
+    { 0b00000001000000000000000000000000, true },
+    { 0b00000010000000000000000000000000, true },
+    { 0b00000100000000000000000000000000, true },
+    { 0b00001000000000000000000000000000, true },
+    { 0b00010000000000000000000000000000, true },
+    { 0b00100000000000000000000000000000, true },
+    { 0b01000000000000000000000000000000, true },
+    { 0b10000000000000000000000000000000, true },
+
+    { 0b00000000000000000000000000000000, false },
+    { 0b11111111111111111111111111111111, false },
+
+    { 0b10000000000000000000000000000001, false },
+    { 0b01000000000000000000000000000001, false },
+    { 0b00100000000000000000000000000001, false },
+    { 0b00010000000000000000000000000001, false },
+    { 0b00001000000000000000000000000001, false },
+    { 0b00000100000000000000000000000001, false },
+    { 0b00000010000000000000000000000001, false },
+    { 0b00000001000000000000000000000001, false },
+    { 0b00000000100000000000000000000001, false },
+    { 0b00000000010000000000000000000001, false },
+    { 0b00000000001000000000000000000001, false },
+    { 0b00000000000100000000000000000001, false },
+    { 0b00000000000010000000000000000001, false },
+    { 0b00000000000001000000000000000001, false },
+    { 0b00000000000000100000000000000001, false },
+    { 0b00000000000000010000000000000001, false },
+    { 0b00000000000000001000000000000001, false },
+    { 0b00000000000000000100000000000001, false },
+    { 0b00000000000000000010000000000001, false },
+    { 0b00000000000000000001000000000001, false },
+    { 0b00000000000000000000100000000001, false },
+    { 0b00000000000000000000010000000001, false },
+    { 0b00000000000000000000001000000001, false },
+    { 0b00000000000000000000000100000001, false },
+    { 0b00000000000000000000000010000001, false },
+    { 0b00000000000000000000000001000001, false },
+    { 0b00000000000000000000000000100001, false },
+    { 0b00000000000000000000000000010001, false },
+    { 0b00000000000000000000000000001001, false },
+    { 0b00000000000000000000000000000101, false },
+
+    { 0b00000000000000000000000000000011, false },
+
+    { 0b00000000000000000000000000000111, false },
+    { 0b00000000000000000000000000001111, false },
+    { 0b00000000000000000000000000011111, false },
+    { 0b00000000000000000000000000111111, false },
+    { 0b00000000000000000000000001111111, false },
+    { 0b00000000000000000000000011111111, false },
+    { 0b00000000000000000000000111111111, false },
+    { 0b00000000000000000000001111111111, false },
+    { 0b00000000000000000000011111111111, false },
+    { 0b00000000000000000000111111111111, false },
+    { 0b00000000000000000001111111111111, false },
+    { 0b00000000000000000011111111111111, false },
+    { 0b00000000000000000111111111111111, false },
+    { 0b00000000000000001111111111111111, false },
+    { 0b00000000000000011111111111111111, false },
+    { 0b00000000000000111111111111111111, false },
+    { 0b00000000000001111111111111111111, false },
+    { 0b00000000000011111111111111111111, false },
+    { 0b00000000000111111111111111111111, false },
+    { 0b00000000001111111111111111111111, false },
+    { 0b00000000011111111111111111111111, false },
+    { 0b00000000111111111111111111111111, false },
+    { 0b00000001111111111111111111111111, false },
+    { 0b00000011111111111111111111111111, false },
+    { 0b00000111111111111111111111111111, false },
+    { 0b00001111111111111111111111111111, false },
+    { 0b00011111111111111111111111111111, false },
+    { 0b00111111111111111111111111111111, false },
+    { 0b01111111111111111111111111111111, false },
+
+    { 0b00000000000000000000000000000110, false },
+    { 0b00000000000000000000000000001100, false },
+    { 0b00000000000000000000000000011001, false },
+    { 0b00000000000000000000000000110111, false },
+    { 0b00000000000000000000000001010011, false },
+    { 0b00000000000000000000000011001100, false },
+    { 0b00000000000000000000000100000100, false },
+    { 0b00000000000000000000001100100001, false },
+    { 0b00000000000000000000011011100000, false },
+    { 0b00000000000000000000101011000011, false },
+    { 0b00000000000000000001101110011111, false },
+    { 0b00000000000000000010100111010001, false },
+    { 0b00000000000000000110100001010000, false },
+    { 0b00000000000000001010111110111110, false },
+    { 0b00000000000000010011000000100100, false },
+    { 0b00000000000000101100000110000001, false },
+    { 0b00000000000001111010101010000000, false },
+    { 0b00000000000011001100011101010101, false },
+    { 0b00000000000110011000110000000010, false },
+    { 0b00000000001101111000000100010111, false },
+    { 0b00000000010100110111010110001111, false },
+    { 0b00000000110011001100001010000001, false },
+    { 0b00000001000001000011111101111100, false },
+    { 0b00000011001000011001101011000010, false },
+    { 0b00000110111000000101010011100101, false },
+    { 0b00001010110000111010000000011000, false },
+    { 0b00011011100111110100101001101100, false },
+    { 0b00101001110100010010010101101000, false },
+    { 0b01101000010100001110110110101101, false },
+    { 0b10101111101111101000101000001111, false },
+
+    // clang-format on
+};
+
+INSTANTIATE_TEST_SUITE_P(, isPowerOfTwo32, ValuesIn( isPowerOfTwo32_TEST_CASES ) );
