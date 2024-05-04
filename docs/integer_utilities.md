@@ -13,7 +13,7 @@ source file.
 1. [`to_unsigned()`](#to_unsigned)
 1. [`highest_bit_set()`](#highest_bit_set)
 1. [`mask()`](#mask)
-1. [`reflect()`](#mask)
+1. [`reflect()`](#reflect)
 
 ## `to_unsigned()`
 
