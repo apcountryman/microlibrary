@@ -90,6 +90,32 @@ constexpr auto mask( std::uint_fast8_t size, std::uint_fast8_t bit ) noexcept ->
            << bit;
 }
 
+/**
+ * \brief Reflect an unsigned integer's bits.
+ *
+ * \tparam Integer The type of unsigned integer the reflection will be performed on.
+ *
+ * \param[in] value The unsigned integer value to reflect.
+ *
+ * \return The reflection of the unsigned integer value.
+ */
+template<typename Integer>
+constexpr auto reflect( Integer value ) noexcept -> Integer
+{
+    static_assert( std::is_unsigned_v<Integer> );
+
+    auto result = value;
+    value >>= 1;
+    auto remaining_shifts = std::numeric_limits<Integer>::digits - 1;
+    while ( value ) {
+        result <<= 1;
+        result |= value & 0b1;
+        value >>= 1;
+        --remaining_shifts;
+    } // while
+    return result << remaining_shifts;
+}
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_INTEGER_H

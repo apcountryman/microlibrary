@@ -13,6 +13,7 @@ source file.
 1. [`to_unsigned()`](#to_unsigned)
 1. [`highest_bit_set()`](#highest_bit_set)
 1. [`mask()`](#mask)
+1. [`reflect()`](#reflect)
 
 ## `to_unsigned()`
 
@@ -27,3 +28,7 @@ To lookup an unsigned integer value's highest bit set, use the
 ## `mask()`
 
 To create a bit mask, use the `::microlibrary::mask()` utility.
+
+## `reflect()`
+
+To reflect an unsigned integer's bits, use the `::microlibrary::reflect()` utility.
