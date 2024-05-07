@@ -13,19 +13,22 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary static library automated tests CMake rules.
+# Description: microlibrary algorithms automated tests CMake rules.
 
-# microlibrary algorithms automated tests
-add_subdirectory( algorithm )
+add_executable( test-automated-microlibrary-algorithm )
 
-# microlibrary::Error_Code automated tests
-add_subdirectory( error_code )
+target_sources( test-automated-microlibrary-algorithm
+    PRIVATE main.cc
+    )
 
-# microlibrary::Generic_Error automated tests
-add_subdirectory( generic_error )
+target_link_libraries( test-automated-microlibrary-algorithm
+    PRIVATE gmock
+    PRIVATE gmock_main
+    PRIVATE gtest
+    PRIVATE microlibrary
+    )
 
-# microlibrary::Generic_Error_Category automated tests
-add_subdirectory( generic_error_category )
-
-# microlibrary integer utilities automated tests
-add_subdirectory( integer )
+add_test(
+    NAME    test-automated-microlibrary-algorithm
+    COMMAND test-automated-microlibrary-algorithm ${MICROLIBRARY_AUTOMATED_TESTS_OPTIONS}
+    )
