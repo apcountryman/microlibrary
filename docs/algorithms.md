@@ -9,3 +9,13 @@ automated test executable's
 source file.
 
 ## Table of Contents
+
+1. [Algorithm Functor Policies](#algorithm-functor-policies)
+
+## Algorithm Functor Policies
+
+The following algorithm functor policy types are used to select algorithm implementations
+that check for functor reported errors and report functor errors to the caller:
+- `::microlibrary::Functor_Reports_Errors`
+- `::microlibrary::Functor_Reports_Errors_Return_Functor`
+- `::microlibrary::Functor_Reports_Errors_Discard_Functor`
