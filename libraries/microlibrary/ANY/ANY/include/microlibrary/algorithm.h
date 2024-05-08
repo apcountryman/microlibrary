@@ -24,6 +24,25 @@
 #define MICROLIBRARY_ALGORITHM_H
 
 namespace microlibrary {
+
+/**
+ * \brief Functor reports errors algorithm policy.
+ */
+struct Functor_Reports_Errors {
+};
+
+/**
+ * \brief Functor reports errors, return functor algorithm policy.
+ */
+struct Functor_Reports_Errors_Return_Functor {
+};
+
+/**
+ * \brief Functor reports errors, discard functor algorithm policy.
+ */
+struct Functor_Reports_Errors_Diiscard_Functor {
+};
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_ALGORITHM_H
