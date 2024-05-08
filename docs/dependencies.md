@@ -10,7 +10,7 @@ avr-libcpp is a microlibrary dependency if `MICROLIBRARY_HIL` is `MICROCHIP_MEGA
 `MICROLIBRARY_TARGET` is `HARDWARE`.
 A parent project supplied copy of avr-libcpp can be used instead of the microlibrary
 supplied copy by using CMake's FetchContent module to add the parent project supplied copy
-to a CMake build before miicrolibrary is added to the CMake build.
+to a CMake build before microlibrary is added to the CMake build.
 ```cmake
 include( FetchContent )
 FetchContent_Declare( avrlibcpp
@@ -28,7 +28,7 @@ GoogleTest is a microlibrary dependency if `MICROLIBRARY_TARGET` is
 `DEVELOPMENT_ENVIRONMENT`.
 A parent project supplied copy of GoogleTest can be used instead of the microlibrary
 supplied copy by using CMake's FetchContent module to add the parent project supplied copy
-to a CMake build before miicrolibrary is added to the CMake build.
+to a CMake build before microlibrary is added to the CMake build.
 ```cmake
 include( FetchContent )
 FetchContent_Declare( googletest
