@@ -40,7 +40,7 @@ struct Functor_Reports_Errors_Return_Functor {
 /**
  * \brief Functor reports errors, discard functor algorithm policy.
  */
-struct Functor_Reports_Errors_Diiscard_Functor {
+struct Functor_Reports_Errors_Discard_Functor {
 };
 
 } // namespace microlibrary
