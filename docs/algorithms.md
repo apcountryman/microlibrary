@@ -11,6 +11,7 @@ source file.
 ## Table of Contents
 
 1. [Algorithm Functor Policies](#algorithm-functor-policies)
+1. [`for_each()`](#for_each)
 
 ## Algorithm Functor Policies
 
@@ -19,3 +20,45 @@ that check for functor reported errors and report functor errors to the caller:
 - `::microlibrary::Functor_Reports_Errors`
 - `::microlibrary::Functor_Reports_Errors_Return_Functor`
 - `::microlibrary::Functor_Reports_Errors_Discard_Functor`
+
+## `for_each()`
+
+To apply a functor to a range, use the `::microlibrary::for_each()` algorithm.
+To report functor errors to the caller, use the
+`::microlibrary::Functor_Reports_Errors_Return_Functor` or
+`::microlibrary::Functor_Reports_Errors_Discard_Functor` algorithm functor policy.
+```c++
+#include <cstdint>
+
+#include "microlibrary/algorithm.h"
+#include "microlibrary/result.h"
+
+void foo( std::uint_fast8_t value ) noexcept;
+
+auto bar( std::uint_fast8_t value ) noexcept -> Result<void>;
+
+auto wibble( std::uint_fast8_t const * begin, std::uint_fast8_t const * end ) noexcept
+{
+    return ::microlibrary::for_each( begin, end, foo );
+}
+
+auto wobble( std::uint_fast8_t const * begin, std::uint_fast8_t const * end ) noexcept
+{
+    auto result = ::microlibrary::for_each<::microlibrary::Functor_Reports_Errors_Return_Functor>(
+        begin, end, bar );
+    if ( result.is_error() ) {
+        // handle error
+    } // if
+
+    return result.value();
+}
+
+void wobble( std::uint_fast8_t const * begin, std::uint_fast8_t const * end ) noexcept
+{
+    auto result = ::microlibrary::for_each<::microlibrary::Functor_Reports_Errors_Discard_Functor>(
+        begin, end, bar );
+    if ( result.is_error() ) {
+        // handle error
+    } // if
+}
+```
