@@ -12,6 +12,7 @@ source file.
 
 1. [Algorithm Functor Policies](#algorithm-functor-policies)
 1. [`for_each()`](#for_each)
+1. [`fill()`](#fill)
 
 ## Algorithm Functor Policies
 
@@ -62,3 +63,7 @@ void wobble( std::uint_fast8_t const * begin, std::uint_fast8_t const * end ) no
     } // if
 }
 ```
+
+## `fill()`
+
+To fill a range with a value, use the `::microlibrary::fill()` algorithm.
