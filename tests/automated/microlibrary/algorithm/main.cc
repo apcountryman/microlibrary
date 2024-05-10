@@ -20,6 +20,7 @@
  * \brief microlibrary algorithms automated tests.
  */
 
+#include <cstddef>
 #include <cstdint>
 #include <type_traits>
 #include <vector>
@@ -37,11 +38,13 @@ using ::microlibrary::Functor_Reports_Errors_Return_Functor;
 using ::microlibrary::Result;
 using ::microlibrary::Testing::Automated::Mock_Error;
 using ::testing::_;
+using ::testing::Each;
 using ::testing::InSequence;
 using ::testing::MockFunction;
 using ::testing::Ref;
 using ::testing::Return;
 using ::testing::TestWithParam;
+using ::testing::Values;
 using ::testing::ValuesIn;
 
 } // namespace
@@ -200,3 +203,26 @@ TEST_P( forEachFunctorReportsErrorsDiscardFunctor, worksProperly )
 }
 
 INSTANTIATE_TEST_SUITE_P(, forEachFunctorReportsErrorsDiscardFunctor, ValuesIn( forEach_TEST_CASES ) );
+
+/**
+ * \brief microlibrary::fill() test fixture.
+ */
+class fill : public TestWithParam<std::size_t> {
+};
+
+/**
+ * \brief Verify microlibrary::fill() works properly.
+ */
+TEST_P( fill, worksProperly )
+{
+    auto const size = GetParam();
+
+    auto       container = std::vector<std::uint_fast8_t>( size );
+    auto const value     = std::uint_fast8_t{ 0xCB };
+
+    ::microlibrary::fill( container.begin(), container.end(), value );
+
+    EXPECT_THAT( container, Each( value ) );
+}
+
+INSTANTIATE_TEST_SUITE_P(, fill, Values<std::size_t>( 0, 5 ) );

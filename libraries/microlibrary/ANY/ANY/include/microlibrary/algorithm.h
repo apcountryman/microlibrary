@@ -155,6 +155,22 @@ constexpr auto for_each( Iterator begin, Iterator end, Functor functor ) noexcep
     return ::microlibrary::for_each( begin, end, std::move( functor ), Functor_Policy{} );
 }
 
+/**
+ * \brief Fill a range with a value.
+ *
+ * \tparam Iterator Range iterator.
+ * \tparam T Value type.
+ *
+ * \param[in] begin The beginning of the range to fill.
+ * \param[in] end The end of the range to fill.
+ * \param[in] value The value to fill the range with.
+ */
+template<typename Iterator, typename T>
+constexpr void fill( Iterator begin, Iterator end, T const & value ) noexcept
+{
+    for ( ; begin != end; ++begin ) { *begin = value; } // for
+}
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_ALGORITHM_H
