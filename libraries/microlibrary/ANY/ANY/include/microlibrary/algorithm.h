@@ -73,7 +73,7 @@ constexpr auto for_each( Iterator begin, Iterator end, Functor functor ) noexcep
  *
  * \tparam Iterator Range iterator.
  * \tparam Functor A unary functor that takes the iterated over type by value or const
- *         reference, and return microlibrary::Result<void>. If an error is returned by
+ *         reference, and returns microlibrary::Result<void>. If an error is returned by
  *         the functor, iteration halts and the error is returned.
  *
  * \param[in] begin The beginning of the range to apply the functor to.
@@ -102,7 +102,7 @@ constexpr auto for_each( Iterator begin, Iterator end, Functor functor, Functor_
  *
  * \tparam Iterator Range iterator.
  * \tparam Functor A unary functor that takes the iterated over type by value or const
- *         reference, and return microlibrary::Result<void>. If an error is returned by
+ *         reference, and returns microlibrary::Result<void>. If an error is returned by
  *         the functor, iteration halts and the error is returned.
  *
  * \param[in] begin The beginning of the range to apply the functor to.
@@ -134,7 +134,7 @@ constexpr auto for_each( Iterator begin, Iterator end, Functor functor, Functor_
  *         microlibrary::Functor_Reports_Errors_Discard_Functor).
  * \tparam Iterator Range iterator.
  * \tparam Functor A unary functor that takes the iterated over type by value or const
- *         reference, and return microlibrary::Result<void>. If an error is returned by
+ *         reference, and returns microlibrary::Result<void>. If an error is returned by
  *         the functor, iteration halts and the error is returned.
  *
  * \param[in] begin The beginning of the range to apply the functor to.
@@ -144,7 +144,7 @@ constexpr auto for_each( Iterator begin, Iterator end, Functor functor, Functor_
  * \return The functor if Functor_Policy is
  *         microlibrary::Functor_Reports_Errors_Return_Functor and application of the
  *         functor to the range succeeded.
- * \return The functor if Functor_Policy is
+ * \return Nothing if Functor_Policy is
  *         microlibrary::Functor_Reports_Errors_Discard_Functor and application of the
  *         functor to the range succeeded.
  * \return An error code if application of the functor to the range failed.
