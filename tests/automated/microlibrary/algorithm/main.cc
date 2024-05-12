@@ -33,6 +33,7 @@
 
 namespace {
 
+using ::microlibrary::Functor_Reports_Errors;
 using ::microlibrary::Functor_Reports_Errors_Discard_Functor;
 using ::microlibrary::Functor_Reports_Errors_Return_Functor;
 using ::microlibrary::Result;
@@ -226,3 +227,96 @@ TEST_P( fill, worksProperly )
 }
 
 INSTANTIATE_TEST_SUITE_P(, fill, Values<std::size_t>( 0, 5 ) );
+
+/**
+ * \brief microlibrary::generate() test cases.
+ */
+std::vector<std::uint_fast8_t> const generate_TEST_CASES[]{
+    {},
+    { 0x1C, 0x0C, 0xE6, 0xEC, 0x99 },
+};
+
+/**
+ * \brief microlibrary::generate( Iterator, Iterator, Functor ) test fixture.
+ */
+class generate : public TestWithParam<std::vector<std::uint_fast8_t>> {
+};
+
+/**
+ * \brief Verify microlibrary::generate( Iterator, Iterator, Functor ) works properly.
+ */
+TEST_P( generate, worksProperly )
+{
+    auto const in_sequence = InSequence{};
+
+    auto functor = MockFunction<std::uint_fast8_t()>{};
+
+    auto const values = GetParam();
+
+    for ( auto const & value : values ) {
+        EXPECT_CALL( functor, Call() ).WillOnce( Return( value ) );
+    } // for
+
+    auto container = std::vector<std::uint_fast8_t>( values.size() );
+
+    ::microlibrary::generate( container.begin(), container.end(), functor.AsStdFunction() );
+
+    EXPECT_EQ( container, values );
+}
+
+INSTANTIATE_TEST_SUITE_P(, generate, ValuesIn( generate_TEST_CASES ) );
+
+/**
+ * \brief Verify microlibrary::generate( Iterator, Iterator, Functor,
+ *        microlibrary::Functor_Reports_Errors ) properly handles a functor error.
+ */
+TEST( generateFunctorReportsErrorsErrorHandling, functorError )
+{
+    auto functor = MockFunction<Result<std::uint_fast8_t>()>{};
+
+    auto error = Mock_Error{ 146 };
+
+    auto container = std::vector<std::uint_fast8_t>( 5 );
+
+    EXPECT_CALL( functor, Call() ).WillOnce( Return( error ) );
+
+    auto const result = ::microlibrary::generate<Functor_Reports_Errors>(
+        container.begin(), container.end(), functor.AsStdFunction() );
+
+    EXPECT_TRUE( result.is_error() );
+    EXPECT_EQ( result.error(), error );
+}
+
+/**
+ * \brief microlibrary::generate( Iterator, Iterator, Functor,
+ *        microlibrary::Functor_Reports_Errors ) test fixture.
+ */
+class generateFunctorReportsErrors : public TestWithParam<std::vector<std::uint_fast8_t>> {
+};
+
+/**
+ * \brief Verify microlibrary::generate( Iterator, Iterator, Functor,
+ *        microlibrary::Functor_Reports_Errors ) works properly.
+ */
+TEST_P( generateFunctorReportsErrors, worksProperly )
+{
+    auto const in_sequence = InSequence{};
+
+    auto functor = MockFunction<Result<std::uint_fast8_t>()>{};
+
+    auto const values = GetParam();
+
+    for ( auto const & value : values ) {
+        EXPECT_CALL( functor, Call() ).WillOnce( Return( value ) );
+    } // for
+
+    auto container = std::vector<std::uint_fast8_t>( values.size() );
+
+    EXPECT_FALSE( ::microlibrary::generate<Functor_Reports_Errors>(
+                      container.begin(), container.end(), functor.AsStdFunction() )
+                      .is_error() );
+
+    EXPECT_EQ( container, values );
+}
+
+INSTANTIATE_TEST_SUITE_P(, generateFunctorReportsErrors, ValuesIn( generate_TEST_CASES ) );
