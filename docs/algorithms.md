@@ -55,7 +55,7 @@ auto wobble( std::uint_fast8_t const * begin, std::uint_fast8_t const * end ) no
     return result.value();
 }
 
-void wobble( std::uint_fast8_t const * begin, std::uint_fast8_t const * end ) noexcept
+void wubble( std::uint_fast8_t const * begin, std::uint_fast8_t const * end ) noexcept
 {
     auto result = ::microlibrary::for_each<::microlibrary::Functor_Reports_Errors_Discard_Functor>(
         begin, end, bar );
