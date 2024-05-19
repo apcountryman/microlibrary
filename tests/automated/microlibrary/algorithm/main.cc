@@ -379,3 +379,62 @@ TEST( min, worksProperlyAGreaterBNotAdjacent )
 
     EXPECT_THAT( ::microlibrary::min( a, b ), Ref( b ) );
 }
+
+/**
+ * \brief Verify microlibrary::max() works properly when a is less than b, and a and b are
+ *        not adjacent.
+ */
+TEST( max, worksProperlyALessBNotAdjacent )
+{
+    auto const a = std::uint_fast8_t{ 28 };
+    auto const b = std::uint_fast8_t{ 199 };
+
+    EXPECT_THAT( ::microlibrary::max( a, b ), Ref( b ) );
+}
+
+/**
+ * \brief Verify microlibrary::max() works properly when a is less than b, and a and b are
+ *        adjacent.
+ */
+TEST( max, worksProperlyALessBAdjacent )
+{
+    auto const a = std::uint_fast8_t{ 198 };
+    auto const b = std::uint_fast8_t{ 199 };
+
+    EXPECT_THAT( ::microlibrary::max( a, b ), Ref( b ) );
+}
+
+/**
+ * \brief Verify microlibrary::max() works properly when a equals b.
+ */
+TEST( max, worksProperlyAEqualB )
+{
+    auto const a = std::uint_fast8_t{ 199 };
+    auto const b = std::uint_fast8_t{ 199 };
+
+    EXPECT_THAT( ::microlibrary::max( a, b ), Ref( a ) );
+}
+
+/**
+ * \brief Verify microlibrary::max() works properly when a is greater than b, and a and b
+ *        are adjacent.
+ */
+TEST( max, worksProperlyAGreaterBAdjacent )
+{
+    auto const a = std::uint_fast8_t{ 200 };
+    auto const b = std::uint_fast8_t{ 199 };
+
+    EXPECT_THAT( ::microlibrary::max( a, b ), Ref( a ) );
+}
+
+/**
+ * \brief Verify microlibrary::max() works properly when a is greater than b, and a and b
+ *        are not adjacent.
+ */
+TEST( max, worksProperlyAGreaterBNotAdjacent )
+{
+    auto const a = std::uint_fast8_t{ 232 };
+    auto const b = std::uint_fast8_t{ 199 };
+
+    EXPECT_THAT( ::microlibrary::max( a, b ), Ref( a ) );
+}
