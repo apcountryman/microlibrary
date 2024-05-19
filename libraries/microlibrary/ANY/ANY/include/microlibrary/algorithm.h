@@ -240,6 +240,23 @@ constexpr auto generate( Iterator begin, Iterator end, Functor functor ) noexcep
     return ::microlibrary::generate( begin, end, std::move( functor ), Functor_Policy{} );
 }
 
+/**
+ * \brief Get the minimum of two values.
+ *
+ * \tparam T The type to compare.
+ *
+ * \param[in] a The first of the two values to compare.
+ * \param[in] b The second of the two values to compare.
+ *
+ * \return The minimum of the two values. If the two values are equal, the first argument
+ *         will be returned.
+ */
+template<typename T>
+constexpr auto min( T const & a, T const & b ) noexcept -> T const &
+{
+    return b < a ? b : a;
+}
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_ALGORITHM_H

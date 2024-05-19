@@ -320,3 +320,62 @@ TEST_P( generateFunctorReportsErrors, worksProperly )
 }
 
 INSTANTIATE_TEST_SUITE_P(, generateFunctorReportsErrors, ValuesIn( generate_TEST_CASES ) );
+
+/**
+ * \brief Verify microlibrary::min() works properly when a is less than b, and a and b are
+ *        not adjacent.
+ */
+TEST( min, worksProperlyALessBNotAdjacent )
+{
+    auto const a = std::uint_fast8_t{ 28 };
+    auto const b = std::uint_fast8_t{ 199 };
+
+    EXPECT_THAT( ::microlibrary::min( a, b ), Ref( a ) );
+}
+
+/**
+ * \brief Verify microlibrary::min() works properly when a is less than b, and a and b are
+ *        adjacent.
+ */
+TEST( min, worksProperlyALessBAdjacent )
+{
+    auto const a = std::uint_fast8_t{ 198 };
+    auto const b = std::uint_fast8_t{ 199 };
+
+    EXPECT_THAT( ::microlibrary::min( a, b ), Ref( a ) );
+}
+
+/**
+ * \brief Verify microlibrary::min() works properly when a equals b.
+ */
+TEST( min, worksProperlyAEqualB )
+{
+    auto const a = std::uint_fast8_t{ 199 };
+    auto const b = std::uint_fast8_t{ 199 };
+
+    EXPECT_THAT( ::microlibrary::min( a, b ), Ref( a ) );
+}
+
+/**
+ * \brief Verify microlibrary::min() works properly when a is greater than b, and a and b
+ *        are adjacent.
+ */
+TEST( min, worksProperlyAGreaterBAdjacent )
+{
+    auto const a = std::uint_fast8_t{ 200 };
+    auto const b = std::uint_fast8_t{ 199 };
+
+    EXPECT_THAT( ::microlibrary::min( a, b ), Ref( b ) );
+}
+
+/**
+ * \brief Verify microlibrary::min() works properly when a is greater than b, and a and b
+ *        are not adjacent.
+ */
+TEST( min, worksProperlyAGreaterBNotAdjacent )
+{
+    auto const a = std::uint_fast8_t{ 232 };
+    auto const b = std::uint_fast8_t{ 199 };
+
+    EXPECT_THAT( ::microlibrary::min( a, b ), Ref( b ) );
+}

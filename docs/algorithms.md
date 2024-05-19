@@ -14,6 +14,7 @@ source file.
 1. [`for_each()`](#for_each)
 1. [`fill()`](#fill)
 1. [`generate()`](#generate)
+1. [`min()`](#min)
 
 ## Algorithm Functor Policies
 
@@ -99,3 +100,7 @@ void wobble( std::uint_fast8_t * begin, std::uint_fast8_t * end ) noexcept
     } // if
 }
 ```
+
+## `min()`
+
+To get the minimum of two values, use the `::microlibrary::min()` algorithm.
