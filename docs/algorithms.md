@@ -15,6 +15,7 @@ source file.
 1. [`fill()`](#fill)
 1. [`generate()`](#generate)
 1. [`min()`](#min)
+1. [`max()`](#max)
 
 ## Algorithm Functor Policies
 
@@ -104,3 +105,7 @@ void wobble( std::uint_fast8_t * begin, std::uint_fast8_t * end ) noexcept
 ## `min()`
 
 To get the minimum of two values, use the `::microlibrary::min()` algorithm.
+
+## `max()`
+
+To get the maximum of two values, use the `::microlibrary::max()` algorithm.

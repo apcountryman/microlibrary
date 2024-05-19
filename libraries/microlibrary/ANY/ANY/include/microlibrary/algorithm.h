@@ -257,6 +257,23 @@ constexpr auto min( T const & a, T const & b ) noexcept -> T const &
     return b < a ? b : a;
 }
 
+/**
+ * \brief Get the maximum of two values.
+ *
+ * \tparam T The type to compare.
+ *
+ * \param[in] a The first of the two values to compare.
+ * \param[in] b The second of the two values to compare.
+ *
+ * \return The maximum of the two values. If the two values are equal, the first argument
+ *         will be returned.
+ */
+template<typename T>
+constexpr auto max( T const & a, T const & b ) noexcept -> T const &
+{
+    return b > a ? b : a;
+}
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_ALGORITHM_H
