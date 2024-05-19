@@ -22,6 +22,9 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <ios>
+#include <ostream>
+#include <string_view>
 #include <type_traits>
 #include <vector>
 
@@ -438,3 +441,193 @@ TEST( max, worksProperlyAGreaterBNotAdjacent )
 
     EXPECT_THAT( ::microlibrary::max( a, b ), Ref( a ) );
 }
+
+/**
+ * \brief microlibrary::equal() test case.
+ */
+struct equal_Test_Case {
+    /**
+     * \brief Range 1.
+     */
+    std::string_view range_1;
+
+    /**
+     * \brief Range 2.
+     */
+    std::string_view range_2;
+
+    /**
+     * \brief range_1 and range_2 are equal.
+     */
+    bool equal;
+};
+
+auto operator<<( std::ostream & stream, equal_Test_Case const & test_case ) -> std::ostream &
+{
+    // clang-format off
+
+    return stream << "{ "
+                  << ".range_1 = \"" << test_case.range_1 << '"'
+                  << ", "
+                  << ".range_2 = \"" << test_case.range_2 << '"'
+                  << ", "
+                  << ".equal = " << std::boolalpha << test_case.equal
+                  << " }";
+
+    // clang-format on
+}
+
+/**
+ * \brief microlibrary::equal( Iterator_1, Iterator_1, Iterator_2 ) and
+ *        microlibrary::equal( Iterator_1, Iterator_1, Iterator_2, Predicate ) test cases.
+ */
+equal_Test_Case const equal3Iterators_TEST_CASES[]{
+    // clang-format off
+
+    {
+        "",
+        "",
+        true },
+    {
+        "xlC8WWhQqaVcM3",
+        "xlC8WWhQqbVcM3",
+        false },
+    {
+        "xlC8WWhQqaVcM3",
+        "xlC8WWhQqaVcM3",
+        true },
+
+    // clang-format on
+};
+
+/**
+ * \brief microlibrary::equal( Iterator_1, Iterator_1, Iterator_2 ) test fixture.
+ */
+class equal3Iterators : public TestWithParam<equal_Test_Case> {
+};
+
+/**
+ * \brief Verify microlibrary::equal( Iterator_1, Iterator_1, Iterator_2 ) works properly.
+ */
+TEST_P( equal3Iterators, worksProperly )
+{
+    auto const test_case = GetParam();
+
+    EXPECT_EQ(
+        ::microlibrary::equal(
+            test_case.range_1.begin(), test_case.range_1.end(), test_case.range_2.begin() ),
+        test_case.equal );
+}
+
+INSTANTIATE_TEST_SUITE_P(, equal3Iterators, ValuesIn( equal3Iterators_TEST_CASES ) );
+
+/**
+ * \brief microlibrary::equal( Iterator_1, Iterator_1, Iterator_2, Predicate ) test
+ *        fixture.
+ */
+class equal3IteratorsPredicate : public TestWithParam<equal_Test_Case> {
+};
+
+/**
+ * \brief Verify microlibrary::equal( Iterator_1, Iterator_1, Iterator_2, Predicate )
+ *        works properly.
+ */
+TEST_P( equal3IteratorsPredicate, worksProperly )
+{
+    auto const test_case = GetParam();
+
+    EXPECT_EQ(
+        ::microlibrary::equal(
+            test_case.range_1.begin(),
+            test_case.range_1.end(),
+            test_case.range_2.begin(),
+            []( auto a, auto b ) { return a == b; } ),
+        test_case.equal );
+}
+
+INSTANTIATE_TEST_SUITE_P(, equal3IteratorsPredicate, ValuesIn( equal3Iterators_TEST_CASES ) );
+
+/**
+ * \brief microlibrary::equal( Iterator_1, Iterator_1, Iterator_2, Iterator_2 ) and
+ *        microlibrary::equal( Iterator_1, Iterator_1, Iterator_2, Iterator_2, Predicate )
+ *        test cases.
+ */
+equal_Test_Case const equal4Iterators_TEST_CASES[]{
+    // clang-format off
+
+    {
+        "",
+        "",
+        true },
+    {
+        "xlC8WWhQqaVcM3",
+        "xlC8WWhQqbVcM3fAjJ",
+        false },
+    {
+        "xlC8WWhQqaVcM3",
+        "xlC8WWhQqaVcM3fAjJ",
+        false },
+    {
+        "xlC8WWhQqaVcM3",
+        "xlC8WWhQqbVcM3",
+        false },
+    {
+        "xlC8WWhQqaVcM3",
+        "xlC8WWhQqaVcM3",
+        true },
+
+    // clang-format on
+};
+
+/**
+ * \brief microlibrary::equal( Iterator_1, Iterator_1, Iterator_2, Iterator_2 ) test
+ *        fixture.
+ */
+class equal4Iterators : public TestWithParam<equal_Test_Case> {
+};
+
+/**
+ * \brief Verify microlibrary::equal( Iterator_1, Iterator_1, Iterator_2, Iterator_2 )
+ *        works properly.
+ */
+TEST_P( equal4Iterators, worksProperly )
+{
+    auto const test_case = GetParam();
+
+    EXPECT_EQ(
+        ::microlibrary::equal(
+            test_case.range_1.begin(),
+            test_case.range_1.end(),
+            test_case.range_2.begin(),
+            test_case.range_2.end() ),
+        test_case.equal );
+}
+
+INSTANTIATE_TEST_SUITE_P(, equal4Iterators, ValuesIn( equal4Iterators_TEST_CASES ) );
+
+/**
+ * \brief microlibrary::equal( Iterator_1, Iterator_1, Iterator_2, Iterator_2, Predicate )
+ *        test fixture.
+ */
+class equal4IteratorsPredicate : public TestWithParam<equal_Test_Case> {
+};
+
+/**
+ * \brief Verify microlibrary::equal( Iterator_1, Iterator_1, Iterator_2, Iterator_2,
+ *        Predicate ) works properly.
+ */
+TEST_P( equal4IteratorsPredicate, worksProperly )
+{
+    auto const test_case = GetParam();
+
+    EXPECT_EQ(
+        ::microlibrary::equal(
+            test_case.range_1.begin(),
+            test_case.range_1.end(),
+            test_case.range_2.begin(),
+            test_case.range_2.end(),
+            []( auto a, auto b ) { return a == b; } ),
+        test_case.equal );
+}
+
+INSTANTIATE_TEST_SUITE_P(, equal4IteratorsPredicate, ValuesIn( equal4Iterators_TEST_CASES ) );

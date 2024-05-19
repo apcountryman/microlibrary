@@ -16,6 +16,7 @@ source file.
 1. [`generate()`](#generate)
 1. [`min()`](#min)
 1. [`max()`](#max)
+1. [`equal()`](#equal)
 
 ## Algorithm Functor Policies
 
@@ -109,3 +110,9 @@ To get the minimum of two values, use the `::microlibrary::min()` algorithm.
 ## `max()`
 
 To get the maximum of two values, use the `::microlibrary::max()` algorithm.
+
+## `equal()`
+
+To check if two ranges are equal, use the `::microlibrary::equal()` algorithm.
+If the elements in the ranges do not support direct comparison, a binary predicate can be
+used to compare elements.
