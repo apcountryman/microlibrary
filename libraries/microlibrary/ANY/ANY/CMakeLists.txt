@@ -42,5 +42,6 @@ target_sources( microlibrary
     PRIVATE source/microlibrary/precondition.cc
     PRIVATE source/microlibrary/result.cc
     PRIVATE source/microlibrary/rom.cc
+    PRIVATE source/microlibrary/stream.cc
     PRIVATE source/microlibrary/testing.cc
     )
