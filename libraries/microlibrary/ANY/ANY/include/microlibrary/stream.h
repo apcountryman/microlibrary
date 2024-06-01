@@ -24,6 +24,61 @@
 #define MICROLIBRARY_STREAM_H
 
 namespace microlibrary {
+
+/**
+ * \brief Output formatter.
+ *
+ * \tparam T The type to print.
+ *
+ * \attention This class must be fully or partially specialized for each type that will
+ *            support formatted output.
+ */
+template<typename T, typename = void>
+class Output_Formatter {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    Output_Formatter() noexcept;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] source The source of the move.
+     */
+    Output_Formatter( Output_Formatter && source ) noexcept;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] original The original to copy.
+     */
+    Output_Formatter( Output_Formatter const & original ) noexcept;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Output_Formatter() noexcept;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    auto operator=( Output_Formatter && expression ) noexcept -> Output_Formatter &;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    auto operator=( Output_Formatter const & expression ) noexcept -> Output_Formatter &;
+};
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_STREAM_H
