@@ -20,10 +20,10 @@
  * \brief microlibrary automated testing I/O streams interface.
  */
 
-#ifndef MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_STREAM_H
-#define MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_STREAM_H
+#ifndef MICROLIBRARY_TESTING_AUTOMATED_STREAM_H
+#define MICROLIBRARY_TESTING_AUTOMATED_STREAM_H
 
 namespace microlibrary::Testing::Automated {
 } // namespace microlibrary::Testing::Automated
 
-#endif // MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_STREAM_H
+#endif // MICROLIBRARY_TESTING_AUTOMATED_STREAM_H
