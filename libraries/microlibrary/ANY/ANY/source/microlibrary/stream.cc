@@ -17,7 +17,7 @@
 
 /**
  * \file
- * \brief microlibrary stream implementation.
+ * \brief microlibrary I/O streams implementation.
  */
 
 #include "microlibrary/stream.h"

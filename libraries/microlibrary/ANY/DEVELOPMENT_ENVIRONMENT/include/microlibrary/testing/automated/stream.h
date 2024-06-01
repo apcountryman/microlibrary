@@ -23,7 +23,7 @@
 #ifndef MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_STREAM_H
 #define MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_STREAM_H
 
-namespace microlibrary {
-} // namespace microlibrary
+namespace microlibrary::Testing::Automated {
+} // namespace microlibrary::Testing::Automated
 
 #endif // MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_STREAM_H
