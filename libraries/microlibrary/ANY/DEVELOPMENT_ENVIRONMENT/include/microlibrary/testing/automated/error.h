@@ -20,8 +20,8 @@
  * \brief microlibrary error identification automated testing facilities interface.
  */
 
-#ifndef MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_ERROR_H
-#define MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_ERROR_H
+#ifndef MICROLIBRARY_TESTING_AUTOMATED_ERROR_H
+#define MICROLIBRARY_TESTING_AUTOMATED_ERROR_H
 
 #include <ostream>
 #include <type_traits>
@@ -133,4 +133,4 @@ struct is_error_code_enum<Testing::Automated::Mock_Error> : std::true_type {
 
 } // namespace microlibrary
 
-#endif // MICROLIBRARY_TESTING_AUTOMATED_AUTOMATED_ERROR_H
+#endif // MICROLIBRARY_TESTING_AUTOMATED_ERROR_H
