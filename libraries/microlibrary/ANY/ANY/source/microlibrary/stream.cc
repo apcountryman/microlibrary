@@ -22,6 +22,8 @@
 
 #include "microlibrary/stream.h"
 
+#include <cstdint>
+
 #include "microlibrary/algorithm.h"
 #include "microlibrary/rom.h"
 
