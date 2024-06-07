@@ -25,6 +25,7 @@
 
 #include <cstdint>
 
+#include "microlibrary/result.h"
 #include "microlibrary/rom.h"
 
 namespace microlibrary {
@@ -183,6 +184,131 @@ class Stream_IO_Driver {
      */
     constexpr auto operator   =( Stream_IO_Driver const & expression ) noexcept
         -> Stream_IO_Driver & = default;
+};
+
+/**
+ * \brief Fault reporting stream I/O driver.
+ */
+class Fault_Reporting_Stream_IO_Driver {
+  public:
+    /**
+     * \brief Write a character to the data sink.
+     *
+     * \param[in] character The character to write to the data sink.
+     *
+     * \return Nothing if the write succeeded.
+     * \return An error code if the write failed.
+     */
+    virtual auto put( char character ) noexcept -> Result<void> = 0;
+
+    /**
+     * \brief Write a block of characters to the data sink.
+     *
+     * \param[in] begin The beginning of the block of characters to write to the data
+     *            sink.
+     * \param[in] end The end of the block of characters to write to the data sink.
+     *
+     * \return Nothing if the write succeeded.
+     * \return An error code if the write failed.
+     */
+    virtual auto put( char const * begin, char const * end ) noexcept -> Result<void>;
+
+    /**
+     * \brief Write a null-terminated string to the data sink.
+     *
+     * \param[in] string The null-terminated string to write to the data sink.
+     *
+     * \return Nothing if the write succeeded.
+     * \return An error code if the write failed.
+     */
+    virtual auto put( char const * string ) noexcept -> Result<void>;
+
+#if MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+    /**
+     * \brief Write a null-terminated ROM string to the data sink.
+     *
+     * \param[in] string The null-terminated ROM string to write to the data sink.
+     *
+     * \return Nothing if the write succeeded.
+     * \return An error code if the write failed.
+     */
+    virtual auto put( ROM::String string ) noexcept -> Result<void>;
+#endif // MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+
+    /**
+     * \brief Write data to the data sink.
+     *
+     * \param[in] data The data to write to the data sink.
+     *
+     * \return Nothing if the write succeeded.
+     * \return An error code if the write failed.
+     */
+    virtual auto put( std::uint8_t data ) noexcept -> Result<void> = 0;
+
+    /**
+     * \brief Write a block of data to the data sink.
+     *
+     * \param[in] begin The beginning of the block of data to write to the data sink.
+     * \param[in] end The end of the block of data to write to the data sink.
+     *
+     * \return Nothing if the write succeeded.
+     * \return An error code if the write failed.
+     */
+    virtual auto put( std::uint8_t const * begin, std::uint8_t const * end ) noexcept
+        -> Result<void>;
+
+    /**
+     * \brief Write any data that has been buffered to the data sink.
+     *
+     * \return Nothing if the write succeeded.
+     * \return An error code if the write failed.
+     */
+    virtual auto flush() noexcept -> Result<void> = 0;
+
+  protected:
+    /**
+     * \brief Constructor.
+     */
+    constexpr Fault_Reporting_Stream_IO_Driver() noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] source The source of the move.
+     */
+    constexpr Fault_Reporting_Stream_IO_Driver( Fault_Reporting_Stream_IO_Driver && source ) noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] original The original to copy.
+     */
+    constexpr Fault_Reporting_Stream_IO_Driver( Fault_Reporting_Stream_IO_Driver const & original ) noexcept = default;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Fault_Reporting_Stream_IO_Driver() noexcept = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Fault_Reporting_Stream_IO_Driver && expression ) noexcept
+        -> Fault_Reporting_Stream_IO_Driver & = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Fault_Reporting_Stream_IO_Driver const & expression ) noexcept
+        -> Fault_Reporting_Stream_IO_Driver & = default;
 };
 
 } // namespace microlibrary

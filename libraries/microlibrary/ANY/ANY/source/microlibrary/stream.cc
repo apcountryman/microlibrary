@@ -25,6 +25,7 @@
 #include <cstdint>
 
 #include "microlibrary/algorithm.h"
+#include "microlibrary/result.h"
 #include "microlibrary/rom.h"
 
 namespace microlibrary {
@@ -50,6 +51,46 @@ void Stream_IO_Driver::put( ROM::String string ) noexcept
 void Stream_IO_Driver::put( std::uint8_t const * begin, std::uint8_t const * end ) noexcept
 {
     ::microlibrary::for_each( begin, end, [ this ]( auto data ) noexcept { put( data ); } );
+}
+
+auto Fault_Reporting_Stream_IO_Driver::put( char const * begin, char const * end ) noexcept
+    -> Result<void>
+{
+    return ::microlibrary::for_each<Functor_Reports_Errors_Discard_Functor>(
+        begin, end, [ this ]( auto character ) noexcept { return put( character ); } );
+}
+
+auto Fault_Reporting_Stream_IO_Driver::put( char const * string ) noexcept -> Result<void>
+{
+    while ( auto const character = *string++ ) {
+        auto result = put( character );
+        if ( result.is_error() ) {
+            return result.error();
+        } // if
+    }     // while
+
+    return {};
+}
+
+#if MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+auto Fault_Reporting_Stream_IO_Driver::put( ROM::String string ) noexcept -> Result<void>
+{
+    while ( auto const character = *string++ ) {
+        auto result = put( character );
+        if ( result.is_error() ) {
+            return result.error();
+        } // if
+    }     // while
+
+    return {};
+}
+#endif // MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+
+auto Fault_Reporting_Stream_IO_Driver::put( std::uint8_t const * begin, std::uint8_t const * end ) noexcept
+    -> Result<void>
+{
+    return ::microlibrary::for_each<Functor_Reports_Errors_Discard_Functor>(
+        begin, end, [ this ]( auto data ) noexcept { return put( data ); } );
 }
 
 } // namespace microlibrary

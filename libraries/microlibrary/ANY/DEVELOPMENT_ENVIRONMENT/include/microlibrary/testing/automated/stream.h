@@ -28,6 +28,7 @@
 #include <vector>
 
 #include "gmock/gmock.h"
+#include "microlibrary/result.h"
 #include "microlibrary/stream.h"
 
 namespace microlibrary::Testing::Automated {
@@ -71,6 +72,47 @@ class Mock_Stream_IO_Driver : public Stream_IO_Driver {
     }
 
     MOCK_METHOD( void, flush, (), ( noexcept, override ) );
+};
+
+/**
+ * \brief Mock stream I/O driver.
+ */
+class Mock_Fault_Reporting_Stream_IO_Driver : public Fault_Reporting_Stream_IO_Driver {
+  public:
+    Mock_Fault_Reporting_Stream_IO_Driver() = default;
+
+    Mock_Fault_Reporting_Stream_IO_Driver( Mock_Fault_Reporting_Stream_IO_Driver && ) = delete;
+
+    Mock_Fault_Reporting_Stream_IO_Driver( Mock_Fault_Reporting_Stream_IO_Driver const & ) = delete;
+
+    ~Mock_Fault_Reporting_Stream_IO_Driver() noexcept = default;
+
+    auto operator=( Mock_Fault_Reporting_Stream_IO_Driver && ) = delete;
+
+    auto operator=( Mock_Fault_Reporting_Stream_IO_Driver const & ) = delete;
+
+    MOCK_METHOD( Result<void>, put, (char), ( noexcept, override ) );
+    MOCK_METHOD( Result<void>, put, ( std::string ) );
+
+    auto put( char const * begin, char const * end ) noexcept -> Result<void> override
+    {
+        return put( std::string{ begin, end } );
+    }
+
+    auto put( char const * string ) noexcept -> Result<void> override
+    {
+        return put( std::string{ string } );
+    }
+
+    MOCK_METHOD( Result<void>, put, ( std::uint8_t ), ( noexcept, override ) );
+    MOCK_METHOD( Result<void>, put, (std::vector<std::uint8_t>));
+
+    auto put( std::uint8_t const * begin, std::uint8_t const * end ) noexcept -> Result<void> override
+    {
+        return put( std::vector<std::uint8_t>{ begin, end } );
+    }
+
+    MOCK_METHOD( Result<void>, flush, (), ( noexcept, override ) );
 };
 
 } // namespace microlibrary::Testing::Automated
