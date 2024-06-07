@@ -21,3 +21,35 @@
  */
 
 #include "microlibrary/stream.h"
+
+#include <cstdint>
+
+#include "microlibrary/algorithm.h"
+#include "microlibrary/rom.h"
+
+namespace microlibrary {
+
+void Stream_IO_Driver::put( char const * begin, char const * end ) noexcept
+{
+    ::microlibrary::for_each(
+        begin, end, [ this ]( auto character ) noexcept { put( character ); } );
+}
+
+void Stream_IO_Driver::put( char const * string ) noexcept
+{
+    while ( auto const character = *string++ ) { put( character ); } // while
+}
+
+#if MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+void Stream_IO_Driver::put( ROM::String string ) noexcept
+{
+    while ( auto const character = *string++ ) { put( character ); } // while
+}
+#endif // MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+
+void Stream_IO_Driver::put( std::uint8_t const * begin, std::uint8_t const * end ) noexcept
+{
+    ::microlibrary::for_each( begin, end, [ this ]( auto data ) noexcept { put( data ); } );
+}
+
+} // namespace microlibrary
