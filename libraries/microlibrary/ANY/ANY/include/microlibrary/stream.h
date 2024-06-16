@@ -491,7 +491,7 @@ class Stream {
      */
     struct Mask {
         static constexpr auto END_OF_FILE_REACHED = mask<State>( 1, Bit::END_OF_FILE_REACHED ); ///< End-of-file reached.
-        static constexpr auto IO_ERROR_REPORTED = mask<State>( 1, Bit::IO_ERROR_REPORTED ); ///< End-of-file reached.
+        static constexpr auto IO_ERROR_REPORTED = mask<State>( 1, Bit::IO_ERROR_REPORTED ); ///< I/O error reported.
 
         static constexpr auto ERROR_REPORTED = IO_ERROR_REPORTED; ///< Error reported.
     };

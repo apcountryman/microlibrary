@@ -55,7 +55,7 @@ class Stream : public ::microlibrary::Stream {
 
 /**
  * \brief microlibrary::Stream::is_nominal(), microlibrary::Stream::error_reported(),
- *        microlibrary::end_of_file_reached(),
+ *        microlibrary::Stream::end_of_file_reached(),
  *        microlibrary::Stream::report_end_of_file_reached(),
  *        microlibrary::Stream::clear_end_of_file_reached_report(),
  *        microlibrary::Stream::io_error_reported(),
@@ -66,17 +66,17 @@ struct flagSetClear_Test_Case {
     /**
      * \brief Flag manipulation function pointer.
      */
-    using flagSetClear_Manipulation_Function_Pointer = void ( Stream::* )();
+    using Flag_Manipulation_Function_Pointer = void ( Stream::* )();
 
     /**
      * \brief The function to call to set the flag.
      */
-    flagSetClear_Manipulation_Function_Pointer set_flag;
+    Flag_Manipulation_Function_Pointer set_flag;
 
     /**
      * \brief The function to call to clear the flag.
      */
-    flagSetClear_Manipulation_Function_Pointer clear_flag;
+    Flag_Manipulation_Function_Pointer clear_flag;
 
     /**
      * \brief Errors have been reported.
@@ -111,7 +111,7 @@ auto operator<<( std::ostream & stream, flagSetClear_Test_Case const & test_case
 
 /**
  * \brief microlibrary::Stream::is_nominal(), microlibrary::Stream::error_reported(),
- *        microlibrary::end_of_file_reached(),
+ *        microlibrary::Stream::end_of_file_reached(),
  *        microlibrary::Stream::report_end_of_file_reached(),
  *        microlibrary::Stream::clear_end_of_file_reached_report(),
  *        microlibrary::Stream::io_error_reported(),
@@ -123,7 +123,8 @@ class flagSetClear : public TestWithParam<flagSetClear_Test_Case> {
 
 /**
  * \brief Verify microlibrary::Stream::is_nominal(),
- *        microlibrary::Stream::error_reported(), microlibrary::end_of_file_reached(),
+ *        microlibrary::Stream::error_reported(),
+ *        microlibrary::Stream::end_of_file_reached(),
  *        microlibrary::Stream::report_end_of_file_reached(),
  *        microlibrary::Stream::clear_end_of_file_reached_report(),
  *        microlibrary::Stream::io_error_reported(),
@@ -172,7 +173,7 @@ TEST_P( flagSetClear, worksProperly )
 
 /**
  * \brief microlibrary::Stream::is_nominal(), microlibrary::Stream::error_reported(),
- *        microlibrary::end_of_file_reached(),
+ *        microlibrary::Stream::end_of_file_reached(),
  *        microlibrary::Stream::report_end_of_file_reached(),
  *        microlibrary::Stream::clear_end_of_file_reached_report(),
  *        microlibrary::Stream::io_error_reported(),
