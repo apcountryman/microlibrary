@@ -25,6 +25,7 @@
 
 #include <cstdint>
 
+#include "microlibrary/integer.h"
 #include "microlibrary/result.h"
 #include "microlibrary/rom.h"
 
@@ -309,6 +310,201 @@ class Fault_Reporting_Stream_IO_Driver {
      */
     constexpr auto operator=( Fault_Reporting_Stream_IO_Driver const & expression ) noexcept
         -> Fault_Reporting_Stream_IO_Driver & = default;
+};
+
+/**
+ * \brief Stream core.
+ *
+ * This class performs the following stream functions:
+ * - Stores the stream's state information (end-of-file reached, I/O error present)
+ * - Associates the stream with a stream I/O driver
+ */
+class Stream {
+  public:
+    /**
+     * \brief Check if the stream is nominal (no errors present and end-of-file has not
+     *        been reached.
+     *
+     * \return true if the stream is nominal.
+     * \return false if the stream is not nominal.
+     */
+    constexpr auto is_nominal() const noexcept -> bool
+    {
+        return not m_state;
+    }
+
+    /**
+     * \brief Check if errors (I/O error) have been reported.
+     *
+     * \return true if errors have been reported.
+     * \return false if no errors have been reported.
+     */
+    constexpr auto error_reported() const noexcept -> bool
+    {
+        return m_state & Mask::ERROR_REPORTED;
+    }
+
+    /**
+     * \brief Check if end-of-file has been reached.
+     *
+     * \return true if end-of-file has been reached.
+     * \return false if end-of-file has not been reached.
+     */
+    constexpr auto end_of_file_reached() const noexcept -> bool
+    {
+        return m_state & Mask::END_OF_FILE_REACHED;
+    }
+
+    /**
+     * \brief Check if an I/O error has been reported.
+     *
+     * \return true if an I/O error has been reported.
+     * \return false if an I/O error has not been reported.
+     */
+    constexpr auto io_error_reported() const noexcept -> bool
+    {
+        return m_state & Mask::IO_ERROR_REPORTED;
+    }
+
+    /**
+     * \brief Report an I/O error.
+     */
+    constexpr void report_io_error() noexcept
+    {
+        m_state |= Mask::IO_ERROR_REPORTED;
+    }
+
+    /**
+     * \brief Clear I/O error report.
+     */
+    constexpr void clear_io_error_report() noexcept
+    {
+        m_state &= ~Mask::IO_ERROR_REPORTED;
+    }
+
+    /**
+     * \brief Check if the stream is associated with a stream I/O driver.
+     *
+     * \return true if the stream is associated with a stream I/O driver.
+     * \return false if the stream is not associated with a stream I/O driver.
+     */
+    constexpr auto driver_is_set() const noexcept -> bool
+    {
+        return m_driver;
+    }
+
+  protected:
+    /**
+     * \brief Constructor.
+     */
+    constexpr Stream() noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] source The source of the move.
+     */
+    constexpr Stream( Stream && source ) noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] original The original to copy.
+     */
+    constexpr Stream( Stream const & original ) noexcept = default;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Stream() noexcept = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Stream && expression ) noexcept -> Stream & = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Stream const & expression ) noexcept -> Stream & = default;
+
+    /**
+     * \brief Report that end-of-file has been reached.
+     */
+    constexpr void report_end_of_file_reached() noexcept
+    {
+        m_state |= Mask::END_OF_FILE_REACHED;
+    }
+
+    /**
+     * \brief Clear end-of-file reached report.
+     */
+    constexpr void clear_end_of_file_reached_report() noexcept
+    {
+        m_state &= ~Mask::END_OF_FILE_REACHED;
+    }
+
+    /**
+     * \brief Get the stream I/O driver associated with the stream.
+     *
+     * \return The stream I/O driver associated with the stream.
+     */
+    constexpr auto driver() noexcept -> Stream_IO_Driver *
+    {
+        return m_driver;
+    }
+
+    /**
+     * \brief Associate the stream with a stream I/O driver.
+     *
+     * \param[in] driver The stream I/O driver to associate the stream with.
+     */
+    constexpr void set_driver( Stream_IO_Driver * driver ) noexcept
+    {
+        m_driver = driver;
+    }
+
+  private:
+    /**
+     * \brief State flags.
+     */
+    using State = std::uint_fast8_t;
+
+    /**
+     * \brief State flag bit positions.
+     */
+    enum Bit : std::uint_fast8_t {
+        END_OF_FILE_REACHED, ///< End-of-file reached.
+        IO_ERROR_REPORTED,   ///< I/O error reported.
+    };
+
+    /**
+     * \brief State flag bit masks.
+     */
+    struct Mask {
+        static constexpr auto END_OF_FILE_REACHED = mask<State>( 1, Bit::END_OF_FILE_REACHED ); ///< End-of-file reached.
+        static constexpr auto IO_ERROR_REPORTED = mask<State>( 1, Bit::IO_ERROR_REPORTED ); ///< End-of-file reached.
+
+        static constexpr auto ERROR_REPORTED = IO_ERROR_REPORTED; ///< Error reported.
+    };
+
+    /**
+     * \brief The stream's state flags.
+     */
+    State m_state{ 0 };
+
+    /**
+     * \brief The stream I/O driver associated with the stream.
+     */
+    Stream_IO_Driver * m_driver{ nullptr };
 };
 
 } // namespace microlibrary

@@ -33,5 +33,8 @@ add_subdirectory( generic_error_category )
 # microlibrary integer utilities automated tests
 add_subdirectory( integer )
 
+# microlibrary::Stream automated tests
+add_subdirectory( stream )
+
 # microlibrary::Stream_IO_Driver automated tests
 add_subdirectory( stream_io_driver )
