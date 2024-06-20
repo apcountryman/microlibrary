@@ -316,13 +316,13 @@ class Fault_Reporting_Stream_IO_Driver {
  * \brief Stream core.
  *
  * This class performs the following stream functions:
- * - Stores the stream's state information (end-of-file reached, I/O error present)
+ * - Stores the stream's state information (end-of-file reached, I/O error reported)
  * - Associates the stream with a stream I/O driver
  */
 class Stream {
   public:
     /**
-     * \brief Check if the stream is nominal (no errors present and end-of-file has not
+     * \brief Check if the stream is nominal (no errors reported and end-of-file has not
      *        been reached.
      *
      * \return true if the stream is nominal.
