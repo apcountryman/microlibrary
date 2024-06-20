@@ -530,7 +530,7 @@ class Fault_Reporting_Stream {
     }
 
     /**
-     * \brief Check if errors (I/O error and or fatal error (fault)) have been reported.
+     * \brief Check if errors (I/O error and/or fatal error (fault)) have been reported.
      *
      * \return true if errors have been reported.
      * \return false if no errors have been reported.

@@ -172,6 +172,7 @@ TEST_P( flagSetClear, worksProperly )
     EXPECT_FALSE( stream.error_reported() );
     EXPECT_FALSE( stream.end_of_file_reached() );
     EXPECT_FALSE( stream.io_error_reported() );
+    EXPECT_FALSE( stream.fatal_error_reported() );
 
     ( stream.*( test_case.set_flag ) )();
 
