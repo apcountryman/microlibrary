@@ -21,3 +21,19 @@
  */
 
 #include "microlibrary/rom.h"
+
+#include <cstddef>
+
+namespace microlibrary::ROM {
+
+auto length( String string ) noexcept -> std::size_t
+{
+    auto const begin = string;
+    auto       end   = string;
+
+    for ( ; *end; ++end ) {} // for
+
+    return end - begin;
+}
+
+} // namespace microlibrary::ROM

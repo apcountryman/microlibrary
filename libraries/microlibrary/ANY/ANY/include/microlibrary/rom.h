@@ -23,6 +23,8 @@
 #ifndef MICROLIBRARY_ROM_H
 #define MICROLIBRARY_ROM_H
 
+#include <cstddef>
+
 #if __has_include( "microlibrary/hil/rom.h" )
 #include "microlibrary/hil/rom.h"
 #endif // __has_include( "microlibrary/hil/rom.h" )
@@ -69,6 +71,18 @@ using String = char const *;
  */
 #define MICROLIBRARY_ROM_STRING( string ) ( string )
 #endif // !MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+
+/**
+ * \brief Get the length of a null-terminated string that may be stored in ROM.
+ *
+ * \relatedalso microlibrary::ROM::String
+ *
+ * \param[in] string The null-terminated string that may be stored in ROM to get the
+ *            length of.
+ *
+ * \return The length of the null-terminated string that may be stored in ROM.
+ */
+auto length( String string ) noexcept -> std::size_t;
 
 } // namespace microlibrary::ROM
 
