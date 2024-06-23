@@ -115,6 +115,65 @@ class Mock_Fault_Reporting_Stream_IO_Driver : public Fault_Reporting_Stream_IO_D
     MOCK_METHOD( Result<void>, flush, (), ( noexcept, override ) );
 };
 
+/**
+ * \brief String stream I/O driver.
+ */
+class String_Stream_IO_Driver final : public Stream_IO_Driver {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    String_Stream_IO_Driver() = default;
+
+    String_Stream_IO_Driver( String_Stream_IO_Driver && ) = delete;
+
+    String_Stream_IO_Driver( String_Stream_IO_Driver const & ) = delete;
+
+    /**
+     * \brief Destructor.
+     */
+    ~String_Stream_IO_Driver() noexcept = default;
+
+    auto operator=( String_Stream_IO_Driver && ) = delete;
+
+    auto operator=( String_Stream_IO_Driver const & ) = delete;
+
+    /**
+     * \brief Get the string that is wrapped by the stream I/O driver.
+     *
+     * \return The string that is wrapped by the stream I/O driver.
+     */
+    auto string() const noexcept -> std::string const &
+    {
+        return m_string;
+    }
+
+    /**
+     * \brief Write a character to the string.
+     *
+     * \param[in] character The character to write to the string.
+     */
+    void put( char character ) noexcept override final;
+
+    /**
+     * \brief Write data to the string.
+     *
+     * \param[in] data The data to write to the string.
+     */
+    void put( std::uint8_t data ) noexcept override final;
+
+    /**
+     * \brief Do nothing.
+     */
+    void flush() noexcept override final;
+
+  private:
+    /**
+     * \brief The string wrapped by the stream I/O driver.
+     */
+    std::string m_string{};
+};
+
 } // namespace microlibrary::Testing::Automated
 
 #endif // MICROLIBRARY_TESTING_AUTOMATED_STREAM_H
