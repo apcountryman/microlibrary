@@ -21,3 +21,21 @@
  */
 
 #include "microlibrary/testing/automated/stream.h"
+
+namespace microlibrary::Testing::Automated {
+
+void String_Stream_IO_Driver::put( char character ) noexcept
+{
+    m_string.push_back( character );
+}
+
+void String_Stream_IO_Driver::put( std::uint8_t data ) noexcept
+{
+    m_string.push_back( data );
+}
+
+void String_Stream_IO_Driver::flush() noexcept
+{
+}
+
+} // namespace microlibrary::Testing::Automated
