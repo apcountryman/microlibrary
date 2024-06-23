@@ -22,6 +22,8 @@
 
 #include "microlibrary/testing/automated/stream.h"
 
+#include <cstdint>
+
 namespace microlibrary::Testing::Automated {
 
 void String_Stream_IO_Driver::put( char character ) noexcept

@@ -134,6 +134,10 @@ class String_Stream_IO_Driver final : public Stream_IO_Driver {
      */
     ~String_Stream_IO_Driver() noexcept = default;
 
+    auto operator=( String_Stream_IO_Driver && ) = delete;
+
+    auto operator=( String_Stream_IO_Driver const & ) = delete;
+
     /**
      * \brief Get the string that is wrapped by the stream I/O driver.
      *
