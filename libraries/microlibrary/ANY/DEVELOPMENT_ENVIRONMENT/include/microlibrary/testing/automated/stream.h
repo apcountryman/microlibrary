@@ -174,6 +174,76 @@ class String_Stream_IO_Driver final : public Stream_IO_Driver {
     std::string m_string{};
 };
 
+/**
+ * \brief Vector stream I/O driver.
+ *
+ * \tparam T The vector element type.
+ */
+template<typename T>
+class Vector_Stream_IO_Driver final : public Stream_IO_Driver {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    Vector_Stream_IO_Driver() = default;
+
+    Vector_Stream_IO_Driver( Vector_Stream_IO_Driver && ) = delete;
+
+    Vector_Stream_IO_Driver( Vector_Stream_IO_Driver const & ) = delete;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Vector_Stream_IO_Driver() noexcept = default;
+
+    auto operator=( Vector_Stream_IO_Driver && ) = delete;
+
+    auto operator=( Vector_Stream_IO_Driver const & ) = delete;
+
+    /**
+     * \brief Get the vector that is wrapped by the stream I/O driver.
+     *
+     * \return The vector that is wrapped by the stream I/O driver.
+     */
+    auto vector() const noexcept -> std::vector<T> const &
+    {
+        return m_vector;
+    }
+
+    /**
+     * \brief Write a character to the vector.
+     *
+     * \param[in] character The character to write to the vector.
+     */
+    void put( char character ) noexcept override final
+    {
+        m_vector.push_back( character );
+    }
+
+    /**
+     * \brief Write data to the vector.
+     *
+     * \param[in] data The data to write to the vector.
+     */
+    void put( std::uint8_t data ) noexcept override final
+    {
+        m_vector.push_back( data );
+    }
+
+    /**
+     * \brief Do nothing.
+     */
+    void flush() noexcept override final
+    {
+    }
+
+  private:
+    /**
+     * \brief The vector wrapped by the stream I/O driver.
+     */
+    std::vector<T> m_vector{};
+};
+
 } // namespace microlibrary::Testing::Automated
 
 #endif // MICROLIBRARY_TESTING_AUTOMATED_STREAM_H
