@@ -54,6 +54,7 @@ auto operator<<( std::ostream & stream, Generic_Error generic_error ) -> std::os
         case Generic_Error::LOGIC_ERROR: return stream << "::microlibrary::Generic_Error::LOGIC_ERROR";
         case Generic_Error::OUT_OF_RANGE: return stream << "::microlibrary::Generic_Error::OUT_OF_RANGE";
         case Generic_Error::RUNTIME_ERROR: return stream << "::microlibrary::Generic_Error::RUNTIME_ERROR";
+        case Generic_Error::IO_STREAM_DEGRADED: return stream << "::microlibrary::Generic_Error::IO_STREAM_DEGRADED";
 
             // clang-format on
     } // switch

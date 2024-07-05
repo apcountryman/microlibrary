@@ -104,8 +104,9 @@ errorDescription_Test_Case const errorDescription_TEST_CASES[]{
     { to_underlying( Generic_Error::LOGIC_ERROR ), "LOGIC_ERROR" },
     { to_underlying( Generic_Error::OUT_OF_RANGE ), "OUT_OF_RANGE" },
     { to_underlying( Generic_Error::RUNTIME_ERROR ), "RUNTIME_ERROR" },
+    { to_underlying( Generic_Error::IO_STREAM_DEGRADED ), "IO_STREAM_DEGRADED" },
 
-    { to_underlying( Generic_Error::RUNTIME_ERROR ) + 1, "UNKNOWN" },
+    { to_underlying( Generic_Error::IO_STREAM_DEGRADED ) + 1, "UNKNOWN" },
 
     // clang-format on
 };
