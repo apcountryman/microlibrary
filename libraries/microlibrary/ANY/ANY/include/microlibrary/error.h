@@ -327,10 +327,11 @@ constexpr auto operator!=( Error_Code const & lhs, Error_Code const & rhs ) noex
  * \relatedalso microlibrary::Generic_Error_Category
  */
 enum class Generic_Error : Error_ID {
-    INVALID_ARGUMENT, ///< Invalid argument.
-    LOGIC_ERROR,      ///< Logic error.
-    OUT_OF_RANGE,     ///< Out of range.
-    RUNTIME_ERROR,    ///< Runtime error.
+    INVALID_ARGUMENT,   ///< Invalid argument.
+    LOGIC_ERROR,        ///< Logic error.
+    OUT_OF_RANGE,       ///< Out of range.
+    RUNTIME_ERROR,      ///< Runtime error.
+    IO_STREAM_DEGRADED, ///< I/O stream degraded.
 };
 
 /**

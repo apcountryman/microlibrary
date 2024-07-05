@@ -79,6 +79,7 @@ auto Generic_Error_Category::error_description( Error_ID id ) const noexcept -> 
         case Generic_Error::LOGIC_ERROR: return MICROLIBRARY_ROM_STRING( "LOGIC_ERROR" );
         case Generic_Error::OUT_OF_RANGE: return MICROLIBRARY_ROM_STRING( "OUT_OF_RANGE" );
         case Generic_Error::RUNTIME_ERROR: return MICROLIBRARY_ROM_STRING( "RUNTIME_ERROR" );
+        case Generic_Error::IO_STREAM_DEGRADED: return MICROLIBRARY_ROM_STRING( "IO_STREAM_DEGRADED" );
 
             // clang-format on
     } // switch
