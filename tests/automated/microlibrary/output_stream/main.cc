@@ -175,8 +175,8 @@ TEST( putDataBlock, worksProperly )
 }
 
 /**
- * \brief Verify picolibrary::Output_Stream::print() works properly when there is a single
- *        value to format.
+ * \brief Verify microlibrary::Output_Stream::print() works properly when there is a
+ *        single value to format.
  */
 TEST( print, worksProperlySingleValue )
 {
@@ -194,7 +194,7 @@ TEST( print, worksProperlySingleValue )
 }
 
 /**
- * \brief Verify picolibrary::Output_Stream::print() works properly when there are
+ * \brief Verify microlibrary::Output_Stream::print() works properly when there are
  *        multiple values to format.
  */
 TEST( print, worksProperlyMultipleValues )

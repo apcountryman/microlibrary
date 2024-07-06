@@ -761,7 +761,7 @@ class Output_Stream : public Stream {
      *
      * \pre microlibrary::Stream::is_nominal()
      *
-     * \param[in] character The character to write to the stream.
+     * \param[in] character The character to write to the data sink.
      */
     void put( char character ) noexcept;
 
