@@ -23,13 +23,20 @@
 #ifndef MICROLIBRARY_STREAM_H
 #define MICROLIBRARY_STREAM_H
 
+#include <cstddef>
 #include <cstdint>
+#include <type_traits>
+#include <utility>
 
+#include "microlibrary/error.h"
 #include "microlibrary/integer.h"
+#include "microlibrary/precondition.h"
 #include "microlibrary/result.h"
 #include "microlibrary/rom.h"
 
 namespace microlibrary {
+
+class Output_Stream;
 
 /**
  * \brief Output formatter.
@@ -83,6 +90,16 @@ class Output_Formatter {
      * \return The assigned to object.
      */
     auto operator=( Output_Formatter const & expression ) noexcept -> Output_Formatter &;
+
+    /**
+     * \brief Write the formatted value to a stream.
+     *
+     * \param[in] stream The stream to write the formatted value to.
+     * \param[in] value The value to format.
+     *
+     * \return The number of characters written to the stream.
+     */
+    auto print( Output_Stream & stream, T const & value ) const noexcept -> std::size_t;
 };
 
 /**
@@ -733,6 +750,201 @@ class Fault_Reporting_Stream {
      */
     Fault_Reporting_Stream_IO_Driver * m_driver{ nullptr };
 };
+
+/**
+ * \brief Output stream.
+ */
+class Output_Stream : public Stream {
+  public:
+    /**
+     * \brief Write a character to the data sink.
+     *
+     * \pre microlibrary::Stream::is_nominal()
+     *
+     * \param[in] character The character to write to the data sink.
+     */
+    void put( char character ) noexcept;
+
+    /**
+     * \brief Write a block of characters to the data sink.
+     *
+     * \pre microlibrary::Stream::is_nominal()
+     *
+     * \param[in] begin The beginning of the block of characters to write to the data
+     *            sink.
+     * \param[in] end The end of the block of characters to write to the data sink.
+     */
+    void put( char const * begin, char const * end ) noexcept;
+
+    /**
+     * \brief Write a null-terminated string to the data sink.
+     *
+     * \pre microlibrary::Stream::is_nominal()
+     *
+     * \param[in] string The null-terminated string to write to the data sink.
+     */
+    void put( char const * string ) noexcept;
+
+#if MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+    /**
+     * \brief Write a null-terminated ROM string to the data sink.
+     *
+     * \pre microlibrary::Stream::is_nominal()
+     *
+     * \param[in] string The null-terminated ROM string to write to the data sink.
+     */
+    void put( ROM::String string ) noexcept;
+#endif // MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+
+    /**
+     * \brief Write data to the data sink.
+     *
+     * \pre microlibrary::Stream::is_nominal()
+     *
+     * \param[in] data The data to write to the data sink.
+     */
+    void put( std::uint8_t data ) noexcept;
+
+    /**
+     * \brief Write a block of data to the data sink.
+     *
+     * \pre microlibrary::Stream::is_nominal()
+     *
+     * \param[in] begin The beginning of the block of data to write to the data sink.
+     * \param[in] end The end of the block of data to write to the data sink.
+     */
+    void put( std::uint8_t const * begin, std::uint8_t const * end ) noexcept;
+
+    /**
+     * \brief Write formatted values to the data sink.
+     *
+     * \pre microlibrary::Stream::is_nominal()
+     *
+     * \tparam Types The types to print.
+     *
+     * \param[in] values The values to format. If a value is followed by an output
+     *            formatter, the output formatter will be used to format the value and
+     *            write the formatted value to the data sink. If a value is not followed
+     *            by an output formatter, a default constructed output formatter will be
+     *            used to format the value and write the formatted value to the data sink.
+     *
+     * \return The number of characters written to the data sink.
+     */
+    template<typename... Types>
+    auto print( Types &&... values ) noexcept -> std::size_t
+    {
+        MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+        return print_implementation( std::size_t{ 0 }, std::forward<Types>( values )... );
+    }
+
+    /**
+     * \brief Write any data that has been buffered to the data sink.
+     *
+     * \pre microlibrary::Stream::is_nominal()
+     */
+    void flush() noexcept;
+
+  protected:
+    /**
+     * \brief Constructor.
+     */
+    constexpr Output_Stream() noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] source The source of the move.
+     */
+    constexpr Output_Stream( Output_Stream && source ) noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] original The original to copy.
+     */
+    constexpr Output_Stream( Output_Stream const & original ) noexcept = default;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Output_Stream() noexcept = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Output_Stream && expression ) noexcept -> Output_Stream & = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Output_Stream const & expression ) noexcept -> Output_Stream & = default;
+
+  private:
+    /**
+     * \brief Write formatted values to the data sink.
+     *
+     * \param[in] n The number of characters that have been written to the data sink.
+     *
+     * \return The number of characters written to the data sink.
+     */
+    auto print_implementation( std::size_t n ) noexcept -> std::size_t
+    {
+        return n;
+    }
+
+    /**
+     * \brief Write formatted values to the data sink.
+     *
+     * \tparam Type The type to print.
+     * \tparam Types The types to print.
+     *
+     * \param[in] n The number of characters that have been written to the data sink.
+     * \param[in] value The value to format.
+     * \param[in] formatter The output formatter to use to format the value and write the
+     *            formatted value to the data sink.
+     * \param[in] values The values to format.
+     *
+     * \return The number of characters written to the data sink.
+     */
+    template<typename Type, typename... Types>
+    auto print_implementation( std::size_t n, Type && value, Output_Formatter<std::decay_t<Type>> formatter, Types &&... values ) noexcept
+    {
+        return print_implementation(
+            n + formatter.print( *this, value ), std::forward<Types>( values )... );
+    }
+
+    /**
+     * \brief Write formatted values to the data sink.
+     *
+     * \tparam Type The type to print.
+     * \tparam Types The types to print.
+     *
+     * \param[in] n The number of characters that have been written to the data sink.
+     * \param[in] value The value to format.
+     * \param[in] values The values to format.
+     *
+     * \return The number of characters written to the data sink.
+     */
+    template<typename Type, typename... Types>
+    auto print_implementation( std::size_t n, Type && value, Types &&... values ) noexcept
+    {
+        return print_implementation(
+            n,
+            std::forward<Type>( value ),
+            Output_Formatter<std::decay_t<Type>>{},
+            std::forward<Types>( values )... );
+    }
+};
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_STREAM_H
