@@ -25,6 +25,8 @@
 #include <cstdint>
 
 #include "microlibrary/algorithm.h"
+#include "microlibrary/error.h"
+#include "microlibrary/precondition.h"
 #include "microlibrary/result.h"
 #include "microlibrary/rom.h"
 
@@ -91,6 +93,57 @@ auto Fault_Reporting_Stream_IO_Driver::put( std::uint8_t const * begin, std::uin
 {
     return ::microlibrary::for_each<Functor_Reports_Errors_Discard_Functor>(
         begin, end, [ this ]( auto data ) noexcept { return put( data ); } );
+}
+
+void Output_Stream::put( char character ) noexcept
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    driver()->put( character );
+}
+
+void Output_Stream::put( char const * begin, char const * end ) noexcept
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    driver()->put( begin, end );
+}
+
+void Output_Stream::put( char const * string ) noexcept
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    driver()->put( string );
+}
+
+#if MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+void Output_Stream::put( ROM::String string ) noexcept
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    driver()->put( string );
+}
+#endif // MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+
+void Output_Stream::put( std::uint8_t data ) noexcept
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    driver()->put( data );
+}
+
+void Output_Stream::put( std::uint8_t const * begin, std::uint8_t const * end ) noexcept
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    driver()->put( begin, end );
+}
+
+void Output_Stream::flush() noexcept
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    driver()->flush();
 }
 
 } // namespace microlibrary

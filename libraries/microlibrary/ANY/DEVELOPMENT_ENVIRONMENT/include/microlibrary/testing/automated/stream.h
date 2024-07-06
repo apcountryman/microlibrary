@@ -244,6 +244,118 @@ class Vector_Stream_IO_Driver final : public Stream_IO_Driver {
     std::vector<T> m_vector{};
 };
 
+/**
+ * \brief Mock output stream.
+ */
+class Mock_Output_Stream : public Output_Stream {
+  public:
+    Mock_Output_Stream()
+    {
+        set_driver( &m_driver );
+    }
+
+    Mock_Output_Stream( Mock_Output_Stream && ) = delete;
+
+    Mock_Output_Stream( Mock_Output_Stream const & ) = delete;
+
+    ~Mock_Output_Stream() noexcept = default;
+
+    auto operator=( Mock_Output_Stream && ) = delete;
+
+    auto operator=( Mock_Output_Stream const & ) = delete;
+
+    auto driver() noexcept -> Mock_Stream_IO_Driver &
+    {
+        return m_driver;
+    }
+
+  private:
+    Mock_Stream_IO_Driver m_driver{};
+};
+
+/**
+ * \brief Output string stream.
+ */
+class Output_String_Stream : public Output_Stream {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    Output_String_Stream()
+    {
+        set_driver( &m_driver );
+    }
+
+    Output_String_Stream( Output_String_Stream && ) = delete;
+
+    Output_String_Stream( Output_String_Stream const & ) = delete;
+
+    ~Output_String_Stream() noexcept = default;
+
+    auto operator=( Output_String_Stream && ) = delete;
+
+    auto operator=( Output_String_Stream const & ) = delete;
+
+    /**
+     * \brief Get the string that is written to by the stream.
+     *
+     * \return The string that is written to by the stream.
+     */
+    auto string() const noexcept -> std::string const &
+    {
+        return m_driver.string();
+    }
+
+  private:
+    /**
+     * \brief The stream's I/O driver.
+     */
+    String_Stream_IO_Driver m_driver{};
+};
+
+/**
+ * \brief Output vector stream.
+ *
+ * \tparam T The vector element type.
+ */
+template<typename T>
+class Output_Vector_Stream : public Output_Stream {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    Output_Vector_Stream()
+    {
+        set_driver( &m_driver );
+    }
+
+    Output_Vector_Stream( Output_Vector_Stream && ) = delete;
+
+    Output_Vector_Stream( Output_Vector_Stream const & ) = delete;
+
+    ~Output_Vector_Stream() noexcept = default;
+
+    auto operator=( Output_Vector_Stream && ) = delete;
+
+    auto operator=( Output_Vector_Stream const & ) = delete;
+
+    /**
+     * \brief Get the vector that is written to by the stream.
+     *
+     * \return The vector that is written to by the stream.
+     */
+    auto vector() const noexcept -> std::vector<T> const &
+    {
+        return m_driver.vector();
+    }
+
+  private:
+    /**
+     * \brief The stream's I/O driver.
+     */
+    Vector_Stream_IO_Driver<T> m_driver{};
+};
+
 } // namespace microlibrary::Testing::Automated
 
 #endif // MICROLIBRARY_TESTING_AUTOMATED_STREAM_H
