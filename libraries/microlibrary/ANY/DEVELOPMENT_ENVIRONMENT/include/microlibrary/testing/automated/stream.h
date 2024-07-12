@@ -175,6 +175,71 @@ class String_Stream_IO_Driver final : public Stream_IO_Driver {
 };
 
 /**
+ * \brief Fault reporting string stream I/O driver.
+ */
+class Fault_Reporting_String_Stream_IO_Driver final : public Fault_Reporting_Stream_IO_Driver {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    Fault_Reporting_String_Stream_IO_Driver() = default;
+
+    Fault_Reporting_String_Stream_IO_Driver( Fault_Reporting_String_Stream_IO_Driver && ) = delete;
+
+    Fault_Reporting_String_Stream_IO_Driver( Fault_Reporting_String_Stream_IO_Driver const & ) = delete;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Fault_Reporting_String_Stream_IO_Driver() noexcept = default;
+
+    auto operator=( Fault_Reporting_String_Stream_IO_Driver && ) = delete;
+
+    auto operator=( Fault_Reporting_String_Stream_IO_Driver const & ) = delete;
+
+    /**
+     * \brief Get the string that is wrapped by the stream I/O driver.
+     *
+     * \return The string that is wrapped by the stream I/O driver.
+     */
+    auto string() const noexcept -> std::string const &
+    {
+        return m_string;
+    }
+
+    /**
+     * \brief Write a character to the string.
+     *
+     * \param[in] character The character to write to the string.
+     *
+     * \return Nothing.
+     */
+    auto put( char character ) noexcept -> Result<void> override final;
+
+    /**
+     * \brief Write data to the string.
+     *
+     * \param[in] data The data to write to the string.
+     *
+     * \return Nothing.
+     */
+    auto put( std::uint8_t data ) noexcept -> Result<void> override final;
+
+    /**
+     * \brief Do nothing.
+     *
+     * \return Nothing.
+     */
+    auto flush() noexcept -> Result<void> override final;
+
+  private:
+    /**
+     * \brief The string wrapped by the stream I/O driver.
+     */
+    std::string m_string{};
+};
+
+/**
  * \brief Vector stream I/O driver.
  *
  * \tparam T The vector element type.
