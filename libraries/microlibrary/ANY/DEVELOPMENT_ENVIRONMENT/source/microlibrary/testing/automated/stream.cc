@@ -24,6 +24,8 @@
 
 #include <cstdint>
 
+#include "microlibrary/result.h"
+
 namespace microlibrary::Testing::Automated {
 
 void String_Stream_IO_Driver::put( char character ) noexcept
@@ -38,6 +40,25 @@ void String_Stream_IO_Driver::put( std::uint8_t data ) noexcept
 
 void String_Stream_IO_Driver::flush() noexcept
 {
+}
+
+auto Fault_Reporting_String_Stream_IO_Driver::put( char character ) noexcept -> Result<void>
+{
+    m_string.push_back( character );
+
+    return {};
+}
+
+auto Fault_Reporting_String_Stream_IO_Driver::put( std::uint8_t data ) noexcept -> Result<void>
+{
+    m_string.push_back( data );
+
+    return {};
+}
+
+auto Fault_Reporting_String_Stream_IO_Driver::flush() noexcept -> Result<void>
+{
+    return {};
 }
 
 } // namespace microlibrary::Testing::Automated
