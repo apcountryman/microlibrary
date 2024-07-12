@@ -310,6 +310,87 @@ class Vector_Stream_IO_Driver final : public Stream_IO_Driver {
 };
 
 /**
+ * \brief Fault reporting vector stream I/O driver.
+ *
+ * \tparam T The vector element type.
+ */
+template<typename T>
+class Fault_Reporting_Vector_Stream_IO_Driver final : public Stream_IO_Driver {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    Fault_Reporting_Vector_Stream_IO_Driver() = default;
+
+    Fault_Reporting_Vector_Stream_IO_Driver( Fault_Reporting_Vector_Stream_IO_Driver && ) = delete;
+
+    Fault_Reporting_Vector_Stream_IO_Driver( Fault_Reporting_Vector_Stream_IO_Driver const & ) = delete;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Fault_Reporting_Vector_Stream_IO_Driver() noexcept = default;
+
+    auto operator=( Fault_Reporting_Vector_Stream_IO_Driver && ) = delete;
+
+    auto operator=( Fault_Reporting_Vector_Stream_IO_Driver const & ) = delete;
+
+    /**
+     * \brief Get the vector that is wrapped by the stream I/O driver.
+     *
+     * \return The vector that is wrapped by the stream I/O driver.
+     */
+    auto vector() const noexcept -> std::vector<T> const &
+    {
+        return m_vector;
+    }
+
+    /**
+     * \brief Write a character to the vector.
+     *
+     * \param[in] character The character to write to the vector.
+     *
+     * \return Nothing.
+     */
+    auto put( char character ) noexcept -> Result<void> override final
+    {
+        m_vector.push_back( character );
+
+        return {};
+    }
+
+    /**
+     * \brief Write data to the vector.
+     *
+     * \param[in] data The data to write to the vector.
+     *
+     * \return Nothing.
+     */
+    auto put( std::uint8_t data ) noexcept -> Result<void> override final
+    {
+        m_vector.push_back( data );
+
+        return {};
+    }
+
+    /**
+     * \brief Do nothing.
+     *
+     * \return Nothing.
+     */
+    auto flush() noexcept -> Result<void> override final
+    {
+        return {};
+    }
+
+  private:
+    /**
+     * \brief The vector wrapped by the stream I/O driver.
+     */
+    std::vector<T> m_vector{};
+};
+
+/**
  * \brief Mock output stream.
  */
 class Mock_Output_Stream : public Output_Stream {
