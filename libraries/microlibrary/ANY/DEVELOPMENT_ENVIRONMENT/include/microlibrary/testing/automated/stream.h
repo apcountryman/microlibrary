@@ -211,6 +211,8 @@ class Fault_Reporting_String_Stream_IO_Driver final : public Fault_Reporting_Str
      * \brief Write a character to the string.
      *
      * \param[in] character The character to write to the string.
+     *
+     * \return Nothing.
      */
     auto put( char character ) noexcept -> Result<void> override final;
 
@@ -218,11 +220,15 @@ class Fault_Reporting_String_Stream_IO_Driver final : public Fault_Reporting_Str
      * \brief Write data to the string.
      *
      * \param[in] data The data to write to the string.
+     *
+     * \return Nothing.
      */
     auto put( std::uint8_t data ) noexcept -> Result<void> override final;
 
     /**
      * \brief Do nothing.
+     *
+     * \return Nothing.
      */
     auto flush() noexcept -> Result<void> override final;
 
