@@ -315,7 +315,7 @@ class Vector_Stream_IO_Driver final : public Stream_IO_Driver {
  * \tparam T The vector element type.
  */
 template<typename T>
-class Fault_Reporting_Vector_Stream_IO_Driver final : public Stream_IO_Driver {
+class Fault_Reporting_Vector_Stream_IO_Driver final : public Fault_Reporting_Stream_IO_Driver {
   public:
     /**
      * \brief Constructor.
