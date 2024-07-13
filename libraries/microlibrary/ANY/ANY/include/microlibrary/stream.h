@@ -931,6 +931,7 @@ class Output_Stream : public Stream {
      */
     template<typename Type, typename... Types>
     auto print_implementation( std::size_t n, Type && value, Output_Formatter<std::decay_t<Type>> formatter, Types &&... values ) noexcept
+        -> std::size_t
     {
         return print_implementation(
             n + formatter.print( *this, value ), std::forward<Types>( values )... );
@@ -950,6 +951,7 @@ class Output_Stream : public Stream {
      */
     template<typename Type, typename... Types>
     auto print_implementation( std::size_t n, Type && value, Types &&... values ) noexcept
+        -> std::size_t
     {
         return print_implementation(
             n,
