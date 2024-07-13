@@ -21,6 +21,9 @@ add_subdirectory( algorithm )
 # microlibrary::Error_Code automated tests
 add_subdirectory( error_code )
 
+# microlibrary::Fault_Reporting_Output_Stream automated tests
+add_subdirectory( fault_reporting_output_stream )
+
 # microlibrary::Fault_Reporting_Stream automated tests
 add_subdirectory( fault_reporting_stream )
 
