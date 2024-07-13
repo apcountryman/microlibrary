@@ -1154,8 +1154,6 @@ class Fault_Reporting_Output_Stream : public Fault_Reporting_Stream {
     {
         auto result = formatter.print( *this, value );
         if ( result.is_error() ) {
-            report_fatal_error();
-
             return result.error();
         } // if
 

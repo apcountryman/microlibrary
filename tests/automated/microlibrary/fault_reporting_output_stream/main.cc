@@ -307,20 +307,21 @@ TEST( printErrorHandling, outputFormatterPrintError )
 {
     auto stream = Mock_Fault_Reporting_Output_Stream{};
 
-    auto const formatter = Mock_Output_Formatter{};
+    auto const formatter_a = Mock_Output_Formatter{};
+    auto const formatter_b = Mock_Output_Formatter{};
 
     auto const error = Mock_Error{ 242 };
 
-    EXPECT_CALL( formatter, print( _, _ ) ).WillOnce( Return( error ) );
+    EXPECT_CALL( formatter_a, print( _, _ ) ).WillOnce( Return( error ) );
+    EXPECT_CALL( formatter_b, print( _, _ ) ).Times( 0 );
 
-    auto const result = stream.print( Foo{ 89 }, Output_Formatter<Foo>{ formatter } );
+    auto const result = stream.print(
+        Foo{ 89 }, Output_Formatter<Foo>{ formatter_a }, Foo{ 219 }, Output_Formatter<Foo>{ formatter_b } );
 
     EXPECT_TRUE( result.is_error() );
     EXPECT_EQ( result.error(), error );
 
-    EXPECT_FALSE( stream.end_of_file_reached() );
-    EXPECT_FALSE( stream.io_error_reported() );
-    EXPECT_TRUE( stream.fatal_error_reported() );
+    EXPECT_TRUE( stream.is_nominal() );
 }
 
 /**
