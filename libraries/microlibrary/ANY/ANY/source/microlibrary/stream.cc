@@ -146,4 +146,106 @@ void Output_Stream::flush() noexcept
     driver()->flush();
 }
 
+auto Fault_Reporting_Output_Stream::put( char character ) noexcept -> Result<void>
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    auto result = driver()->put( character );
+    if ( result.is_error() ) {
+        report_fatal_error();
+
+        return result.error();
+    } // if
+
+    return {};
+}
+
+auto Fault_Reporting_Output_Stream::put( char const * begin, char const * end ) noexcept
+    -> Result<void>
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    auto result = driver()->put( begin, end );
+    if ( result.is_error() ) {
+        report_fatal_error();
+
+        return result.error();
+    } // if
+
+    return {};
+}
+
+auto Fault_Reporting_Output_Stream::put( char const * string ) noexcept -> Result<void>
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    auto result = driver()->put( string );
+    if ( result.is_error() ) {
+        report_fatal_error();
+
+        return result.error();
+    } // if
+
+    return {};
+}
+
+#if MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+auto Fault_Reporting_Output_Stream::put( ROM::String string ) noexcept -> Result<void>
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    auto result = driver()->put( string );
+    if ( result.is_error() ) {
+        report_fatal_error();
+
+        return result.error();
+    } // if
+
+    return {};
+}
+#endif // MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+
+auto Fault_Reporting_Output_Stream::put( std::uint8_t data ) noexcept -> Result<void>
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    auto result = driver()->put( data );
+    if ( result.is_error() ) {
+        report_fatal_error();
+
+        return result.error();
+    } // if
+
+    return {};
+}
+
+auto Fault_Reporting_Output_Stream::put( std::uint8_t const * begin, std::uint8_t const * end ) noexcept
+    -> Result<void>
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    auto result = driver()->put( begin, end );
+    if ( result.is_error() ) {
+        report_fatal_error();
+
+        return result.error();
+    } // if
+
+    return {};
+}
+
+auto Fault_Reporting_Output_Stream::flush() noexcept -> Result<void>
+{
+    MICROLIBRARY_EXPECT( is_nominal(), Generic_Error::IO_STREAM_DEGRADED );
+
+    auto result = driver()->flush();
+    if ( result.is_error() ) {
+        report_fatal_error();
+
+        return result.error();
+    } // if
+
+    return {};
+}
+
 } // namespace microlibrary

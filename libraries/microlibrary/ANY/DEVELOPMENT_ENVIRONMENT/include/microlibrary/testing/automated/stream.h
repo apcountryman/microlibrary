@@ -420,6 +420,35 @@ class Mock_Output_Stream : public Output_Stream {
 };
 
 /**
+ * \brief Mock fault reporting output stream.
+ */
+class Mock_Fault_Reporting_Output_Stream : public Fault_Reporting_Output_Stream {
+  public:
+    Mock_Fault_Reporting_Output_Stream()
+    {
+        set_driver( &m_driver );
+    }
+
+    Mock_Fault_Reporting_Output_Stream( Mock_Fault_Reporting_Output_Stream && ) = delete;
+
+    Mock_Fault_Reporting_Output_Stream( Mock_Fault_Reporting_Output_Stream const & ) = delete;
+
+    ~Mock_Fault_Reporting_Output_Stream() noexcept = default;
+
+    auto operator=( Mock_Fault_Reporting_Output_Stream && ) = delete;
+
+    auto operator=( Mock_Fault_Reporting_Output_Stream const & ) = delete;
+
+    auto driver() noexcept -> Mock_Fault_Reporting_Stream_IO_Driver &
+    {
+        return m_driver;
+    }
+
+  private:
+    Mock_Fault_Reporting_Stream_IO_Driver m_driver{};
+};
+
+/**
  * \brief Output string stream.
  */
 class Output_String_Stream : public Output_Stream {
@@ -457,6 +486,46 @@ class Output_String_Stream : public Output_Stream {
      * \brief The stream's I/O driver.
      */
     String_Stream_IO_Driver m_driver{};
+};
+
+/**
+ * \brief Fault reporting output string stream.
+ */
+class Fault_Reporting_Output_String_Stream : public Fault_Reporting_Output_Stream {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    Fault_Reporting_Output_String_Stream()
+    {
+        set_driver( &m_driver );
+    }
+
+    Fault_Reporting_Output_String_Stream( Fault_Reporting_Output_String_Stream && ) = delete;
+
+    Fault_Reporting_Output_String_Stream( Fault_Reporting_Output_String_Stream const & ) = delete;
+
+    ~Fault_Reporting_Output_String_Stream() noexcept = default;
+
+    auto operator=( Fault_Reporting_Output_String_Stream && ) = delete;
+
+    auto operator=( Fault_Reporting_Output_String_Stream const & ) = delete;
+
+    /**
+     * \brief Get the string that is written to by the stream.
+     *
+     * \return The string that is written to by the stream.
+     */
+    auto string() const noexcept -> std::string const &
+    {
+        return m_driver.string();
+    }
+
+  private:
+    /**
+     * \brief The stream's I/O driver.
+     */
+    Fault_Reporting_String_Stream_IO_Driver m_driver{};
 };
 
 /**
@@ -500,6 +569,49 @@ class Output_Vector_Stream : public Output_Stream {
      * \brief The stream's I/O driver.
      */
     Vector_Stream_IO_Driver<T> m_driver{};
+};
+
+/**
+ * \brief Fault reporting output vector stream.
+ *
+ * \tparam T The vector element type.
+ */
+template<typename T>
+class Fault_Reporting_Output_Vector_Stream : public Fault_Reporting_Output_Stream {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    Fault_Reporting_Output_Vector_Stream()
+    {
+        set_driver( &m_driver );
+    }
+
+    Fault_Reporting_Output_Vector_Stream( Fault_Reporting_Output_Vector_Stream && ) = delete;
+
+    Fault_Reporting_Output_Vector_Stream( Fault_Reporting_Output_Vector_Stream const & ) = delete;
+
+    ~Fault_Reporting_Output_Vector_Stream() noexcept = default;
+
+    auto operator=( Fault_Reporting_Output_Vector_Stream && ) = delete;
+
+    auto operator=( Fault_Reporting_Output_Vector_Stream const & ) = delete;
+
+    /**
+     * \brief Get the vector that is written to by the stream.
+     *
+     * \return The vector that is written to by the stream.
+     */
+    auto vector() const noexcept -> std::vector<T> const &
+    {
+        return m_driver.vector();
+    }
+
+  private:
+    /**
+     * \brief The stream's I/O driver.
+     */
+    Fault_Reporting_Vector_Stream_IO_Driver<T> m_driver{};
 };
 
 } // namespace microlibrary::Testing::Automated
