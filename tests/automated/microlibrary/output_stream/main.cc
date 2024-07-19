@@ -253,3 +253,21 @@ TEST( outputFormatterCharPrintOutputStream, worksProperly )
     EXPECT_TRUE( stream.is_nominal() );
     EXPECT_EQ( stream.string(), std::string{ character } );
 }
+
+/**
+ * \brief Verify microlibrary::Output_Formatter<char const *>::print(
+ *        microlibrary::Output_Stream &, char const * ) works properly.
+ */
+TEST( outputFormatterNullTerminatedStringPrintOutputStream, worksProperly )
+{
+    auto stream = Output_String_Stream{};
+
+    auto const string = "Ku67TKN3M5ITORA";
+
+    auto const n = stream.print( string );
+
+    EXPECT_EQ( n, stream.string().size() );
+
+    EXPECT_TRUE( stream.is_nominal() );
+    EXPECT_EQ( stream.string(), string );
+}
