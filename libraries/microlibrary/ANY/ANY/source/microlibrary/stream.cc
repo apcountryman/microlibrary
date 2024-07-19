@@ -22,6 +22,7 @@
 
 #include "microlibrary/stream.h"
 
+#include <cstddef>
 #include <cstdint>
 
 #include "microlibrary/algorithm.h"
@@ -246,6 +247,24 @@ auto Fault_Reporting_Output_Stream::flush() noexcept -> Result<void>
     } // if
 
     return {};
+}
+
+auto Output_Formatter<char>::print( Output_Stream & stream, char character ) const noexcept -> std::size_t
+{
+    stream.put( character );
+
+    return 1;
+}
+
+auto Output_Formatter<char>::print( Fault_Reporting_Output_Stream & stream, char character ) const noexcept
+    -> Result<std::size_t>
+{
+    auto result = stream.put( character );
+    if ( result.is_error() ) {
+        return result.error();
+    } // if
+
+    return std::size_t{ 1 };
 }
 
 } // namespace microlibrary

@@ -1187,6 +1187,78 @@ class Fault_Reporting_Output_Stream : public Fault_Reporting_Stream {
     }
 };
 
+/**
+ * \brief Character output formatter.
+ */
+template<>
+class Output_Formatter<char> {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    constexpr Output_Formatter() noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] source The source of the move.
+     */
+    constexpr Output_Formatter( Output_Formatter && source ) noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] original The original to copy.
+     */
+    constexpr Output_Formatter( Output_Formatter const & original ) noexcept = default;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Output_Formatter() noexcept = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Output_Formatter && expression ) noexcept -> Output_Formatter & = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator   =( Output_Formatter const & expression ) noexcept
+        -> Output_Formatter & = default;
+
+    /**
+     * \brief Write the formatted character to a stream.
+     *
+     * \param[in] stream The stream to write the formatted character to.
+     * \param[in] character The character to format.
+     *
+     * \return The number of characters written to the stream.
+     */
+    auto print( Output_Stream & stream, char character ) const noexcept -> std::size_t;
+
+    /**
+     * \brief Write the formatted character to a stream.
+     *
+     * \param[in] stream The stream to write the formatted character to.
+     * \param[in] character The character to format.
+     *
+     * \return The number of characters written to the stream if the write succeeded.
+     * \return An error code if the write failed.
+     */
+    auto print( Fault_Reporting_Output_Stream & stream, char character ) const noexcept
+        -> Result<std::size_t>;
+};
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_STREAM_H
