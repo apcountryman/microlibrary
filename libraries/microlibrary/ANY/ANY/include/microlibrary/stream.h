@@ -94,7 +94,7 @@ class Output_Formatter {
     auto operator=( Output_Formatter const & expression ) noexcept -> Output_Formatter &;
 
     /**
-     * \brief Write the formatted value to a stream.
+     * \brief Write a formatted value to a stream.
      *
      * \param[in] stream The stream to write the formatted value to.
      * \param[in] value The value to format.
@@ -104,7 +104,7 @@ class Output_Formatter {
     auto print( Output_Stream & stream, T const & value ) const noexcept -> std::size_t;
 
     /**
-     * \brief Write the formatted value to a stream.
+     * \brief Write a formatted value to a stream.
      *
      * \param[in] stream The stream to write the formatted value to.
      * \param[in] value The value to format.
@@ -1237,7 +1237,7 @@ class Output_Formatter<char> {
         -> Output_Formatter & = default;
 
     /**
-     * \brief Write the formatted character to a stream.
+     * \brief Write a formatted character to a stream.
      *
      * \param[in] stream The stream to write the formatted character to.
      * \param[in] character The character to format.
@@ -1247,7 +1247,7 @@ class Output_Formatter<char> {
     auto print( Output_Stream & stream, char character ) const noexcept -> std::size_t;
 
     /**
-     * \brief Write the formatted character to a stream.
+     * \brief Write a formatted character to a stream.
      *
      * \param[in] stream The stream to write the formatted character to.
      * \param[in] character The character to format.
