@@ -24,6 +24,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
 
 #include "microlibrary/algorithm.h"
 #include "microlibrary/error.h"
@@ -265,6 +266,25 @@ auto Output_Formatter<char>::print( Fault_Reporting_Output_Stream & stream, char
     } // if
 
     return std::size_t{ 1 };
+}
+
+auto Output_Formatter<char const *>::print( Output_Stream & stream, char const * string ) const noexcept
+    -> std::size_t
+{
+    stream.put( string );
+
+    return std::strlen( string );
+}
+
+auto Output_Formatter<char const *>::print( Fault_Reporting_Output_Stream & stream, char const * string ) const noexcept
+    -> Result<std::size_t>
+{
+    auto result = stream.put( string );
+    if ( result.is_error() ) {
+        return result.error();
+    } // if
+
+    return std::strlen( string );
 }
 
 } // namespace microlibrary

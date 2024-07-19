@@ -453,3 +453,45 @@ TEST( outputFormatterCharPrintFaultReportingOutputStream, worksProperly )
     EXPECT_TRUE( stream.is_nominal() );
     EXPECT_EQ( stream.string(), std::string{ character } );
 }
+
+/**
+ * \brief Verify microlibrary::Output_Formatter<char const *>::print(
+ *        microlibrary::Fault_Reporting_Output_Stream &, char const * ) properly handles a
+ *        put error.
+ */
+TEST( outputFormatterNullTerminatedStringPrintFaultReportingOutputStreamErrorHandling, putError )
+{
+    auto stream = Mock_Fault_Reporting_Output_Stream{};
+
+    auto const error = Mock_Error{ 105 };
+
+    EXPECT_CALL( stream.driver(), put( A<std::string>() ) ).WillOnce( Return( error ) );
+
+    auto const result = stream.print( "FxYCgTqc4" );
+
+    EXPECT_TRUE( result.is_error() );
+    EXPECT_EQ( result.error(), error );
+
+    EXPECT_FALSE( stream.end_of_file_reached() );
+    EXPECT_FALSE( stream.io_error_reported() );
+    EXPECT_TRUE( stream.fatal_error_reported() );
+}
+
+/**
+ * \brief Verify microlibrary::Output_Formatter<char const *>::print(
+ *        microlibrary::Fault_Reporting_Output_Stream &, char const * ) works properly.
+ */
+TEST( outputFormatterNullTerminatedStringPrintFaultReportingOutputStream, worksProperly )
+{
+    auto stream = Fault_Reporting_Output_String_Stream{};
+
+    auto const string = "Ku67TKN3M5ITORA";
+
+    auto const result = stream.print( string );
+
+    EXPECT_FALSE( result.is_error() );
+    EXPECT_EQ( result.value(), stream.string().size() );
+
+    EXPECT_TRUE( stream.is_nominal() );
+    EXPECT_EQ( stream.string(), string );
+}
