@@ -38,6 +38,7 @@ namespace {
 using ::microlibrary::Fault_Reporting_Output_Stream;
 using ::microlibrary::Output_Formatter;
 using ::microlibrary::Result;
+using ::microlibrary::Testing::Automated::Fault_Reporting_Output_String_Stream;
 using ::microlibrary::Testing::Automated::Mock_Error;
 using ::microlibrary::Testing::Automated::Mock_Fault_Reporting_Output_Stream;
 using ::testing::_;
@@ -409,4 +410,46 @@ TEST( flush, worksProperly )
     EXPECT_FALSE( stream.flush().is_error() );
 
     EXPECT_TRUE( stream.is_nominal() );
+}
+
+/**
+ * \brief Verify microlibrary::Output_Formatter<char>::print(
+ *        microlibrary::Fault_Reporting_Output_Stream &, char ) properly handles a put
+ *        error.
+ */
+TEST( outputFormatterCharPrintFaultReportingOutputStreamErrorHandling, putError )
+{
+    auto stream = Mock_Fault_Reporting_Output_Stream{};
+
+    auto const error = Mock_Error{ 181 };
+
+    EXPECT_CALL( stream.driver(), put( A<char>() ) ).WillOnce( Return( error ) );
+
+    auto const result = stream.print( 'g' );
+
+    EXPECT_TRUE( result.is_error() );
+    EXPECT_EQ( result.error(), error );
+
+    EXPECT_FALSE( stream.end_of_file_reached() );
+    EXPECT_FALSE( stream.io_error_reported() );
+    EXPECT_TRUE( stream.fatal_error_reported() );
+}
+
+/**
+ * \brief Verify microlibrary::Output_Formatter<char>::print(
+ *        microlibrary::Fault_Reporting_Output_Stream &, char ) works properly.
+ */
+TEST( outputFormatterCharPrintFaultReportingOutputStream, worksProperly )
+{
+    auto stream = Fault_Reporting_Output_String_Stream{};
+
+    auto const character = 'u';
+
+    auto const result = stream.print( character );
+
+    EXPECT_FALSE( result.is_error() );
+    EXPECT_EQ( result.value(), stream.string().size() );
+
+    EXPECT_TRUE( stream.is_nominal() );
+    EXPECT_EQ( stream.string(), std::string{ character } );
 }

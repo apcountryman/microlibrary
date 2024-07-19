@@ -36,6 +36,7 @@ namespace {
 using ::microlibrary::Output_Formatter;
 using ::microlibrary::Output_Stream;
 using ::microlibrary::Testing::Automated::Mock_Output_Stream;
+using ::microlibrary::Testing::Automated::Output_String_Stream;
 using ::testing::Eq;
 using ::testing::InSequence;
 using ::testing::Ref;
@@ -233,4 +234,22 @@ TEST( flush, worksProperly )
     stream.flush();
 
     EXPECT_TRUE( stream.is_nominal() );
+}
+
+/**
+ * \brief Verify microlibrary::Output_Formatter<char>::print( microlibrary::Output_Stream
+ *        &, char ) works properly.
+ */
+TEST( outputFormatterCharPrintOutputStream, worksProperly )
+{
+    auto stream = Output_String_Stream{};
+
+    auto const character = 'u';
+
+    auto const n = stream.print( character );
+
+    EXPECT_EQ( n, stream.string().size() );
+
+    EXPECT_TRUE( stream.is_nominal() );
+    EXPECT_EQ( stream.string(), std::string{ character } );
 }
