@@ -1196,21 +1196,21 @@ class Output_Formatter<char> {
     /**
      * \brief Constructor.
      */
-    Output_Formatter() noexcept = default;
+    constexpr Output_Formatter() noexcept = default;
 
     /**
      * \brief Constructor.
      *
      * \param[in] source The source of the move.
      */
-    Output_Formatter( Output_Formatter && source ) noexcept = default;
+    constexpr Output_Formatter( Output_Formatter && source ) noexcept = default;
 
     /**
      * \brief Constructor.
      *
      * \param[in] original The original to copy.
      */
-    Output_Formatter( Output_Formatter const & original ) noexcept = default;
+    constexpr Output_Formatter( Output_Formatter const & original ) noexcept = default;
 
     /**
      * \brief Destructor.
@@ -1224,7 +1224,7 @@ class Output_Formatter<char> {
      *
      * \return The assigned to object.
      */
-    auto operator=( Output_Formatter && expression ) noexcept -> Output_Formatter & = default;
+    constexpr auto operator=( Output_Formatter && expression ) noexcept -> Output_Formatter & = default;
 
     /**
      * \brief Assignment operator.
@@ -1233,7 +1233,7 @@ class Output_Formatter<char> {
      *
      * \return The assigned to object.
      */
-    auto operator=( Output_Formatter const & expression ) noexcept -> Output_Formatter & = default;
+    constexpr auto operator=( Output_Formatter const & expression ) noexcept -> Output_Formatter & = default;
 
     /**
      * \brief Write the formatted character to a stream.
