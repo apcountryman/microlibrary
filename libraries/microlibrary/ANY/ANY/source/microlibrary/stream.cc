@@ -287,4 +287,27 @@ auto Output_Formatter<char const *>::print( Fault_Reporting_Output_Stream & stre
     return std::strlen( string );
 }
 
+#if MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+auto Output_Formatter<ROM::String>::print( Output_Stream & stream, ROM::String string ) const noexcept
+    -> std::size_t
+{
+    stream.put( string );
+
+    return ROM::length( string );
+}
+#endif // MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+
+#if MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+auto Output_Formatter<ROM::String>::print( Fault_Reporting_Output_Stream & stream, ROM::String string ) const noexcept
+    -> Result<std::size_t>
+{
+    auto result = stream.put( string );
+    if ( result.is_error() ) {
+        return result.error();
+    } // if
+
+    return ROM::length( string );
+}
+#endif // MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
+
 } // namespace microlibrary
