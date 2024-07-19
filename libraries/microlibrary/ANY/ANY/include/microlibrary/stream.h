@@ -1233,7 +1233,8 @@ class Output_Formatter<char> {
      *
      * \return The assigned to object.
      */
-    constexpr auto operator=( Output_Formatter const & expression ) noexcept -> Output_Formatter & = default;
+    constexpr auto operator   =( Output_Formatter const & expression ) noexcept
+        -> Output_Formatter & = default;
 
     /**
      * \brief Write the formatted character to a stream.
