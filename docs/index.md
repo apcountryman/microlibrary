@@ -16,3 +16,4 @@ A C++ microcontroller driver/utility library.
 1. [Error Handling Facilities](error_handling.md)
 1. [Integer Utilities](integer_utilities.md)
 1. [Algorithms](algorithms.md)
+1. [I/O Facilities](io.md)
