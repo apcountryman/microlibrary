@@ -28,6 +28,8 @@
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include "microlibrary/enum.h"
+#include "microlibrary/error.h"
 #include "microlibrary/result.h"
 #include "microlibrary/stream.h"
 #include "microlibrary/testing/automated/error.h"
@@ -35,11 +37,14 @@
 
 namespace {
 
+using ::microlibrary::Error_Code;
 using ::microlibrary::Fault_Reporting_Output_Stream;
 using ::microlibrary::Output_Formatter;
 using ::microlibrary::Result;
+using ::microlibrary::to_underlying;
 using ::microlibrary::Testing::Automated::Fault_Reporting_Output_String_Stream;
 using ::microlibrary::Testing::Automated::Mock_Error;
+using ::microlibrary::Testing::Automated::Mock_Error_Category;
 using ::microlibrary::Testing::Automated::Mock_Fault_Reporting_Output_Stream;
 using ::testing::_;
 using ::testing::A;
@@ -494,4 +499,83 @@ TEST( outputFormatterNullTerminatedStringPrintFaultReportingOutputStream, worksP
 
     EXPECT_TRUE( stream.is_nominal() );
     EXPECT_EQ( stream.string(), string );
+}
+
+/**
+ * \brief Verify microlibrary::Output_Formatter<microlibrary::Error_Code>::print(
+ *        microlibrary::Fault_Reporting_Output_Stream &, microlibrary::Error_Code const &
+ *        ) properly handles a put error.
+ */
+TEST( outputFormatterErrorCodePrintFaultReportingOutputStreamErrorHandling, putError )
+{
+    auto stream = Mock_Fault_Reporting_Output_Stream{};
+
+    auto const error = Mock_Error{ 163 };
+
+    EXPECT_CALL( Mock_Error_Category::instance(), name() )
+        .WillOnce( Return( "pvtwn8xRCN9" ) );
+    EXPECT_CALL( Mock_Error_Category::instance(), error_description( _ ) )
+        .WillOnce( Return( "1aL94J2UIA" ) );
+    EXPECT_CALL( stream.driver(), put( A<std::string>() ) ).WillOnce( Return( error ) );
+
+    auto const result = stream.print( Mock_Error{ 150 } );
+
+    EXPECT_TRUE( result.is_error() );
+    EXPECT_EQ( result.error(), error );
+
+    EXPECT_FALSE( stream.end_of_file_reached() );
+    EXPECT_FALSE( stream.io_error_reported() );
+    EXPECT_TRUE( stream.fatal_error_reported() );
+}
+
+/**
+ * \brief Verify microlibrary::Output_Formatter<microlibrary::Error_Code>::print(
+ *        microlibrary::Fault_Reporting_Output_Stream &, microlibrary::Error_Code const &
+ *        ) works properly with a microlibrary::Error_Code.
+ */
+TEST( outputFormatterErrorCodePrintFaultReportingOutputStream, worksProperlyErrorCode )
+{
+    auto stream = Fault_Reporting_Output_String_Stream{};
+
+    auto const error               = Mock_Error{ 120 };
+    auto const error_category_name = "CjPf5bhQgbshej";
+    auto const error_description   = "4snpgrnA4";
+
+    EXPECT_CALL( Mock_Error_Category::instance(), name() ).WillOnce( Return( error_category_name ) );
+    EXPECT_CALL( Mock_Error_Category::instance(), error_description( to_underlying( error ) ) )
+        .WillOnce( Return( error_description ) );
+
+    auto const result = stream.print( Error_Code{ error } );
+
+    EXPECT_FALSE( result.is_error() );
+    EXPECT_EQ( result.value(), stream.string().size() );
+
+    EXPECT_TRUE( stream.is_nominal() );
+    EXPECT_EQ( stream.string(), std::string{ error_category_name } + "::" + error_description );
+}
+
+/**
+ * \brief Verify microlibrary::Output_Formatter<microlibrary::Error_Code>::print(
+ *        microlibrary::Fault_Reporting_Output_Stream &, microlibrary::Error_Code const &
+ *        ) works properly with an error code enum.
+ */
+TEST( outputFormatterErrorCodePrintFaultReportingOutputStream, worksProperlyErrorCodeEnum )
+{
+    auto stream = Fault_Reporting_Output_String_Stream{};
+
+    auto const error               = Mock_Error{ 116 };
+    auto const error_category_name = "68vDl0jKy";
+    auto const error_description   = "McNFWXoDC36ZcSt";
+
+    EXPECT_CALL( Mock_Error_Category::instance(), name() ).WillOnce( Return( error_category_name ) );
+    EXPECT_CALL( Mock_Error_Category::instance(), error_description( to_underlying( error ) ) )
+        .WillOnce( Return( error_description ) );
+
+    auto const result = stream.print( error );
+
+    EXPECT_FALSE( result.is_error() );
+    EXPECT_EQ( result.value(), stream.string().size() );
+
+    EXPECT_TRUE( stream.is_nominal() );
+    EXPECT_EQ( stream.string(), std::string{ error_category_name } + "::" + error_description );
 }

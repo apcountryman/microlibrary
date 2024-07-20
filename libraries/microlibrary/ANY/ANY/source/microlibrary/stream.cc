@@ -310,4 +310,18 @@ auto Output_Formatter<ROM::String>::print( Fault_Reporting_Output_Stream & strea
 }
 #endif // MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
 
+auto Output_Formatter<Error_Code>::print( Output_Stream & stream, Error_Code const & error ) const noexcept
+    -> std::size_t
+{
+    return stream.print(
+        error.category().name(), MICROLIBRARY_ROM_STRING( "::" ), error.description() );
+}
+
+auto Output_Formatter<Error_Code>::print( Fault_Reporting_Output_Stream & stream, Error_Code const & error ) const noexcept
+    -> Result<std::size_t>
+{
+    return stream.print(
+        error.category().name(), MICROLIBRARY_ROM_STRING( "::" ), error.description() );
+}
+
 } // namespace microlibrary

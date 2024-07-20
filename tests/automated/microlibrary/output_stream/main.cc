@@ -28,13 +28,20 @@
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include "microlibrary/enum.h"
+#include "microlibrary/error.h"
 #include "microlibrary/stream.h"
+#include "microlibrary/testing/automated/error.h"
 #include "microlibrary/testing/automated/stream.h"
 
 namespace {
 
+using ::microlibrary::Error_Code;
 using ::microlibrary::Output_Formatter;
 using ::microlibrary::Output_Stream;
+using ::microlibrary::to_underlying;
+using ::microlibrary::Testing::Automated::Mock_Error;
+using ::microlibrary::Testing::Automated::Mock_Error_Category;
 using ::microlibrary::Testing::Automated::Mock_Output_Stream;
 using ::microlibrary::Testing::Automated::Output_String_Stream;
 using ::testing::Eq;
@@ -270,4 +277,54 @@ TEST( outputFormatterNullTerminatedStringPrintOutputStream, worksProperly )
 
     EXPECT_TRUE( stream.is_nominal() );
     EXPECT_EQ( stream.string(), string );
+}
+
+/**
+ * \brief Verify microlibrary::Output_Formatter<microlibrary::Error_Code>::print(
+ *        microlibrary::Output_Stream &, microlibrary::Error_Code const & ) works properly
+ *        with a microlibrary::Error_Code.
+ */
+TEST( outputFormatterErrorCodePrintOutputStream, worksProperlyErrorCode )
+{
+    auto stream = Output_String_Stream{};
+
+    auto const error               = Mock_Error{ 120 };
+    auto const error_category_name = "CjPf5bhQgbshej";
+    auto const error_description   = "4snpgrnA4";
+
+    EXPECT_CALL( Mock_Error_Category::instance(), name() ).WillOnce( Return( error_category_name ) );
+    EXPECT_CALL( Mock_Error_Category::instance(), error_description( to_underlying( error ) ) )
+        .WillOnce( Return( error_description ) );
+
+    auto const n = stream.print( Error_Code{ error } );
+
+    EXPECT_EQ( n, stream.string().size() );
+
+    EXPECT_TRUE( stream.is_nominal() );
+    EXPECT_EQ( stream.string(), std::string{ error_category_name } + "::" + error_description );
+}
+
+/**
+ * \brief Verify microlibrary::Output_Formatter<microlibrary::Error_Code>::print(
+ *        microlibrary::Output_Stream &, microlibrary::Error_Code const & ) works properly
+ *        with an error code enum.
+ */
+TEST( outputFormatterErrorCodePrintOutputStream, worksProperlyErrorCodeEnum )
+{
+    auto stream = Output_String_Stream{};
+
+    auto const error               = Mock_Error{ 116 };
+    auto const error_category_name = "68vDl0jKy";
+    auto const error_description   = "McNFWXoDC36ZcSt";
+
+    EXPECT_CALL( Mock_Error_Category::instance(), name() ).WillOnce( Return( error_category_name ) );
+    EXPECT_CALL( Mock_Error_Category::instance(), error_description( to_underlying( error ) ) )
+        .WillOnce( Return( error_description ) );
+
+    auto const n = stream.print( error );
+
+    EXPECT_EQ( n, stream.string().size() );
+
+    EXPECT_TRUE( stream.is_nominal() );
+    EXPECT_EQ( stream.string(), std::string{ error_category_name } + "::" + error_description );
 }

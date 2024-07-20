@@ -1405,6 +1405,88 @@ class Output_Formatter<ROM::String> {
 };
 #endif // MICROLIBRARY_ROM_STRING_IS_HIL_DEFINED
 
+/**
+ * \brief microlibrary::Error_Code output formatter.
+ */
+template<>
+class Output_Formatter<Error_Code> {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    constexpr Output_Formatter() noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] source The source of the move.
+     */
+    constexpr Output_Formatter( Output_Formatter && source ) noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] original The original to copy.
+     */
+    constexpr Output_Formatter( Output_Formatter const & original ) noexcept = default;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Output_Formatter() noexcept = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Output_Formatter && expression ) noexcept -> Output_Formatter & = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator   =( Output_Formatter const & expression ) noexcept
+        -> Output_Formatter & = default;
+
+    /**
+     * \brief Write a formatted microlibrary::Error_Code to a stream.
+     *
+     * \param[in] stream The stream to write the formatted microlibrary::Error_Code to.
+     * \param[in] error The microlibrary::Error_Code to format.
+     *
+     * \return The number of characters written to the stream.
+     */
+    auto print( Output_Stream & stream, Error_Code const & error ) const noexcept -> std::size_t;
+
+    /**
+     * \brief Write a formatted microlibrary::Error_Code to a stream.
+     *
+     * \param[in] stream The stream to write the formatted microlibrary::Error_Code to.
+     * \param[in] error The microlibrary::Error_Code to format.
+     *
+     * \return The number of characters written to the stream if the write succeeded.
+     * \return An error code if the write failed.
+     */
+    auto print( Fault_Reporting_Output_Stream & stream, Error_Code const & error ) const noexcept
+        -> Result<std::size_t>;
+};
+
+/**
+ * \brief Error code enum output formatter.
+ *
+ * \tparam Enum The error code enum type to print.
+ */
+template<typename Enum>
+class Output_Formatter<Enum, std::enable_if_t<is_error_code_enum_v<Enum>>> :
+    public Output_Formatter<Error_Code> {
+};
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_STREAM_H
