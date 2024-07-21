@@ -82,11 +82,11 @@ following operations:
 - To clear an I/O error report, use the `::microlibrary::Stream::clear_io_error_report()`
   and `::microlibrary::Fault_Reporting_Stream::clear_io_error_report()` member functions.
 - To check if a fatal error (fault) has been reported, use the
-  `::microlibrary::Fault_Reporting_Stream::io_error_reported()` member function.
+  `::microlibrary::Fault_Reporting_Stream::fatal_error_reported()` member function.
 - To report a fatal error (fault) from a derived class, use the
-  `::microlibrary::Fault_Reporting_Stream::report_io_error()` member function.
+  `::microlibrary::Fault_Reporting_Stream::report_fatal_error()` member function.
 - To clear a fatal error (fault) report from a derived class, use the
-  `::microlibrary::Fault_Reporting_Stream::clear_io_error_report()` member functions.
+  `::microlibrary::Fault_Reporting_Stream::clear_fatal_error_report()` member functions.
 - To check if a stream is associated with a stream I/O driver, use the
   `::microlibrary::Stream::driver_is_set()` and
   `::microlibrary::Fault_Reporting_Stream::driver_is_set()` member functions.
@@ -159,7 +159,7 @@ header/source file pair.
   member functions.
 
 The `::microlibrary::Testing::Automated::Output_String_Stream` and
-`::microlibrary::Testing::Automated::Fault_Reporting_Output_String_Stream` mock output
+`::microlibrary::Testing::Automated::Fault_Reporting_Output_String_Stream` output string
 stream classes are available if `MICROLIBRARY_TARGET` is `DEVELOPMENT_ENVIRONMENT`.
 The string streams are defined in the
 [`microlibrary/testing/automated/stream.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/include/microlibrary/testing/automated/stream.h)/[`microlibrary/testing/automated/stream.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/source/microlibrary/testing/automated/stream.cc)
@@ -170,7 +170,7 @@ header/source file pair.
   member functions.
 
 The `::microlibrary::Testing::Automated::Output_Vector_Stream` and
-`::microlibrary::Testing::Automated::Fault_Reporting_Output_Vector_Stream` mock output
+`::microlibrary::Testing::Automated::Fault_Reporting_Output_Vector_Stream` output vector
 stream classes are available if `MICROLIBRARY_TARGET` is `DEVELOPMENT_ENVIRONMENT`.
 The vector streams are defined in the
 [`microlibrary/testing/automated/stream.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/include/microlibrary/testing/automated/stream.h)/[`microlibrary/testing/automated/stream.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/source/microlibrary/testing/automated/stream.cc)
