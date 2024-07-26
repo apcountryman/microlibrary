@@ -260,3 +260,8 @@ void foo( ::microlibrary::Output_Stream & stream ) noexcept
     stream.print( ::microlibrary::Generic_Error::LOGIC_ERROR );
 }
 ```
+
+The following formatting helper types and `::microlibrary::Output_Formatter`
+specializations are defined in the
+[`microlibrary/format.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/include/microlibrary/format.h)/[`microlibrary/format.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/ANY/source/microlibrary/format.cc)
+header/source file pair:
