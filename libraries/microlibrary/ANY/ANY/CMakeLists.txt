@@ -35,6 +35,7 @@ target_sources( microlibrary
     PRIVATE source/microlibrary/assertion_failure.cc
     PRIVATE source/microlibrary/enum.cc
     PRIVATE source/microlibrary/error.cc
+    PRIVATE source/microlibrary/format.cc
     PRIVATE source/microlibrary/integer.cc
     PRIVATE source/microlibrary/microchip.cc
     PRIVATE source/microlibrary/microchip/sam.cc
