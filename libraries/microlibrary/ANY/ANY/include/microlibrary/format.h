@@ -188,6 +188,81 @@ class Dec {
     Integer m_integer;
 };
 
+/**
+ * \brief Integer hexadecimal output format specifier.
+ *
+ * \tparam Integer The type of integer to format.
+ */
+template<typename Integer>
+class Hex {
+  public:
+    static_assert( std::is_integral_v<Integer> );
+
+    Hex() = delete;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] integer The integer to be formatted.
+     */
+    constexpr Hex( Integer integer ) noexcept : m_integer{ integer }
+    {
+    }
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] source The source of the move.
+     */
+    constexpr Hex( Hex && source ) noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] original The original to copy.
+     */
+    constexpr Hex( Hex const & original ) noexcept = default;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Hex() noexcept = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Hex && expression ) noexcept -> Hex & = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Hex const & expression ) noexcept -> Hex & = default;
+
+    /**
+     * \brief Get the integer to be formatted.
+     *
+     * \return The integer to be formatted.
+     */
+    constexpr operator Integer() const noexcept
+    {
+        return m_integer;
+    }
+
+  private:
+    /**
+     * \brief The integer to be formatted.
+     */
+    Integer m_integer;
+};
+
 } // namespace microlibrary::Format
 
 namespace microlibrary {
@@ -461,6 +536,144 @@ class Output_Formatter<Format::Dec<Integer>> {
             } while ( integer );
             return i.base();
         } // else
+    }
+};
+
+/**
+ * \brief microlibrary::Format::Hex output formatter.
+ *
+ * \tparam Integer The type of integer to format.
+ */
+template<typename Integer>
+class Output_Formatter<Format::Hex<Integer>> {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    constexpr Output_Formatter() noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] source The source of the move.
+     */
+    constexpr Output_Formatter( Output_Formatter && source ) noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] original The original to copy.
+     */
+    constexpr Output_Formatter( Output_Formatter const & original ) noexcept = default;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Output_Formatter() noexcept = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Output_Formatter && expression ) noexcept -> Output_Formatter & = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator   =( Output_Formatter const & expression ) noexcept
+        -> Output_Formatter & = default;
+
+    /**
+     * \brief Write a formatted integer to a stream.
+     *
+     * \param[in] stream The stream to write the formatted integer to.
+     * \param[in] integer The integer to format.
+     *
+     * \return The number of characters written to the stream.
+     */
+    auto print( Output_Stream & stream, Integer integer ) const noexcept -> std::size_t
+    {
+        auto const formatted_integer = format( integer );
+
+        stream.put( formatted_integer.begin(), formatted_integer.end() );
+
+        return formatted_integer.size();
+    }
+
+    /**
+     * \brief Write a formatted integer to a stream.
+     *
+     * \param[in] stream The stream to write the formatted integer to.
+     * \param[in] integer The integer to format.
+     *
+     * \return The number of characters written to the stream if the write succeeded.
+     * \return An error code if the write failed.
+     */
+    auto print( Fault_Reporting_Output_Stream & stream, Integer integer ) const noexcept
+        -> Result<std::size_t>
+    {
+        auto const formatted_integer = format( integer );
+
+        auto result = stream.put( formatted_integer.begin(), formatted_integer.end() );
+        if ( result.is_error() ) {
+            return result.error();
+        } // if
+
+        return formatted_integer.size();
+    }
+
+  private:
+    /**
+     * \brief The number of bits in a nibble.
+     */
+    static constexpr auto NIBBLE_DIGITS = 4;
+
+    /**
+     * \brief The number of nibbles in an unsigned integer.
+     */
+    static constexpr auto NIBBLES = std::numeric_limits<std::make_unsigned_t<Integer>>::digits / NIBBLE_DIGITS;
+
+    /**
+     * \brief Nibble bit mask.
+     */
+    static constexpr auto NIBBLE_MASK = mask<std::make_unsigned_t<Integer>>( NIBBLE_DIGITS, 0 );
+
+    /**
+     * \brief Formatted integer.
+     */
+    using Formatted_Integer = Array<char, 2 + NIBBLES>;
+
+    /**
+     * \brief Format an integer.
+     *
+     * \param[in] integer The integer to format.
+     *
+     * \return The formatted integer.
+     */
+    static constexpr auto format( Integer integer ) noexcept -> Formatted_Integer
+    {
+        auto unsigned_integer = to_unsigned( integer );
+
+        Formatted_Integer formatted_integer;
+
+        auto i = formatted_integer.rbegin();
+        for ( auto nibble = 0; nibble < NIBBLES; ++nibble, ++i, unsigned_integer >>= NIBBLE_DIGITS ) {
+            auto const n = unsigned_integer & NIBBLE_MASK;
+
+            *i = n < 0xA ? '0' + n : 'A' + ( n - 0xA );
+        } // for
+        *i = 'x';
+        ++i;
+        *i = '0';
+
+        return formatted_integer;
     }
 };
 

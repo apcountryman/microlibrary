@@ -269,6 +269,8 @@ header/source file pair:
 - `::microlibrary::Output_Formatter<::microlibrary::Format::Bin<Integer>>`
 - `::microlibrary::Format::Dec`
 - `::microlibrary::Output_Formatter<::microlibrary::Format::Dec<Integer>>`
+- `::microlibrary::Format::Hex`
+- `::microlibrary::Output_Formatter<::microlibrary::Format::Hex<Integer>>`
 
 The `::microlibrary::Format::Bin` class is used to print an integer type in binary.
 The `::microlibrary::Output_Formatter<::microlibrary::Format::Bin<Integer>>`
@@ -313,5 +315,25 @@ void foo( ::microlibrary::Output_Stream & stream ) noexcept
 
     // output will be "42"
     stream.print( ::microlibrary::Format::Dec{ std::uint8_t{ 42 } } );
+}
+```
+
+The `::microlibrary::Format::Hex` class is used to print an integer type in hexadecimal.
+The `::microlibrary::Output_Formatter<::microlibrary::Format::Hex<Integer>>`
+specialization does not support user formatting configuration.
+`::microlibrary::Output_Formatter<::microlibrary::Format::Hex<Integer>>` automated tests
+are defined in the `test-automated-microlibrary-format-hex` automated test executable's
+[`main.cc`](https://github.com/apcountryman/microlibrary/blob/main/tests/automated/microlibrary/format/hex/main.cc)
+source file.
+```c++
+#include <cstdint>
+
+#include "microlibrary/format.h"
+#include "microlibrary/stream.h"
+
+void foo( ::microlibrary::Output_Stream & stream ) noexcept
+{
+    // output will be "0x0A"
+    stream.print( ::microlibrary::Format::Hex{ std::uint8_t{ 0x0A } } );
 }
 ```
