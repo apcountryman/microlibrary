@@ -32,6 +32,7 @@ target_sources( microlibrary
     PRIVATE source/microlibrary/algorithm.cc
     PRIVATE source/microlibrary/arm.cc
     PRIVATE source/microlibrary/arm/cortex.cc
+    PRIVATE source/microlibrary/array.cc
     PRIVATE source/microlibrary/assertion_failure.cc
     PRIVATE source/microlibrary/enum.cc
     PRIVATE source/microlibrary/error.cc
