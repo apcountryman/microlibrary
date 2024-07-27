@@ -2,8 +2,13 @@
 
 ## Table of Contents
 
+1. [Configuration Requirements](#configuration-requirements)
 1. [Configuration Options](#configuration-options)
 1. [Configuration Injection](#configuration-injection)
+
+## Configuration Requirements
+
+The Arm Cortex-M0+ HIL has the following configuration requirements:
 
 ## Configuration Options
 

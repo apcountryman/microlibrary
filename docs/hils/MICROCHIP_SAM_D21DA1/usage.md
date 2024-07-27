@@ -2,7 +2,12 @@
 
 ## Table of Contents
 
+1. [Configuration Requirements](#configuration-requirements)
 1. [Configuration Options](#configuration-options)
+
+## Configuration Requirements
+
+The Microchip SAM D21/DA1 HIL has the following configuration requirements:
 
 ## Configuration Options
 
