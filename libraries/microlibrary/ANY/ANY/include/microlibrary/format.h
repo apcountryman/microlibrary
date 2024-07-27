@@ -430,6 +430,8 @@ class Output_Formatter<Format::Dec<Integer>> {
     static constexpr auto format( Integer integer, Formatted_Integer & formatted_integer ) noexcept
         -> typename Formatted_Integer::Iterator
     {
+        // #lizard forgives the length
+
         if constexpr ( std::is_signed_v<Integer> ) {
             auto const is_negative = integer < 0;
 
