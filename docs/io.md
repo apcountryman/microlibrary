@@ -269,7 +269,7 @@ header/source file pair:
 - `::microlibrary::Output_Formatter<::microlibrary::Format::Bin<Integer>>`
 
 The `::microlibrary::Format::Bin` class is used to print an integer type in binary.
-The `::microlibrary::Output::Formatter<::microlibrary::Format::Bin<Integer>>`
+The `::microlibrary::Output_Formatter<::microlibrary::Format::Bin<Integer>>`
 specialization does not support user formatting configuration.
 `::microlibrary::Output_Formatter<::microlibrary::Format::Bin<Integer>>` automated tests
 are defined in the `test-automated-microlibrary-format-bin` automated test executable's
