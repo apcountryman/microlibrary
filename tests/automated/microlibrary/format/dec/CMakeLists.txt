@@ -13,10 +13,22 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary::Format automated tests CMake rules.
+# Description: microlibrary::Format::Dec automated tests CMake rules.
 
-# microlibrary::Format::Bin automated tests
-add_subdirectory( bin )
+add_executable( test-automated-microlibrary-format-dec )
 
-# microlibrary::Format::Dec automated tests
-add_subdirectory( dec )
+target_sources( test-automated-microlibrary-format-dec
+    PRIVATE main.cc
+    )
+
+target_link_libraries( test-automated-microlibrary-format-dec
+    PRIVATE gmock
+    PRIVATE gmock_main
+    PRIVATE gtest
+    PRIVATE microlibrary
+    )
+
+add_test(
+    NAME    test-automated-microlibrary-format-dec
+    COMMAND test-automated-microlibrary-format-dec ${MICROLIBRARY_AUTOMATED_TESTS_OPTIONS}
+    )

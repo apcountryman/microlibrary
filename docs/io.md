@@ -267,6 +267,8 @@ specializations are defined in the
 header/source file pair:
 - `::microlibrary::Format::Bin`
 - `::microlibrary::Output_Formatter<::microlibrary::Format::Bin<Integer>>`
+- `::microlibrary::Format::Dec`
+- `::microlibrary::Output_Formatter<::microlibrary::Format::Dec<Integer>>`
 
 The `::microlibrary::Format::Bin` class is used to print an integer type in binary.
 The `::microlibrary::Output_Formatter<::microlibrary::Format::Bin<Integer>>`
@@ -285,5 +287,31 @@ void foo( ::microlibrary::Output_Stream & stream ) noexcept
 {
     // output will be "0b01010101"
     stream.print( ::microlibrary::Format::Bin{ std::uint8_t{ 0b01010101 } } );
+}
+```
+
+The `::microlibrary::Format::Dec` class is used to print an integer type in decimal.
+The `::microlibrary::Output_Formatter<::microlibrary::Format::Dec<Integer>>`
+specialization does not support user formatting configuration.
+`::microlibrary::Output_Formatter<::microlibrary::Format::Dec<Integer>>` automated tests
+are defined in the `test-automated-microlibrary-format-dec` automated test executable's
+[`main.cc`](https://github.com/apcountryman/microlibrary/blob/main/tests/automated/microlibrary/format/dec/main.cc)
+source file.
+```c++
+#include <cstdint>
+
+#include "microlibrary/format.h"
+#include "microlibrary/stream.h"
+
+void foo( ::microlibrary::Output_Stream & stream ) noexcept
+{
+    // output will be "42"
+    stream.print( ::microlibrary::Format::Dec{ std::int8_t{ 42 } } );
+
+    // output will be "-42"
+    stream.print( ::microlibrary::Format::Dec{ std::int8_t{ -42 } } );
+
+    // output will be "42"
+    stream.print( ::microlibrary::Format::Dec{ std::uint8_t{ 42 } } );
 }
 ```
