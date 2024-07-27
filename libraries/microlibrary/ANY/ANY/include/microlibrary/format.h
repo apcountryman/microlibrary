@@ -24,6 +24,8 @@
 #define MICROLIBRARY_FORMAT_H
 
 #include <cstddef>
+#include <cstdlib>
+#include <limits>
 #include <type_traits>
 
 #include "microlibrary/array.h"
@@ -93,6 +95,81 @@ class Bin {
      * \return The assigned to object.
      */
     constexpr auto operator=( Bin const & expression ) noexcept -> Bin & = default;
+
+    /**
+     * \brief Get the integer to be formatted.
+     *
+     * \return The integer to be formatted.
+     */
+    constexpr operator Integer() const noexcept
+    {
+        return m_integer;
+    }
+
+  private:
+    /**
+     * \brief The integer to be formatted.
+     */
+    Integer m_integer;
+};
+
+/**
+ * \brief Integer decimal output format specifier.
+ *
+ * \tparam Integer The type of integer to format.
+ */
+template<typename Integer>
+class Dec {
+  public:
+    static_assert( std::is_integral_v<Integer> );
+
+    Dec() = delete;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] integer The integer to be formatted.
+     */
+    constexpr Dec( Integer integer ) noexcept : m_integer{ integer }
+    {
+    }
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] source The source of the move.
+     */
+    constexpr Dec( Dec && source ) noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] original The original to copy.
+     */
+    constexpr Dec( Dec const & original ) noexcept = default;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Dec() noexcept = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Dec && expression ) noexcept -> Dec & = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Dec const & expression ) noexcept -> Dec & = default;
 
     /**
      * \brief Get the integer to be formatted.
@@ -238,6 +315,150 @@ class Output_Formatter<Format::Bin<Integer>> {
         *i = '0';
 
         return formatted_integer;
+    }
+};
+
+/**
+ * \brief microlibrary::Format::Dec output formatter.
+ *
+ * \tparam Integer The type of integer to format.
+ */
+template<typename Integer>
+class Output_Formatter<Format::Dec<Integer>> {
+  public:
+    /**
+     * \brief Constructor.
+     */
+    constexpr Output_Formatter() noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] source The source of the move.
+     */
+    constexpr Output_Formatter( Output_Formatter && source ) noexcept = default;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] original The original to copy.
+     */
+    constexpr Output_Formatter( Output_Formatter const & original ) noexcept = default;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Output_Formatter() noexcept = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator=( Output_Formatter && expression ) noexcept -> Output_Formatter & = default;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to be assigned.
+     *
+     * \return The assigned to object.
+     */
+    constexpr auto operator   =( Output_Formatter const & expression ) noexcept
+        -> Output_Formatter & = default;
+
+    /**
+     * \brief Write a formatted integer to a stream.
+     *
+     * \param[in] stream The stream to write the formatted integer to.
+     * \param[in] integer The integer to format.
+     *
+     * \return The number of characters written to the stream.
+     */
+    auto print( Output_Stream & stream, Integer integer ) const noexcept -> std::size_t
+    {
+        Formatted_Integer formatted_integer;
+
+        auto const begin = format( integer, formatted_integer );
+
+        stream.put( begin, formatted_integer.end() );
+
+        return formatted_integer.end() - begin;
+    }
+
+    /**
+     * \brief Write a formatted integer to a stream.
+     *
+     * \param[in] stream The stream to write the formatted integer to.
+     * \param[in] integer The integer to format.
+     *
+     * \return The number of characters written to the stream if the write succeeded.
+     * \return An error code if the write failed.
+     */
+    auto print( Fault_Reporting_Output_Stream & stream, Integer integer ) const noexcept
+        -> Result<std::size_t>
+    {
+        Formatted_Integer formatted_integer;
+
+        auto const begin = format( integer, formatted_integer );
+
+        auto result = stream.put( begin, formatted_integer.end() );
+        if ( result.is_error() ) {
+            return result.error();
+        } // if
+
+        return static_cast<std::size_t>( formatted_integer.end() - begin );
+    }
+
+  private:
+    /**
+     * \brief Formatted integer.
+     */
+    using Formatted_Integer =
+        Array<char, ( std::is_signed_v<Integer> ? 1 : 0 ) + std::numeric_limits<Integer>::digits10 + 1>;
+
+    /**
+     * \brief Format an integer.
+     *
+     * \param[in] integer The integer to format.
+     * \param[in] formatted_integer The array to write the formatted integer to.
+     *
+     * \return An iterator to the beginning of the formatted integer.
+     */
+    static constexpr auto format( Integer integer, Formatted_Integer & formatted_integer ) noexcept
+        -> typename Formatted_Integer::Iterator
+    {
+        if constexpr ( std::is_signed_v<Integer> ) {
+            auto const is_negative = integer < 0;
+
+            auto i = formatted_integer.rbegin();
+
+            do {
+                *i = '0' + std::abs( integer % 10 );
+
+                ++i;
+                integer /= 10;
+            } while ( integer );
+
+            if ( is_negative ) {
+                *i = '-';
+
+                ++i;
+            } // if
+
+            return i.base();
+        } else {
+            auto i = formatted_integer.rbegin();
+            do {
+                *i = '0' + ( integer % 10 );
+
+                ++i;
+                integer /= 10;
+            } while ( integer );
+            return i.base();
+        } // else
     }
 };
 
