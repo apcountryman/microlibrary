@@ -125,7 +125,7 @@ if( MICROLIBRARY_HIL STREQUAL "MICROCHIP_MEGAAVR" )
     if( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
         if( NOT MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION )
             message( FATAL_ERROR
-                "Assertion failure location information must be suppressed."
+                "Assertion failure location information must be suppressed if MICROLIBRARY_HIL is 'MICROCHIP_MEGAAVR' and MICROLIBRARY_TARGET is 'HARDWARE'."
                 )
         endif( NOT MICROLIBRARY_SUPPRESS_ASSERTION_FAILURE_LOCATION_INFORMATION )
     endif( MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
