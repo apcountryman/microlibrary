@@ -24,6 +24,7 @@
 #define MICROLIBRARY_FORMAT_H
 
 #include <cstddef>
+#include <cstdint>
 #include <cstdlib>
 #include <limits>
 #include <type_traits>
@@ -643,7 +644,7 @@ class Output_Formatter<Format::Hex<Integer>> {
     /**
      * \brief Nibble bit mask.
      */
-    static constexpr auto NIBBLE_MASK = mask<std::make_unsigned_t<Integer>>( NIBBLE_DIGITS, 0 );
+    static constexpr auto NIBBLE_MASK = mask<std::uint_fast8_t>( NIBBLE_DIGITS, 0 );
 
     /**
      * \brief Formatted integer.
@@ -665,7 +666,7 @@ class Output_Formatter<Format::Hex<Integer>> {
 
         auto i = formatted_integer.rbegin();
         for ( auto nibble = 0; nibble < NIBBLES; ++nibble, ++i, unsigned_integer >>= NIBBLE_DIGITS ) {
-            auto const n = unsigned_integer & NIBBLE_MASK;
+            auto const n = static_cast<std::uint_fast8_t>( unsigned_integer & NIBBLE_MASK );
 
             *i = n < 0xA ? '0' + n : 'A' + ( n - 0xA );
         } // for
