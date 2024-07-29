@@ -271,6 +271,8 @@ header/source file pair:
 - `::microlibrary::Output_Formatter<::microlibrary::Format::Dec<Integer>>`
 - `::microlibrary::Format::Hex`
 - `::microlibrary::Output_Formatter<::microlibrary::Format::Hex<Integer>>`
+- `::microlibrary::Format::Hex_Dump`
+- `::microlibrary::Output_Formatter<::microlibrary::Format::Hex_Dump<Address, Iterator>>`
 
 The `::microlibrary::Format::Bin` class is used to print an integer type in binary.
 The `::microlibrary::Output_Formatter<::microlibrary::Format::Bin<Integer>>`
@@ -335,5 +337,31 @@ void foo( ::microlibrary::Output_Stream & stream ) noexcept
 {
     // output will be "0x0A"
     stream.print( ::microlibrary::Format::Hex{ std::uint8_t{ 0x0A } } );
+}
+```
+
+The `::microlibrary::Format::Hex_Dump` class is used to print a hex dump of data.
+The `::microlibrary::Output_Formatter<::microlibrary::Format::Hex_Dump<Address,
+Iterator>>` specialization does not support user formatting configuration.
+`::microlibrary::Output_Formatter<::microlibrary::Format::Hex_Dump<Address, Iterator>>`
+automated tests are defined in the `test-automated-microlibrary-format-hex_dump` automated
+test executable's
+[`main.cc`](https://github.com/apcountryman/microlibrary/blob/main/tests/automated/microlibrary/format/hex_dump/main.cc)
+source file.
+```c++
+#include <cstdint>
+#include <string_view>
+
+#include "microlibrary/format.h"
+#include "microlibrary/stream.h"
+
+void foo( ::microlibrary::Output_Stream & stream ) noexcept
+{
+    auto const data = std::string_view{ "{yZZk7V!/{>fm[lxV!$e|:" };
+
+    // output will be
+    // "0400  7B 79 5A 5A 6B 37 56 21 2F 7B 3E 66 6D 5B 6C 78  |{yZZk7V!/{>fm[lx|\n"
+    // "0410  56 21 24 65 7C 3A                                |V!$e|:|          \n"
+    stream.print( ::picolibrary::Format::Hex_Dump{ std::uint16_t{ 0x0400 }, data.begin(), data.end() } );
 }
 ```

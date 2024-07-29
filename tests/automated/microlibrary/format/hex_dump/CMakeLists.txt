@@ -13,16 +13,22 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary::Format automated tests CMake rules.
+# Description: microlibrary::Format::Hex_Dump automated tests CMake rules.
 
-# microlibrary::Format::Bin automated tests
-add_subdirectory( bin )
+add_executable( test-automated-microlibrary-format-hex_dump )
 
-# microlibrary::Format::Dec automated tests
-add_subdirectory( dec )
+target_sources( test-automated-microlibrary-format-hex_dump
+    PRIVATE main.cc
+    )
 
-# microlibrary::Format::Hex automated tests
-add_subdirectory( hex )
+target_link_libraries( test-automated-microlibrary-format-hex_dump
+    PRIVATE gmock
+    PRIVATE gmock_main
+    PRIVATE gtest
+    PRIVATE microlibrary
+    )
 
-# microlibrary::Format::Hex_Dump automated tests
-add_subdirectory( hex_dump )
+add_test(
+    NAME    test-automated-microlibrary-format-hex_dump
+    COMMAND test-automated-microlibrary-format-hex_dump ${MICROLIBRARY_AUTOMATED_TESTS_OPTIONS}
+    )
