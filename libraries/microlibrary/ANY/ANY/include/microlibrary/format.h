@@ -963,6 +963,8 @@ class Output_Formatter<Format::Hex_Dump<Address, Iterator>> {
     /**
      * \brief Format an integer (hex).
      *
+     * \tparam Integer The type of integer to format.
+     *
      * \param[in] integer The integer to format.
      * \param[out] location The location to write the formatted integer to.
      */
@@ -970,9 +972,9 @@ class Output_Formatter<Format::Hex_Dump<Address, Iterator>> {
     static void format_hex( Integer integer, typename Row::Iterator location ) noexcept
     {
         constexpr auto nibbles = std::uint_fast8_t{ std::numeric_limits<Integer>::digits / 4 };
-        auto           i       = typename Row::Reverse_Iterator{ location + nibbles };
-        for ( auto nibble = std::uint_fast8_t{ 0 }; nibble < nibbles;
-              ++nibble, ++i, integer >>= NIBBLE_DIGITS ) {
+        auto           nibble = std::uint_fast8_t{ 0 };
+        auto           i      = typename Row::Reverse_Iterator{ location + nibbles };
+        for ( ; nibble < nibbles; ++nibble, ++i, integer >>= NIBBLE_DIGITS ) {
             auto const n = static_cast<std::uint_fast8_t>( integer & NIBBLE_MASK );
 
             *i = n < 0xA ? '0' + n : 'A' + ( n - 0xA );
