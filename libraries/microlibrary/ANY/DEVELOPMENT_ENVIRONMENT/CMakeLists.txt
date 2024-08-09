@@ -27,6 +27,7 @@ target_include_directories( microlibrary
 target_sources( microlibrary
     PRIVATE source/microlibrary/testing/automated.cc
     PRIVATE source/microlibrary/testing/automated/error.cc
+    PRIVATE source/microlibrary/testing/automated/register.cc
     PRIVATE source/microlibrary/testing/automated/stream.cc
     )
 
