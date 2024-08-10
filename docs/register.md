@@ -8,6 +8,7 @@ header/source file pair.
 
 1. [Register](#register)
 1. [Reserved Register](#reserved-register)
+1. [Read-Only Register](#read-only-register)
 
 ## Register
 
@@ -33,3 +34,19 @@ header/source file pair.
 The `::microlibrary::Reserved_Register` class is used to declare a microcontroller
 reserved register.
 Reserved registers cannot be accessed.
+
+## Read-Only Register
+
+The `::microlibrary::Read_Only_Register` class is used to declare a read-only
+microcontroller register.
+Register access is restricted to the following operations:
+- Conversion to the register's underlying integer type (reading the register)
+
+The `::microlibrary::Testing::Automated::Mock_Read_Only_Register` mock register class is
+available if `MICROLIBRARY_TARGET` is `DEVELOPMENT_ENVIRONMENT`.
+The mock is defined in the
+[`microlibrary/testing/automated/register.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/include/microlibrary/testing/automated/register.h)/[`microlibrary/testing/automated/register.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/source/microlibrary/testing/automated/register.cc)
+header/source file pair.
+`::microlibrary::Read_Only_Register` is an alias for the
+`::microlibrary::Testing::Automated::Mock_Read_Only_Register` when `MICROLIBRARY_TARGET`
+is `DEVELOPMENT_ENVIRONMENT`.
