@@ -7,6 +7,7 @@ header/source file pair.
 ## Table of Contents
 
 1. [Register](#register)
+1. [Reserved Register](#reserved-register)
 
 ## Register
 
@@ -26,3 +27,9 @@ header/source file pair.
 `::microlibrary::Register` is an alias for the
 `::microlibrary::Testing::Automated::Mock_Register` when `MICROLIBRARY_TARGET` is
 `DEVELOPMENT_ENVIRONMENT`.
+
+## Reserved Register
+
+The `::microlibrary::Reserved_Register` class is used to declare a microcontroller
+reserved register.
+Reserved registers cannot be accessed.
