@@ -126,6 +126,40 @@ class Mock_Read_Only_Register {
     }
 };
 
+/**
+ * \brief Mock write-only register.
+ *
+ * \tparam T The register's underlying integer type.
+ */
+template<typename T>
+class Mock_Write_Only_Register {
+  public:
+    static_assert( std::is_integral_v<T> );
+
+    using Type = T;
+
+    Mock_Write_Only_Register() = default;
+
+    Mock_Write_Only_Register( Mock_Write_Only_Register && ) = delete;
+
+    Mock_Write_Only_Register( Mock_Write_Only_Register const & ) = delete;
+
+    ~Mock_Write_Only_Register() noexcept = default;
+
+    auto operator=( Mock_Write_Only_Register && ) = delete;
+
+    auto operator=( Mock_Write_Only_Register const & ) = delete;
+
+    MOCK_METHOD( void, write, ( Type ) );
+
+    auto operator=( Type expression ) noexcept -> Mock_Write_Only_Register &
+    {
+        write( expression );
+
+        return *this;
+    }
+};
+
 } // namespace microlibrary::Testing::Automated
 
 #endif // MICROLIBRARY_TESTING_AUTOMATED_REGISTER_H
