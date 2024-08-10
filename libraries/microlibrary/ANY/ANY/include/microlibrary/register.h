@@ -223,6 +223,58 @@ class MICROLIBRARY_PACKED_REGISTER Read_Only_Register {
 };
 #endif // MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
 
+/**
+ * \brief Write-only register.
+ *
+ * \tparam T The register's underlying integer type.
+ */
+template<typename T>
+#if MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
+using Write_Only_Register = Testing::Automated::Mock_Write_Only_Register<T>;
+#else  // MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
+class MICROLIBRARY_PACKED_REGISTER Write_Only_Register {
+  public:
+    static_assert( std::is_integral_v<T> );
+
+    /**
+     * \brief The register's underlying integer type.
+     */
+    using Type = T;
+
+    Write_Only_Register() = delete;
+
+    Write_Only_Register( Write_Only_Register && ) = delete;
+
+    Write_Only_Register( Write_Only_Register const & ) = delete;
+
+    ~Write_Only_Register() = delete;
+
+    auto operator=( Write_Only_Register && ) = delete;
+
+    auto operator=( Write_Only_Register const & ) = delete;
+
+    /**
+     * \brief Assignment operator.
+     *
+     * \param[in] expression The expression to assign to the register.
+     *
+     * \return The assigned to object.
+     */
+    auto operator=( Type expression ) noexcept -> Write_Only_Register &
+    {
+        m_register = expression;
+
+        return *this;
+    }
+
+  private:
+    /**
+     * \brief The register.
+     */
+    Type volatile m_register;
+};
+#endif // MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_REGISTER_H
