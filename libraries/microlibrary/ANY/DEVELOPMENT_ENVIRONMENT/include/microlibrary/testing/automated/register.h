@@ -94,6 +94,38 @@ class Mock_Register {
     }
 };
 
+/**
+ * \brief Mock read-only register.
+ *
+ * \tparam T The register's underlying integer type.
+ */
+template<typename T>
+class Mock_Read_Only_Register {
+  public:
+    static_assert( std::is_integral_v<T> );
+
+    using Type = T;
+
+    Mock_Read_Only_Register() = default;
+
+    Mock_Read_Only_Register( Mock_Read_Only_Register && ) = delete;
+
+    Mock_Read_Only_Register( Mock_Read_Only_Register const & ) = delete;
+
+    ~Mock_Read_Only_Register() noexcept = default;
+
+    auto operator=( Mock_Read_Only_Register && ) = delete;
+
+    auto operator=( Mock_Read_Only_Register const & ) = delete;
+
+    MOCK_METHOD( Type, read, (), ( const ) );
+
+    operator Type() const noexcept
+    {
+        return read();
+    }
+};
+
 } // namespace microlibrary::Testing::Automated
 
 #endif // MICROLIBRARY_TESTING_AUTOMATED_REGISTER_H

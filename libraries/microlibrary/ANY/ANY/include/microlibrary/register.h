@@ -175,6 +175,54 @@ class MICROLIBRARY_PACKED_REGISTER Reserved_Register {
     Type volatile m_register;
 };
 
+/**
+ * \brief Read-only register.
+ *
+ * \tparam T The register's underlying integer type.
+ */
+template<typename T>
+#if MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
+using Read_Only_Register = Testing::Automated::Mock_Read_Only_Register<T>;
+#else  // MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
+class MICROLIBRARY_PACKED_REGISTER Read_Only_Register {
+  public:
+    static_assert( std::is_integral_v<T> );
+
+    /**
+     * \brief The register's underlying integer type.
+     */
+    using Type = T;
+
+    Read_Only_Register() = delete;
+
+    Read_Only_Register( Read_Only_Register && ) = delete;
+
+    Read_Only_Register( Read_Only_Register const & ) = delete;
+
+    ~Read_Only_Register() = delete;
+
+    auto operator=( Read_Only_Register && ) = delete;
+
+    auto operator=( Read_Only_Register const & ) = delete;
+
+    /**
+     * \brief Read the register.
+     *
+     * \return The register contents.
+     */
+    operator Type() const noexcept
+    {
+        return m_register;
+    }
+
+  private:
+    /**
+     * \brief The register.
+     */
+    Type const volatile m_register;
+};
+#endif // MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_REGISTER_H
