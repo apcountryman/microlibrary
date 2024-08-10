@@ -53,7 +53,7 @@ class Mock_Register {
 
     auto operator=( Mock_Register const & ) = delete;
 
-    MOCK_METHOD( Type, read, () );
+    MOCK_METHOD( Type, read, (), ( const ) );
 
     MOCK_METHOD( void, write, ( Type ) );
     MOCK_METHOD( void, write_and, ( Type ) );
