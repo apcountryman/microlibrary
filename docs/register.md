@@ -13,7 +13,10 @@ header/source file pair.
 
 ## Register
 
-The `::microlibrary::Register` class is used to declare a microcontroller register.
+The `::microlibrary::Register` class is used to declare a memory-mapped register.
+`::microlibrary::Register` is an alias for the
+`::microlibrary::Testing::Automated::Mock_Register` when `MICROLIBRARY_TARGET` is
+`DEVELOPMENT_ENVIRONMENT`.
 Register access is restricted to the following operations:
 - Conversion to the register's underlying integer type (reading the register)
 - Assignment
@@ -26,20 +29,20 @@ if `MICROLIBRARY_TARGET` is `DEVELOPMENT_ENVIRONMENT`.
 The mock is defined in the
 [`microlibrary/testing/automated/register.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/include/microlibrary/testing/automated/register.h)/[`microlibrary/testing/automated/register.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/source/microlibrary/testing/automated/register.cc)
 header/source file pair.
-`::microlibrary::Register` is an alias for the
-`::microlibrary::Testing::Automated::Mock_Register` when `MICROLIBRARY_TARGET` is
-`DEVELOPMENT_ENVIRONMENT`.
 
 ## Reserved Register
 
-The `::microlibrary::Reserved_Register` class is used to declare a microcontroller
-reserved register.
+The `::microlibrary::Reserved_Register` class is used to declare a memory-mapped reserved
+register.
 Reserved registers cannot be accessed.
 
 ## Read-Only Register
 
-The `::microlibrary::Read_Only_Register` class is used to declare a read-only
-microcontroller register.
+The `::microlibrary::Read_Only_Register` class is used to declare a memory-mapped
+read-only register.
+`::microlibrary::Read_Only_Register` is an alias for the
+`::microlibrary::Testing::Automated::Mock_Read_Only_Register` when `MICROLIBRARY_TARGET`
+is `DEVELOPMENT_ENVIRONMENT`.
 Register access is restricted to the following operations:
 - Conversion to the register's underlying integer type (reading the register)
 
@@ -48,14 +51,14 @@ available if `MICROLIBRARY_TARGET` is `DEVELOPMENT_ENVIRONMENT`.
 The mock is defined in the
 [`microlibrary/testing/automated/register.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/include/microlibrary/testing/automated/register.h)/[`microlibrary/testing/automated/register.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/source/microlibrary/testing/automated/register.cc)
 header/source file pair.
-`::microlibrary::Read_Only_Register` is an alias for the
-`::microlibrary::Testing::Automated::Mock_Read_Only_Register` when `MICROLIBRARY_TARGET`
-is `DEVELOPMENT_ENVIRONMENT`.
 
 ## Write-Only Register
 
-The `::microlibrary::Write_Only_Register` class is used to declare a write-only
-microcontroller register.
+The `::microlibrary::Write_Only_Register` class is used to declare a memory-mapped
+write-only register.
+`::microlibrary::Write_Only_Register` is an alias for the
+`::microlibrary::Testing::Automated::Mock_Write_Only_Register` when `MICROLIBRARY_TARGET`
+is `DEVELOPMENT_ENVIRONMENT`.
 Register access is restricted to the following operations:
 - Assignment
 
@@ -64,6 +67,3 @@ available if `MICROLIBRARY_TARGET` is `DEVELOPMENT_ENVIRONMENT`.
 The mock is defined in the
 [`microlibrary/testing/automated/register.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/include/microlibrary/testing/automated/register.h)/[`microlibrary/testing/automated/register.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/source/microlibrary/testing/automated/register.cc)
 header/source file pair.
-`::microlibrary::Write_Only_Register` is an alias for the
-`::microlibrary::Testing::Automated::Mock_Write_Only_Register` when `MICROLIBRARY_TARGET`
-is `DEVELOPMENT_ENVIRONMENT`.
