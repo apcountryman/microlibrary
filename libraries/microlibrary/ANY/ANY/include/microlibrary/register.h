@@ -48,6 +48,8 @@ using Register = Testing::Automated::Mock_Register<T>;
 #else  // MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
 class MICROLIBRARY_PACKED_REGISTER Register {
   public:
+    static_assert( std::is_integral_v<T> );
+
     /**
      * \brief The register's underlying integer type.
      */
