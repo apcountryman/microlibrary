@@ -18,9 +18,11 @@ Register access is restricted to the following operations:
 - Bitwise OR assignment
 - Bitwise XOR assignment
 
-`::microlibrary::Register` is an alias for the
-`::microlibrary::Testing::Automated::Mock_Register` mock register class when
-`MICROLIBRARY_TARGET` is `DEVELOPMENT_ENVIRONMENT`.
+The `::microlibrary::Testing::Automated::Mock_Register` mock register class is available
+if `MICROLIBRARY_TARGET` is `DEVELOPMENT_ENVIRONMENT`.
 The mock is defined in the
 [`microlibrary/testing/automated/register.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/include/microlibrary/testing/automated/register.h)/[`microlibrary/testing/automated/register.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/ANY/DEVELOPMENT_ENVIRONMENT/source/microlibrary/testing/automated/register.cc)
 header/source file pair.
+`::microlibrary::Register` is an alias for the
+`::microlibrary::Testing::Automated::Mock_Register` when `MICROLIBRARY_TARGET` is
+`DEVELOPMENT_ENVIRONMENT`.
