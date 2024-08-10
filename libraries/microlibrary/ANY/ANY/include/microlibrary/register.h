@@ -141,6 +141,40 @@ class MICROLIBRARY_PACKED_REGISTER Register {
 };
 #endif // MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
 
+/**
+ * \brief Reserved register.
+ *
+ * \tparam T The register's underlying integer type.
+ */
+template<typename T>
+class MICROLIBRARY_PACKED_REGISTER Reserved_Register {
+  public:
+    static_assert( std::is_integral_v<T> );
+
+    /**
+     * \brief The register's underlying integer type.
+     */
+    using Type = T;
+
+    Reserved_Register() = delete;
+
+    Reserved_Register( Reserved_Register && ) = delete;
+
+    Reserved_Register( Reserved_Register const & ) = delete;
+
+    ~Reserved_Register() = delete;
+
+    auto operator=( Reserved_Register && ) = delete;
+
+    auto operator=( Reserved_Register const & ) = delete;
+
+  private:
+    /**
+     * \brief The register.
+     */
+    Type volatile m_register;
+};
+
 } // namespace microlibrary
 
 #endif // MICROLIBRARY_REGISTER_H
