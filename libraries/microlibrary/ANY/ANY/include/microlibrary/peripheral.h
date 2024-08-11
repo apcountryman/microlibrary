@@ -23,10 +23,55 @@
 #ifndef MICROLIBRARY_PERIPHERAL_H
 #define MICROLIBRARY_PERIPHERAL_H
 
+#include <cstdint>
+
 /**
  * \brief Peripheral facilities.
  */
 namespace microlibrary::Peripheral {
+
+/**
+ * \brief Peripheral instance.
+ *
+ * \tparam T The type of the peripheral instance.
+ * \tparam INSTANCE_ADDRESS The address of the peripheral instance.
+ */
+template<typename T, std::uintptr_t INSTANCE_ADDRESS>
+class Instance {
+  public:
+    /**
+     * \brief The type of the peripheral instance.
+     */
+    using Type = T;
+
+    /**
+     * \brief The address of the peripheral instance.
+     */
+    static constexpr auto ADDRESS = INSTANCE_ADDRESS;
+
+    /**
+     * \brief Get a pointer to the peripheral instance.
+     *
+     * \return A pointer to the peripheral instance.
+     */
+    static auto pointer() noexcept -> Type *
+    {
+        return reinterpret_cast<Type *>( ADDRESS );
+    }
+
+    Instance() = delete;
+
+    Instance( Instance && ) = delete;
+
+    Instance( Instance const & ) = delete;
+
+    ~Instance() = delete;
+
+    auto operator=( Instance && ) = delete;
+
+    auto operator=( Instance const & ) = delete;
+};
+
 } // namespace microlibrary::Peripheral
 
 #endif // MICROLIBRARY_PERIPHERAL_H
