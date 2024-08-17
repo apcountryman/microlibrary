@@ -41,6 +41,7 @@ target_sources( microlibrary
     PRIVATE source/microlibrary/microchip.cc
     PRIVATE source/microlibrary/microchip/sam.cc
     PRIVATE source/microlibrary/peripheral.cc
+    PRIVATE source/microlibrary/pointer.cc
     PRIVATE source/microlibrary/postcondition.cc
     PRIVATE source/microlibrary/precondition.cc
     PRIVATE source/microlibrary/register.cc

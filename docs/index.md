@@ -11,6 +11,7 @@ A C++ microcontroller driver/utility library.
 1. [Interactive Tests](tests-interactive.md)
 1. [HILs](hils.md)
 1. [Enum Utilities](enum_utilities.md)
+1. [Pointer Utilities](pointer_utilities.md)
 1. [Register Facilities](register.md)
 1. [Peripheral Facilities](peripheral.md)
 1. [ROM Facilities](rom.md)
