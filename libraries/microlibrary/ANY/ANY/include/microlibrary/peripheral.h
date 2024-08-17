@@ -25,6 +25,9 @@
 
 #include <cstdint>
 
+#include "microlibrary/pointer.h"
+#include "microlibrary/precondition.h"
+
 /**
  * \brief Peripheral facilities.
  */
@@ -54,9 +57,9 @@ class Instance {
      *
      * \return A pointer to the peripheral instance.
      */
-    static auto pointer() noexcept -> Type *
+    static auto pointer() noexcept -> Not_Null<Type *>
     {
-        return reinterpret_cast<Type *>( ADDRESS );
+        return Not_Null{ BYPASS_PRECONDITION_EXPECTATION_CHECKS, reinterpret_cast<Type *>( ADDRESS ) };
     }
 
     Instance() = delete;
