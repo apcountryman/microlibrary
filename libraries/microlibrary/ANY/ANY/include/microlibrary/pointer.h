@@ -37,8 +37,8 @@ namespace microlibrary {
  * \tparam Pointer The type of the wrapped pointer.
  *
  * \warning If the wrapped pointer is a move-only smart pointer, a moved from
- *          microlibrary::Not_Null will wrap a nullptr, and must only be destroyed or
- *          assigned to.
+ *          microlibrary::Not_Null will wrap a null pointer that can only be assigned
+ *          to or destroyed.
  */
 template<typename Pointer>
 class Not_Null {
@@ -182,7 +182,7 @@ class Not_Null {
      *
      * \return The pointed to object.
      */
-    constexpr auto operator*() const noexcept
+    constexpr auto & operator*() const noexcept
     {
         return *m_pointer;
     }
