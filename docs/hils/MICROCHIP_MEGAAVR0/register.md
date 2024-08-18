@@ -7,7 +7,7 @@ header/source file pair.
 
 ## Table of Contents
 
-1. [Protected Register](#protected_register)
+1. [Protected Register](#protected-register)
 
 ## Protected Register
 

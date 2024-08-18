@@ -46,7 +46,7 @@ enum class CPU_CCP_Key : std::uint8_t {
 /**
  * \brief Protected register
  *
- * \tparam T The register's underlying integral type (must be std::uint8_t).
+ * \tparam T The register's underlying integer type (must be std::uint8_t).
  * \tparam CPU_CCP_KEY The register's CPU peripheral CCP register key.
  */
 template<typename T, CPU_CCP_Key CPU_CCP_KEY>
@@ -170,11 +170,11 @@ class MICROLIBRARY_PACKED_REGISTER Protected_Register {
     {
 #if MICROLIBRARY_TARGET_IS_HARDWARE
         asm volatile(
-            "out %[cpu_ccp_address], %[cpu_ccp_unlock_protected_registers] \n\t"
+            "out %[cpu_ccp_address], %[cpu_ccp_key] \n\t"
             "sts %[protected_register_address], %[protected_register_data]"
             :
             : [ cpu_ccp_address ] "I"( CPU_CCP_ADDRESS ),
-              [ cpu_ccp_unlock_protected_registers ] "d"( to_underlying( CPU_CCP_KEY ) ),
+              [ cpu_ccp_key ] "d"( to_underlying( CPU_CCP_KEY ) ),
               [ protected_register_address ] "n"( &m_register ),
               [ protected_register_data ] "r"( data ) );
 #else  // MICROLIBRARY_TARGET_IS_HARDWARE
