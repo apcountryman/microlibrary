@@ -3,8 +3,11 @@
 ## Table of Contents
 
 1. [Peripherals](#peripherals)
+1. [Peripheral Instances](#peripheral-instances)
 
 ## Peripherals
+
+## Peripheral Instances
 
 Microchip megaAVR 0-series peripheral instances are defined in the `microlibrary` static
 library's
