@@ -20,6 +20,14 @@ if( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
     return()
 endif( NOT MICROLIBRARY_TARGET STREQUAL "HARDWARE" )
 
+target_include_directories( microlibrary
+    PUBLIC include
+    )
+
+target_sources( microlibrary
+    PRIVATE source/microlibrary/microchip/megaavr0/peripheral/instances.cc
+    )
+
 target_link_libraries( microlibrary
     PUBLIC avr-libcpp
     )
