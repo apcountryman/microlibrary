@@ -13,7 +13,4 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary::Microchip automated tests CMake rules.
-
-# microlibrary::Microchip::megaAVR0 automated tests
-add_subdirectory( megaavr0 )
+# Description: microlibrary::Microchip::megaAVR0 automated tests CMake rules.
