@@ -42,6 +42,9 @@ add_subdirectory( generic_error_category )
 # microlibrary integer utilities automated tests
 add_subdirectory( integer )
 
+# microlibrary::Microchip automated tests
+add_subdirectory( microchip )
+
 # microlibrary::Output_Stream automated tests
 add_subdirectory( output_stream )
 
