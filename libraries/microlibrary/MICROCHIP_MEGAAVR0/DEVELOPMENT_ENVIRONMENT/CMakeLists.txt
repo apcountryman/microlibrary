@@ -19,3 +19,11 @@
 if( NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
     return()
 endif( NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
+
+target_include_directories( microlibrary
+    PUBLIC include
+    )
+
+target_sources( microlibrary
+    PRIVATE source/microlibrary/testing/automated/microchip/megaavr0.cc
+    )
