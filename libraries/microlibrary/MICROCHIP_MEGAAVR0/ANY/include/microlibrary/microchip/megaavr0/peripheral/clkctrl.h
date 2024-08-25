@@ -286,7 +286,7 @@ struct CLKCTRL {
      *
      * This register has the following fields:
      * - Oscillator Temperature Coefficient Calibration (TEMPCAL20M)
-     * - Oscillator Calibration Locked by Fuse(LOCK)
+     * - Oscillator Calibration Locked by Fuse (LOCK)
      */
     struct OSC20MCALIBB {
         /**

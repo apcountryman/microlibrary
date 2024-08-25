@@ -11,7 +11,7 @@
 The layout of each Microchip megaAVR 0-series peripheral's registers is defined by the
 structure named after the peripheral (e.g. the layout of the CLKCTRL peripheral's
 registers is defined by the `::microlibrary::Microchip::megaAVR0::Peripheral::CLKCTRL`
-structure.
+structure).
 Peripheral registers are accessed via the member variables named after the registers (e.g.
 the CLKCTRL peripheral's MCLKCTRLA register is accessed via the
 `::microlibrary::Microchip::megaAVR0::Peripheral::CLKCTRL::mclkctrla` member variable).
@@ -29,7 +29,7 @@ Peripheral register field constants are defined in the following member structur
   constant).
 - `Mask`: field bit masks (e.g. the mask for the CLKSEL field of the CLKCTRL peripheral's
   MCLKCTRLA register is defined by the
-  `::microlibrary::Microchip::megaAVR0::Peripheral::CLKCTRL::MCLKCTRLA::Bit::CLKSEL`
+  `::microlibrary::Microchip::megaAVR0::Peripheral::CLKCTRL::MCLKCTRLA::Mask::CLKSEL`
   constant).
 
 ### CLKCTRL
