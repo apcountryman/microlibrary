@@ -156,13 +156,27 @@ class MICROLIBRARY_PACKED_REGISTER Reserved_Register {
      */
     using Type = T;
 
-    Reserved_Register() = delete;
+#if MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
+    /**
+     * \brief Constructor.
+     */
+    Reserved_Register() noexcept = default;
+#else  // MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
+    Reserved_Register()  = delete;
+#endif // MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
 
     Reserved_Register( Reserved_Register && ) = delete;
 
     Reserved_Register( Reserved_Register const & ) = delete;
 
+#if MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
+    /**
+     * \brief Destructor.
+     */
+    ~Reserved_Register() noexcept = default;
+#else  // MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
     ~Reserved_Register() = delete;
+#endif // MICROLIBRARY_TARGET_IS_DEVELOPMENT_ENVIRONMENT
 
     auto operator=( Reserved_Register && ) = delete;
 
