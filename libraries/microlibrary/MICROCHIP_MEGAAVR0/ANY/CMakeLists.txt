@@ -22,6 +22,7 @@ target_include_directories( microlibrary
 
 target_sources( microlibrary
     PRIVATE source/microlibrary/microchip/megaavr0.cc
+    PRIVATE source/microlibrary/microchip/megaavr0/clock_controller.cc
     PRIVATE source/microlibrary/microchip/megaavr0/peripheral.cc
     PRIVATE source/microlibrary/microchip/megaavr0/peripheral/clkctrl.cc
     PRIVATE source/microlibrary/microchip/megaavr0/register.cc
