@@ -25,8 +25,8 @@
 
 #include <cstdint>
 
-#include "microlibrary/error.h"
 #include "microlibrary/enum.h"
+#include "microlibrary/error.h"
 #include "microlibrary/microchip/megaavr0/peripheral/clkctrl.h"
 #include "microlibrary/pointer.h"
 #include "microlibrary/precondition.h"

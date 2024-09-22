@@ -46,6 +46,7 @@ using ::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillato
 using ::microlibrary::Microchip::megaAVR0::Internal_16_20_MHz_Oscillator_Mode;
 using ::microlibrary::Microchip::megaAVR0::Internal_32_768_kHz_Ultra_Low_Power_Oscillator_Mode;
 using ::microlibrary::Microchip::megaAVR0::Peripheral::CLKCTRL;
+using ::testing::InSequence;
 using ::testing::Return;
 using ::testing::TestWithParam;
 using ::testing::ValuesIn;
@@ -240,7 +241,7 @@ class setClockSource : public TestWithParam<setClockSource_Test_Case> {
 TEST_P( setClockSource, worksProperly )
 {
     auto const test_case = GetParam();
-    
+
     auto const in_sequence = InSequence{};
 
     auto clkctrl = CLKCTRL{};
@@ -1846,7 +1847,7 @@ class setExternal32768kHzCrystalOscillatorMode :
 TEST_P( setExternal32768kHzCrystalOscillatorMode, worksProperly )
 {
     auto const test_case = GetParam();
-    
+
     auto const in_sequence = InSequence{};
 
     auto clkctrl = CLKCTRL{};
