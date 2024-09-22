@@ -13,18 +13,23 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary static library Microchip megaAVR 0-series HIL, development
-#       environment target CMake rules.
+# Description: microlibrary::Microchip::megaAVR0::Clock_Controller automated tests CMake
+#       rules.
 
-if( NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
-    return()
-endif( NOT MICROLIBRARY_TARGET STREQUAL "DEVELOPMENT_ENVIRONMENT" )
+add_executable( test-automated-microlibrary-microchip-megaavr0-clock_controller )
 
-target_include_directories( microlibrary
-    PUBLIC include
+target_sources( test-automated-microlibrary-microchip-megaavr0-clock_controller
+    PRIVATE main.cc
     )
 
-target_sources( microlibrary
-    PRIVATE source/microlibrary/testing/automated/microchip/megaavr0.cc
-    PRIVATE source/microlibrary/testing/automated/microchip/megaavr0/clock_controller.cc
+target_link_libraries( test-automated-microlibrary-microchip-megaavr0-clock_controller
+    PRIVATE gmock
+    PRIVATE gmock_main
+    PRIVATE gtest
+    PRIVATE microlibrary
+    )
+
+add_test(
+    NAME    test-automated-microlibrary-microchip-megaavr0-clock_controller
+    COMMAND test-automated-microlibrary-microchip-megaavr0-clock_controller ${MICROLIBRARY_AUTOMATED_TESTS_OPTIONS}
     )

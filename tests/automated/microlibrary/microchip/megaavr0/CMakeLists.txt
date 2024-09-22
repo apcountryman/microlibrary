@@ -14,3 +14,6 @@
 # permissions and limitations under the License.
 
 # Description: microlibrary::Microchip::megaAVR0 automated tests CMake rules.
+
+# microlibrary::Microchip::megaAVR0::Clock_Controller automated tests
+add_subdirectory( clock_controller )
