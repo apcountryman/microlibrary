@@ -240,6 +240,8 @@ class setClockSource : public TestWithParam<setClockSource_Test_Case> {
 TEST_P( setClockSource, worksProperly )
 {
     auto const test_case = GetParam();
+    
+    auto const in_sequence = InSequence{};
 
     auto clkctrl = CLKCTRL{};
 
@@ -1405,7 +1407,7 @@ struct external32768kHzCrystalOscillatorIsStable_Test_Case {
     std::uint8_t mclkstatus;
 
     /**
-     * \brief Internal 16/20 MHz oscillator is stable.
+     * \brief External 32.768 kHz crystal oscillator is stable.
      */
     bool external_32_768_kHz_cystal_oscillator_is_stable;
 };
@@ -1797,17 +1799,17 @@ INSTANTIATE_TEST_SUITE_P(, configureExternal32768kHzCrystalOscillator, ValuesIn(
  */
 struct setExternal32768kHzCrystalOscillatorMode_Test_Case {
     /**
-     * \brief The initial OSC20MCTRLA register value.
+     * \brief The initial XOSC32KCTRLA register value.
      */
     std::uint8_t xosc32kctrla_initial;
 
     /**
-     * \brief The desired internal 16/20 MHz oscillator mode.
+     * \brief The desired external 32.768 kHz crystal oscillator mode.
      */
     External_32_768_kHz_Crystal_Oscillator_Mode mode;
 
     /**
-     * \brief The final OSC20MCTRLA register value.
+     * \brief The final XOSC32KCTRLA register value.
      */
     std::uint8_t xosc32kctrla_final;
 };
@@ -1844,6 +1846,8 @@ class setExternal32768kHzCrystalOscillatorMode :
 TEST_P( setExternal32768kHzCrystalOscillatorMode, worksProperly )
 {
     auto const test_case = GetParam();
+    
+    auto const in_sequence = InSequence{};
 
     auto clkctrl = CLKCTRL{};
 

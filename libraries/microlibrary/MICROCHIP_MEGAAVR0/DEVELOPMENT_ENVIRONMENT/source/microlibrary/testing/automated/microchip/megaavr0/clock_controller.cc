@@ -35,10 +35,10 @@ auto operator<<( std::ostream & stream, Clock_Source clock_source ) -> std::ostr
     switch ( clock_source ) {
             // clang-format off
 
-        case Microchip::megaAVR0::Clock_Source::INTERNAL_16_20_MHz_OSCILLATOR: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Source::INTERNAL_16_20_MHz_OSCILLATOR";
-        case Microchip::megaAVR0::Clock_Source::INTERNAL_32_768_kHz_ULTRA_LOW_POWER_OSCILLATOR: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Source::INTERNAL_32_768_kHz_ULTRA_LOW_POWER_OSCILLATOR";
-        case Microchip::megaAVR0::Clock_Source::EXTERNAL_32_768_kHz_CRYSTAL_OSCILLATOR: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Source::EXTERNAL_32_768_kHz_CRYSTAL_OSCILLATOR";
-        case Microchip::megaAVR0::Clock_Source::EXTERNAL_CLOCK: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Source::EXTERNAL_CLOCK";
+        case Clock_Source::INTERNAL_16_20_MHz_OSCILLATOR: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Source::INTERNAL_16_20_MHz_OSCILLATOR";
+        case Clock_Source::INTERNAL_32_768_kHz_ULTRA_LOW_POWER_OSCILLATOR: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Source::INTERNAL_32_768_kHz_ULTRA_LOW_POWER_OSCILLATOR";
+        case Clock_Source::EXTERNAL_32_768_kHz_CRYSTAL_OSCILLATOR: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Source::EXTERNAL_32_768_kHz_CRYSTAL_OSCILLATOR";
+        case Clock_Source::EXTERNAL_CLOCK: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Source::EXTERNAL_CLOCK";
 
             // clang-format on
     } // switch
@@ -53,8 +53,8 @@ auto operator<<( std::ostream & stream, Clock_Prescaler clock_prescaler_configur
     switch ( clock_prescaler_configuration ) {
             // clang-format off
 
-        case Microchip::megaAVR0::Clock_Prescaler::DISABLED: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler::DISABLED";
-        case Microchip::megaAVR0::Clock_Prescaler::ENABLED: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler::ENABLED";
+        case Clock_Prescaler::DISABLED: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler::DISABLED";
+        case Clock_Prescaler::ENABLED: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler::ENABLED";
 
             // clang-format on
     } // switch
@@ -70,17 +70,17 @@ auto operator<<( std::ostream & stream, Clock_Prescaler_Value clock_prescaler_va
     switch ( clock_prescaler_value ) {
             // clang-format off
 
-        case Microchip::megaAVR0::Clock_Prescaler_Value::_2: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_2";
-        case Microchip::megaAVR0::Clock_Prescaler_Value::_4: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_4";
-        case Microchip::megaAVR0::Clock_Prescaler_Value::_6: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_6";
-        case Microchip::megaAVR0::Clock_Prescaler_Value::_8: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_8";
-        case Microchip::megaAVR0::Clock_Prescaler_Value::_10: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_10";
-        case Microchip::megaAVR0::Clock_Prescaler_Value::_12: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_12";
-        case Microchip::megaAVR0::Clock_Prescaler_Value::_16: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_16";
-        case Microchip::megaAVR0::Clock_Prescaler_Value::_24: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_24";
-        case Microchip::megaAVR0::Clock_Prescaler_Value::_32: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_32";
-        case Microchip::megaAVR0::Clock_Prescaler_Value::_48: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_48";
-        case Microchip::megaAVR0::Clock_Prescaler_Value::_64: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_64";
+        case Clock_Prescaler_Value::_2: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_2";
+        case Clock_Prescaler_Value::_4: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_4";
+        case Clock_Prescaler_Value::_6: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_6";
+        case Clock_Prescaler_Value::_8: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_8";
+        case Clock_Prescaler_Value::_10: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_10";
+        case Clock_Prescaler_Value::_12: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_12";
+        case Clock_Prescaler_Value::_16: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_16";
+        case Clock_Prescaler_Value::_24: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_24";
+        case Clock_Prescaler_Value::_32: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_32";
+        case Clock_Prescaler_Value::_48: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_48";
+        case Clock_Prescaler_Value::_64: return stream << "::microlibrary::Microchip::megaAVR0::Clock_Prescaler_Value::_64";
 
             // clang-format on
     } // switch
@@ -97,8 +97,8 @@ auto operator<<( std::ostream & stream, Internal_16_20_MHz_Oscillator_Mode inter
     switch ( internal_16_20_MHz_oscillator_mode ) {
             // clang-format off
 
-        case Microchip::megaAVR0::Internal_16_20_MHz_Oscillator_Mode::NORMAL: return stream << "::microlibrary::Microchip::megaAVR0::Internal_16_20_MHz_Oscillator_Mode::NORMAL";
-        case Microchip::megaAVR0::Internal_16_20_MHz_Oscillator_Mode::FORCED_ON: return stream << "::microlibrary::Microchip::megaAVR0::Internal_16_20_MHz_Oscillator_Mode::FORCED_ON";
+        case Internal_16_20_MHz_Oscillator_Mode::NORMAL: return stream << "::microlibrary::Microchip::megaAVR0::Internal_16_20_MHz_Oscillator_Mode::NORMAL";
+        case Internal_16_20_MHz_Oscillator_Mode::FORCED_ON: return stream << "::microlibrary::Microchip::megaAVR0::Internal_16_20_MHz_Oscillator_Mode::FORCED_ON";
 
             // clang-format on
     } // switch
@@ -115,8 +115,8 @@ auto operator<<( std::ostream & stream, Internal_32_768_kHz_Ultra_Low_Power_Osci
     switch ( internal_32_768_kHz_ultra_low_power_oscillator_mode ) {
             // clang-format off
 
-        case Microchip::megaAVR0::Internal_32_768_kHz_Ultra_Low_Power_Oscillator_Mode::NORMAL: return stream << "::microlibrary::Microchip::megaAVR0::Internal_32_768_kHz_Ultra_Low_Power_Oscillator_Mode::NORMAL";
-        case Microchip::megaAVR0::Internal_32_768_kHz_Ultra_Low_Power_Oscillator_Mode::FORCED_ON: return stream << "::microlibrary::Microchip::megaAVR0::Internal_32_768_kHz_Ultra_Low_Power_Oscillator_Mode::FORCED_ON";
+        case Internal_32_768_kHz_Ultra_Low_Power_Oscillator_Mode::NORMAL: return stream << "::microlibrary::Microchip::megaAVR0::Internal_32_768_kHz_Ultra_Low_Power_Oscillator_Mode::NORMAL";
+        case Internal_32_768_kHz_Ultra_Low_Power_Oscillator_Mode::FORCED_ON: return stream << "::microlibrary::Microchip::megaAVR0::Internal_32_768_kHz_Ultra_Low_Power_Oscillator_Mode::FORCED_ON";
 
             // clang-format on
     } // switch
@@ -134,8 +134,8 @@ auto operator<<( std::ostream & stream, External_32_768_kHz_Crystal_Oscillator_S
     switch ( external_32_768_kHz_crystal_oscillator_source ) {
             // clang-format off
 
-        case Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Source::CRYSTAL: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Source::CRYSTAL";
-        case Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Source::CLOCK: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Source::CLOCK";
+        case External_32_768_kHz_Crystal_Oscillator_Source::CRYSTAL: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Source::CRYSTAL";
+        case External_32_768_kHz_Crystal_Oscillator_Source::CLOCK: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Source::CLOCK";
 
             // clang-format on
     } // switch
@@ -153,10 +153,10 @@ auto operator<<( std::ostream & stream, External_32_768_kHz_Crystal_Oscillator_S
     switch ( external_32_768_kHz_crystal_oscillator_start_up_time ) {
             // clang-format off
 
-        case Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_1k_CYCLES: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_1k_CYCLES";
-        case Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_16k_CYCLES: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_16k_CYCLES";
-        case Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_32k_CYCLES: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_32k_CYCLES";
-        case Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_64k_CYCLES: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_64k_CYCLES";
+        case External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_1k_CYCLES: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_1k_CYCLES";
+        case External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_16k_CYCLES: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_16k_CYCLES";
+        case External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_32k_CYCLES: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_32k_CYCLES";
+        case External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_64k_CYCLES: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time::_64k_CYCLES";
 
             // clang-format on
     } // switch
@@ -164,7 +164,7 @@ auto operator<<( std::ostream & stream, External_32_768_kHz_Crystal_Oscillator_S
     throw std::invalid_argument{
         "external_32_768_kHz_crystal_oscillator_start_up_time is not a valid "
         "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_"
-        "Source"
+        "Start_Up_Time"
     };
 }
 
@@ -174,8 +174,8 @@ auto operator<<( std::ostream & stream, External_32_768_kHz_Crystal_Oscillator_M
     switch ( external_32_768_kHz_crystal_oscillator_mode ) {
             // clang-format off
 
-        case Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Mode::NORMAL: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Mode::NORMAL";
-        case Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Mode::FORCED_ON: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Mode::FORCED_ON";
+        case External_32_768_kHz_Crystal_Oscillator_Mode::NORMAL: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Mode::NORMAL";
+        case External_32_768_kHz_Crystal_Oscillator_Mode::FORCED_ON: return stream << "::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Mode::FORCED_ON";
 
             // clang-format on
     } // switch

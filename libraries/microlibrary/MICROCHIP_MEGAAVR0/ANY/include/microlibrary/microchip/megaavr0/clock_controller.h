@@ -26,7 +26,7 @@
 #include <cstdint>
 
 #include "microlibrary/error.h"
-#include "microlibrary/integer.h"
+#include "microlibrary/enum.h"
 #include "microlibrary/microchip/megaavr0/peripheral/clkctrl.h"
 #include "microlibrary/pointer.h"
 #include "microlibrary/precondition.h"
@@ -38,7 +38,7 @@ namespace microlibrary::Microchip::megaAVR0 {
  */
 enum class Clock_Source : std::uint8_t {
     INTERNAL_16_20_MHz_OSCILLATOR                  = Peripheral::CLKCTRL::MCLKCTRLA::CLKSEL_OSC20M, ///< Internal 16/20 MHz oscillator.
-    INTERNAL_32_768_kHz_ULTRA_LOW_POWER_OSCILLATOR = Peripheral::CLKCTRL::MCLKCTRLA::CLKSEL_OSCULP32K, ///< 32.768 kHz ultra low-power oscillator.
+    INTERNAL_32_768_kHz_ULTRA_LOW_POWER_OSCILLATOR = Peripheral::CLKCTRL::MCLKCTRLA::CLKSEL_OSCULP32K, ///< Internal 32.768 kHz ultra low-power oscillator.
     EXTERNAL_32_768_kHz_CRYSTAL_OSCILLATOR         = Peripheral::CLKCTRL::MCLKCTRLA::CLKSEL_XOSC32K, ///< External 32.768 kHz crystal oscillator.
     EXTERNAL_CLOCK = Peripheral::CLKCTRL::MCLKCTRLA::CLKSEL_EXTCLK, ///< External clock.
 };
@@ -456,10 +456,10 @@ class Clock_Controller {
     }
 
     /**
-     * \brief Check if the clock external 32.768 kHz crystal oscillator is enabled.
+     * \brief Check if the external 32.768 kHz crystal oscillator is enabled.
      *
-     * \return true if the clock external 32.768 kHz crystal oscillator is enabled.
-     * \return false if the clock external 32.768 kHz crystal oscillator is not enabled.
+     * \return true if the external 32.768 kHz crystal oscillator is enabled.
+     * \return false if the external 32.768 kHz crystal oscillator is not enabled.
      */
     auto external_32_768_kHz_crystal_oscillator_is_enabled() const noexcept -> bool
     {

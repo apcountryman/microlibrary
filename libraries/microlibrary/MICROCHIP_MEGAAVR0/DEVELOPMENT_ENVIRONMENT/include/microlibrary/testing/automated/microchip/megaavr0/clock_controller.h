@@ -232,7 +232,7 @@ class Mock_Clock_Controller {
         ( const ) );
     MOCK_METHOD(
         void,
-        configure_external_32_768_kHz_oscillator_mode,
+        configure_external_32_768_kHz_oscillator,
         ( ::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Source,
           ::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Start_Up_Time,
           ::microlibrary::Microchip::megaAVR0::External_32_768_kHz_Crystal_Oscillator_Mode ) );
