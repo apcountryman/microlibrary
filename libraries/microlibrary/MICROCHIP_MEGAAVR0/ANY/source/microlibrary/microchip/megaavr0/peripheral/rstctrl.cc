@@ -17,28 +17,15 @@
 
 /**
  * \file
- * \brief microlibrary Microchip megaAVR 0-series peripheral instances interface.
+ * \brief microlibrary::Microchip::megaAVR0::Peripheral::RSTCTRL implementation.
  */
 
-#ifndef MICROLIBRARY_MICROCHIP_MEGAAVR0_PERIPHERAL_INSTANCES_H
-#define MICROLIBRARY_MICROCHIP_MEGAAVR0_PERIPHERAL_INSTANCES_H
-
-#include "microlibrary/microchip/megaavr0/peripheral/clkctrl.h"
 #include "microlibrary/microchip/megaavr0/peripheral/rstctrl.h"
-#include "microlibrary/peripheral.h"
 
 namespace microlibrary::Microchip::megaAVR0::Peripheral {
 
-/**
- * \brief RSTCTRL0.
- */
-using RSTCTRL0 = ::microlibrary::Peripheral::Instance<RSTCTRL, 0x0040>;
-
-/**
- * \brief CLKCTRL0.
- */
-using CLKCTRL0 = ::microlibrary::Peripheral::Instance<CLKCTRL, 0x0060>;
+#if MICROLIBRARY_TARGET_IS_HARDWARE
+static_assert( sizeof( RSTCTRL ) == 0x01 + 1 );
+#endif // MICROLIBRARY_TARGET_IS_HARDWARE
 
 } // namespace microlibrary::Microchip::megaAVR0::Peripheral
-
-#endif // MICROLIBRARY_MICROCHIP_MEGAAVR0_PERIPHERAL_INSTANCES_H

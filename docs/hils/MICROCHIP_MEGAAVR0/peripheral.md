@@ -4,6 +4,7 @@
 
 1. [Peripherals](#peripherals)
     1. [CLKCTRL](#clkctrl)
+    1. [RSTCTRL](#rstctrl)
 1. [Peripheral Instances](#peripheral-instances)
 
 ## Peripherals
@@ -42,6 +43,16 @@ The `::microlibrary::Microchip::megaAVR0::Peripheral::CLKCTRL` structure is defi
 [`microlibrary/microchip/megaavr0/peripheral/clkctrl.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/MICROCHIP_MEGAAVR0/ANY/include/microlibrary/microchip/megaavr0/peripheral/clkctrl.h)/[`microlibrary/microchip/megaavr0/peripheral/clkctrl.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/MICROCHIP_MEGAAVR0/ANY/source/microlibrary/microchip/megaavr0/peripheral/clkctrl.cc)
 header/source file pair.
 
+### RSTCTRL
+
+The `::microlibrary::Microchip::megaAVR0::Peripheral::RSTCTRL` structure defines the
+layout of the Microchip megaAVR 0-series RSTCTRL peripheral and information about its
+registers.
+The `::microlibrary::Microchip::megaAVR0::Peripheral::RSTCTRL` structure is defined in the
+`microlibrary` static library's
+[`microlibrary/microchip/megaavr0/peripheral/rstctrl.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/MICROCHIP_MEGAAVR0/ANY/include/microlibrary/microchip/megaavr0/peripheral/rstctrl.h)/[`microlibrary/microchip/megaavr0/peripheral/rstctrl.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/MICROCHIP_MEGAAVR0/ANY/source/microlibrary/microchip/megaavr0/peripheral/rstctrl.cc)
+header/source file pair.
+
 ## Peripheral Instances
 
 Microchip megaAVR 0-series peripheral instances are defined in the `microlibrary` static
@@ -54,6 +65,7 @@ name of peripherals that only have a single instance to differentiate the periph
 and the instance name.
 The following peripheral instances are defined (listed alphabetically):
 - `::microlibrary::Microchip::megaAVR0::Peripheral::CLKCTRL0`
+- `::microlibrary::Microchip::megaAVR0::Peripheral::RSTCTRL0`
 
 The availability of these peripheral instance definitions depends on the specific
 Microchip megaAVR 0-series microcontroller that is used.
