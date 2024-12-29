@@ -17,7 +17,7 @@
 
 /**
  * \file
- * \brief microlibrary::Microchip::megaAVR0::Clock_Controller implementation.
+ * \brief microlibrary::Microchip::megaAVR0 clock facilities implementation.
  */
 
-#include "microlibrary/microchip/megaavr0/clock_controller.h"
+#include "microlibrary/microchip/megaavr0/clock.h"

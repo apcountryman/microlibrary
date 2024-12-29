@@ -26,5 +26,5 @@ target_include_directories( microlibrary
 
 target_sources( microlibrary
     PRIVATE source/microlibrary/testing/automated/microchip/megaavr0.cc
-    PRIVATE source/microlibrary/testing/automated/microchip/megaavr0/clock_controller.cc
+    PRIVATE source/microlibrary/testing/automated/microchip/megaavr0/clock.cc
     )
