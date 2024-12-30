@@ -17,11 +17,11 @@
 
 /**
  * \file
- * \brief microlibrary::Microchip::megaAVR0::Clock_Controller interface.
+ * \brief microlibrary Microchip megaAVR 0-series clock facilities interface.
  */
 
-#ifndef MICROLIBRARY_MICROCHIP_MEGAAVR0_CLOCK_CONTROLLER_H
-#define MICROLIBRARY_MICROCHIP_MEGAAVR0_CLOCK_CONTROLLER_H
+#ifndef MICROLIBRARY_MICROCHIP_MEGAAVR0_CLOCK_H
+#define MICROLIBRARY_MICROCHIP_MEGAAVR0_CLOCK_H
 
 #include <cstdint>
 
@@ -502,4 +502,4 @@ class Clock_Controller {
 
 } // namespace microlibrary::Microchip::megaAVR0
 
-#endif // MICROLIBRARY_MICROCHIP_MEGAAVR0_CLOCK_CONTROLLER_H
+#endif // MICROLIBRARY_MICROCHIP_MEGAAVR0_CLOCK_H

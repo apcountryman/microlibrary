@@ -17,16 +17,16 @@
 
 /**
  * \file
- * \brief microlibrary::Testing::Automated::Microchip::megaAVR0::Mock_Clock_Controller
+ * \brief microlibrary Microchip megaAVR 0-series clock automated testing facilities
  *        implementation.
  */
 
-#include "microlibrary/testing/automated/microchip/megaavr0/clock_controller.h"
+#include "microlibrary/testing/automated/microchip/megaavr0/clock.h"
 
 #include <ostream>
 #include <stdexcept>
 
-#include "microlibrary/microchip/megaavr0/clock_controller.h"
+#include "microlibrary/microchip/megaavr0/clock.h"
 
 namespace microlibrary::Microchip::megaAVR0 {
 

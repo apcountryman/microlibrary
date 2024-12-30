@@ -28,10 +28,10 @@
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
-#include "microlibrary/microchip/megaavr0/clock_controller.h"
+#include "microlibrary/microchip/megaavr0/clock.h"
 #include "microlibrary/microchip/megaavr0/peripheral/clkctrl.h"
 #include "microlibrary/pointer.h"
-#include "microlibrary/testing/automated/microchip/megaavr0/clock_controller.h"
+#include "microlibrary/testing/automated/microchip/megaavr0/clock.h"
 
 namespace {
 

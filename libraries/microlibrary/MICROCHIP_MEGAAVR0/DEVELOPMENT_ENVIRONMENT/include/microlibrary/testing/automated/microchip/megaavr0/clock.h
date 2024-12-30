@@ -17,18 +17,18 @@
 
 /**
  * \file
- * \brief microlibrary::Testing::Automated::Microchip::megaAVR0::Mock_Clock_Controller
+ * \brief microlibrary Microchip megaAVR 0-series clock automated testing facilities
  *        interface.
  */
 
-#ifndef MICROLIBRARY_TESTING_AUTOMATED_MICROCHIP_MEGAAVR0_CLOCK_CONTROLLER_H
-#define MICROLIBRARY_TESTING_AUTOMATED_MICROCHIP_MEGAAVR0_CLOCK_CONTROLLER_H
+#ifndef MICROLIBRARY_TESTING_AUTOMATED_MICROCHIP_MEGAAVR0_CLOCK_H
+#define MICROLIBRARY_TESTING_AUTOMATED_MICROCHIP_MEGAAVR0_CLOCK_H
 
 #include <cstdint>
 #include <ostream>
 
 #include "gmock/gmock.h"
-#include "microlibrary/microchip/megaavr0/clock_controller.h"
+#include "microlibrary/microchip/megaavr0/clock.h"
 
 namespace microlibrary::Microchip::megaAVR0 {
 
@@ -250,4 +250,4 @@ class Mock_Clock_Controller {
 
 } // namespace microlibrary::Testing::Automated::Microchip::megaAVR0
 
-#endif // MICROLIBRARY_TESTING_AUTOMATED_MICROCHIP_MEGAAVR0_CLOCK_CONTROLLER_H
+#endif // MICROLIBRARY_TESTING_AUTOMATED_MICROCHIP_MEGAAVR0_CLOCK_H
