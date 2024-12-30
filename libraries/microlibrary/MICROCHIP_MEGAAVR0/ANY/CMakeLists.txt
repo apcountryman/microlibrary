@@ -27,4 +27,5 @@ target_sources( microlibrary
     PRIVATE source/microlibrary/microchip/megaavr0/peripheral/clkctrl.cc
     PRIVATE source/microlibrary/microchip/megaavr0/peripheral/rstctrl.cc
     PRIVATE source/microlibrary/microchip/megaavr0/register.cc
+    PRIVATE source/microlibrary/microchip/megaavr0/reset.cc
     )
