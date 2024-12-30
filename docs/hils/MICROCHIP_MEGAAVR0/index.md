@@ -6,3 +6,4 @@
 1. [Register Facilities](register.md)
 1. [Peripheral Facilities](peripheral.md)
 1. [Clock Facilities](clock.md)
+1. [Reset Facilities](reset.md)
