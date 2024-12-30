@@ -1,6 +1,6 @@
 # Clock Facilities
 
-Microchip megaAVR 0-series register facilities are defined in the `microlibrary` static
+Microchip megaAVR 0-series clock facilities are defined in the `microlibrary` static
 library's
 [`microlibrary/microchip/megaavr0/clock.h`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/MICROCHIP_MEGAAVR0/ANY/include/microlibrary/microchip/megaavr0/clock.h)/[`microlibrary/microchip/megaavr0/clock.cc`](https://github.com/apcountryman/microlibrary/blob/main/libraries/microlibrary/MICROCHIP_MEGAAVR0/ANY/source/microlibrary/microchip/megaavr0/clock.cc)
 header/source file pair.
