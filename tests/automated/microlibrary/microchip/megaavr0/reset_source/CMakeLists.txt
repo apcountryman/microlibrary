@@ -13,10 +13,23 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: microlibrary::Microchip::megaAVR0 automated tests CMake rules.
+# Description: microlibrary::Microchip::megaAVR0::Reset_Source automated tests CMake
+#       rules.
 
-# microlibrary::Microchip::megaAVR0::Clock_Controller automated tests
-add_subdirectory( clock_controller )
+add_executable( test-automated-microlibrary-microchip-megaavr0-reset_source )
 
-# microlibrary::Microchip::megaAVR0::Reset_Source automated tests
-add_subdirectory( reset_source )
+target_sources( test-automated-microlibrary-microchip-megaavr0-reset_source
+    PRIVATE main.cc
+    )
+
+target_link_libraries( test-automated-microlibrary-microchip-megaavr0-reset_source
+    PRIVATE gmock
+    PRIVATE gmock_main
+    PRIVATE gtest
+    PRIVATE microlibrary
+    )
+
+add_test(
+    NAME    test-automated-microlibrary-microchip-megaavr0-reset_source
+    COMMAND test-automated-microlibrary-microchip-megaavr0-reset_source ${MICROLIBRARY_AUTOMATED_TESTS_OPTIONS}
+    )
