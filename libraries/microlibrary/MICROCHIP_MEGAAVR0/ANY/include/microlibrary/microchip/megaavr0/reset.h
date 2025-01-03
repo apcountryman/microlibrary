@@ -25,7 +25,10 @@
 
 #include <cstdint>
 
+#include "microlibrary/error.h"
 #include "microlibrary/microchip/megaavr0/peripheral/rstctrl.h"
+#include "microlibrary/pointer.h"
+#include "microlibrary/postcondition.h"
 
 namespace microlibrary::Microchip::megaAVR0 {
 
@@ -164,6 +167,78 @@ class Reset_Source {
      * \brief The RSTCTRL peripheral RSTFR value.
      */
     std::uint8_t m_rstctrl_rstfr;
+};
+
+/**
+ * \brief Reset controller.
+ */
+class Reset_Controller {
+  public:
+    Reset_Controller() = delete;
+
+    /**
+     * \brief Constructor.
+     *
+     * \param[in] rstctrl The RSTCTRL peripheral instance.
+     */
+    constexpr Reset_Controller( Not_Null<Peripheral::RSTCTRL *> rstctrl ) noexcept :
+        m_rstctrl{ rstctrl }
+    {
+    }
+
+    Reset_Controller( Reset_Controller && ) = delete;
+
+    Reset_Controller( Reset_Controller const & ) = delete;
+
+    /**
+     * \brief Destructor.
+     */
+    ~Reset_Controller() noexcept = default;
+
+    auto operator=( Reset_Controller && ) = delete;
+
+    auto operator=( Reset_Controller const & ) = delete;
+
+    /**
+     * \brief Get the reset source(s).
+     *
+     * \return The reset source(s).
+     */
+    auto reset_source() const noexcept -> Reset_Source
+    {
+        return { m_rstctrl->rstfr };
+    }
+
+    /**
+     * \brief Clear the reset source(s).
+     */
+    void clear_reset_source() noexcept
+    {
+        m_rstctrl->rstfr = Peripheral::RSTCTRL::RSTFR::Mask::UPDIRF
+                           | Peripheral::RSTCTRL::RSTFR::Mask::SWRF
+                           | Peripheral::RSTCTRL::RSTFR::Mask::WDRF
+                           | Peripheral::RSTCTRL::RSTFR::Mask::EXTRF
+                           | Peripheral::RSTCTRL::RSTFR::Mask::BORF
+                           | Peripheral::RSTCTRL::RSTFR::Mask::PORF;
+    }
+
+    /**
+     * \brief Initiate a software reset.
+     *
+     * \post A software reset is initiated.
+     */
+    [[noreturn]] void initiate_software_reset() noexcept
+    {
+        m_rstctrl->swrr = Peripheral::RSTCTRL::SWRR::Mask::SWRE;
+
+        MICROLIBRARY_GUARANTEE_NOT_MET( Generic_Error::LOGIC_ERROR );
+    }
+
+  private:
+    /**
+     * \brief The RSTCTRL peripheral instance.
+     */
+    Not_Null<Peripheral::RSTCTRL *> m_rstctrl;
 };
 
 } // namespace microlibrary::Microchip::megaAVR0
