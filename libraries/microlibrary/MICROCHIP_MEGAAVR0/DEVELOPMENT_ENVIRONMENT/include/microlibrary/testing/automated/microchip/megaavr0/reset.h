@@ -24,7 +24,39 @@
 #ifndef MICROLIBRARY_TESTING_AUTOMATED_MICROCHIP_MEGAAVR0_RESET_H
 #define MICROLIBRARY_TESTING_AUTOMATED_MICROCHIP_MEGAAVR0_RESET_H
 
+#include <cstdlib>
+
+#include "gmock/gmock.h"
+#include "microlibrary/microchip/megaavr0/reset.h"
+
 namespace microlibrary::Testing::Automated::Microchip::megaAVR0 {
+
+/**
+ * \brief Mock reset controller.
+ */
+class Mock_Reset_Controller {
+  public:
+    Mock_Reset_Controller() = default;
+
+    Mock_Reset_Controller( Mock_Reset_Controller && ) = delete;
+
+    Mock_Reset_Controller( Mock_Reset_Controller const & ) = delete;
+
+    ~Mock_Reset_Controller() noexcept = default;
+
+    auto operator=( Mock_Reset_Controller && ) = delete;
+
+    auto operator=( Mock_Reset_Controller const & ) = delete;
+
+    MOCK_METHOD( ::microlibrary::Microchip::megaAVR0::Reset_Source, reset_source, (), ( const ) );
+    MOCK_METHOD( void, clear_reset_source, () );
+
+    [[noreturn]] void initiate_software_reset()
+    {
+        std::exit( 0 );
+    }
+};
+
 } // namespace microlibrary::Testing::Automated::Microchip::megaAVR0
 
 #endif // MICROLIBRARY_TESTING_AUTOMATED_MICROCHIP_MEGAAVR0_RESET_H

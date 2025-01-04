@@ -18,5 +18,8 @@
 # microlibrary::Microchip::megaAVR0::Clock_Controller automated tests
 add_subdirectory( clock_controller )
 
+# microlibrary::Microchip::megaAVR0::Reset_Controller automated tests
+add_subdirectory( reset_controller )
+
 # microlibrary::Microchip::megaAVR0::Reset_Source automated tests
 add_subdirectory( reset_source )
