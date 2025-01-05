@@ -1,7 +1,7 @@
 /**
  * microlibrary
  *
- * Copyright 2024, Andrew Countryman <apcountryman@gmail.com> and the microlibrary
+ * Copyright 2024-2025, Andrew Countryman <apcountryman@gmail.com> and the microlibrary
  * contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
