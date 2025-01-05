@@ -34,6 +34,11 @@ The `::microlibrary::Microchip::megaAVR0::Reset_Source` class holds a Microchip 
 - To check if a UPDI reset has occurred, use the
   `::microlibrary::Microchip::megaAVR0::Reset_Source::is_updi_reset()` member function.
 
+`::microlibrary::Microchip::megaAVR0::Reset_Source` automated tests are defined in the
+`test-automated-microlibrary-microchip-megaavr0-reset_source` automated test executable's
+[`main.cc`](https://github.com/apcountryman/microlibrary/blob/main/tests/automated/microlibrary/microchip/megaavr0/reset_source/main.cc)
+source file.
+
 ## Reset Controller
 
 The `::microlibrary::Microchip::megaAVR0::Reset_Controller` reset controller class is used
